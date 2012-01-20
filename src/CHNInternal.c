@@ -1,5 +1,5 @@
 //  
-//  CHNObject.c
+//  CHNInternal.c
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,7 +19,34 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include <coreHezelnut/CHNClass.h>
+#include <coreHezelnut/CHNInternal.h>
 
 
+CHN_EXPORT id CHN_retain(id self)
+{
+}
 
+
+CHN_EXPORT CHNBoolean CHN_tryRetain(id self)
+{
+}
+
+
+CHN_EXPORT void CHN_release(id self)
+{
+}
+
+
+CHN_EXPORT CHNBoolean CHN_isDeallocating(id self)
+{
+}
+
+
+CHN_EXPORT CHNBoolean CHN_equals(id left, id right)
+{
+}
+
+
+CHN_EXPORT CHNBoolean CHN_identityEquals(id left, id right)
+{
+}

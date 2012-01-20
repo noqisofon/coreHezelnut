@@ -1,5 +1,5 @@
 //  
-//  CHNObject.c
+//  chn-selector.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,7 +19,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include <coreHezelnut/CHNClass.h>
+#include "coreHezelnut.h"
 
 
-
+CHN_EXTERN CHNBoolean __sel_eq(SEL left, SEL right)
+{
+    if ( left == NULL || right == NULL )
+        return left == right;
+    else
+        return left->actual_id == right->actual_id;
+}
