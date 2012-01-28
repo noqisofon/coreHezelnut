@@ -1,0 +1,70 @@
+commit 3457f8b19b6a3e9abcdb2110301ec8eed87c0683
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Fri Jan 20 17:51:46 2012 +0900
+
+    * まだ考え中
+    
+    + include/core-hezelnut/CHNClass.h:
+    ++ CHNClass.h を追加。
+    
+    + include/core-hezelnut/CHNGenericTypes.h:
+    ++ CHNGenericTypes.h を追加。
+    
+    + include/core-hezelnut/CHNObject.h:
+    ++ CHNObject.h を追加。
+    
+    + include/core-hezelnut/chn-internal.h:
+    ++ CHNInternal.h から chn-internal.h に変名。
+    
+    + include/core-hezelnut/coreHezelnut.h:
+    ++ coreHezelnut.h を追加。
+    
+    + src/CHNClass.c:
+    ++ chn_class 構造体とか、chn_class_node 構造体とかの宣言を削除。
+    
+    + src/CHNInternal.c:
+    ++ CHNObject の派生インスタンスで使用する関数の実装を追加。
+    
+    + src/CHNObject.c:
+    ++ 色々書きなおし。
+    
+    + src/chn-selector.h:
+    ++ 後で *.c に直す。
+    
+    + src/objacts.c:
+    ++ CHNObject 以下派生インスタンスで使用する関数の実装を追加。
+
+ include/core-hezelnut/CHNClass.h        |   31 +++++
+ include/core-hezelnut/CHNGenericTypes.h |   21 ++++
+ include/core-hezelnut/CHNObject.h       |   65 ++++++++++
+ include/core-hezelnut/chn-internal.h    |  197 +++++++++++++++++++++++++++++++
+ include/core-hezelnut/coreHezelnut.h    |   92 ++++++++++++++
+ src/CHNClass.c                          |   53 ++++-----
+ src/CHNInternal.c                       |   52 ++++++++
+ src/CHNObject.c                         |   86 +++++++++-----
+ src/chn-selector.h                      |   31 +++++
+ src/objacts.c                           |   53 ++++++++
+ 10 files changed, 620 insertions(+), 61 deletions(-)
+
+commit 5700668f4df9213d090fa595d51c25f607aa3a2e
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Tue Jan 10 19:04:18 2012 +0900
+
+    first commit.
+
+ .gitignore                          |   35 ++
+ COPYING.LESSER                      |  165 +++++++++
+ INSTALL                             |  370 +++++++++++++++++++
+ Makefile.am                         |    1 +
+ Makefile.in                         |  689 +++++++++++++++++++++++++++++++++++
+ README.md                           |   13 +
+ configure.ac                        |   29 ++
+ include/config.h.in                 |   73 ++++
+ include/core-hezelnut/CHNInternal.h |   28 ++
+ src/CHNAllocator.c                  |  503 +++++++++++++++++++++++++
+ src/CHNClass.c                      |   34 ++
+ src/CHNCollection.c                 |  129 +++++++
+ src/CHNObject.c                     |   94 +++++
+ src/Makefile.am                     |    4 +
+ src/Makefile.in                     |  425 +++++++++++++++++++++
+ 15 files changed, 2592 insertions(+), 0 deletions(-)

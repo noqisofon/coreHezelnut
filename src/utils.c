@@ -1,0 +1,45 @@
+//  
+//  utils.h
+//  
+//  Auther:
+//       ned rihine <ned.rihine@gmail.com>
+// 
+//  Copyright (c) 2012 rihine All rights reserved.
+// 
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+#include "coreHezelnut/chn-internal.h"
+
+
+CHN_EXPORT CHNRange __CHNRange_new(int first, int last)
+{
+    CHNRange new;
+
+    new.first = first;
+    new.last = last;
+
+    return new;
+}
+
+
+CHN_EXPORT CHNBoolean __CHNRange_isInclude(CHNRange range, int x)
+{
+    return range.first <= x && x < range.last;
+}
+
+
+CHN_EXPORT void chn_error(void* object, int error_code, const char* format, ...)
+{
+    
+}

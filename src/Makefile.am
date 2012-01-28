@@ -1,4 +1,3 @@
-noinst_LIBRARIES = libcoreHezelnut.a
+noinst_LIBRARIES = libmaranon.a
 
-
-libcoreHezelnut_a_SOURCES = CHNAllocator.c  CHNClass.c  CHNCollection.c  CHNObject.c
+libmaranon_a_SOURCES = classes.c chn-selector.c objects.c utils.c

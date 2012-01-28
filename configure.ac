@@ -4,7 +4,7 @@
 AC_PREREQ([2.68])
 AC_INIT(coreHezelnut, 0.1, ned.rihine@gmail.com)
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([src/CHNObject.c])
+AC_CONFIG_SRCDIR([src/objects.c])
 AC_CONFIG_HEADERS([include/config.h])
 
 # Checks for programs.

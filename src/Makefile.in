@@ -45,11 +45,11 @@ CONFIG_CLEAN_VPATH_FILES =
 LIBRARIES = $(noinst_LIBRARIES)
 AR = ar
 ARFLAGS = cru
-libcoreHezelnut_a_AR = $(AR) $(ARFLAGS)
-libcoreHezelnut_a_LIBADD =
-am_libcoreHezelnut_a_OBJECTS = CHNAllocator.$(OBJEXT) \
-	CHNClass.$(OBJEXT) CHNCollection.$(OBJEXT) CHNObject.$(OBJEXT)
-libcoreHezelnut_a_OBJECTS = $(am_libcoreHezelnut_a_OBJECTS)
+libmaranon_a_AR = $(AR) $(ARFLAGS)
+libmaranon_a_LIBADD =
+am_libmaranon_a_OBJECTS = classes.$(OBJEXT) chn-selector.$(OBJEXT) \
+	objects.$(OBJEXT) utils.$(OBJEXT)
+libmaranon_a_OBJECTS = $(am_libmaranon_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -58,8 +58,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libcoreHezelnut_a_SOURCES)
-DIST_SOURCES = $(libcoreHezelnut_a_SOURCES)
+SOURCES = $(libmaranon_a_SOURCES)
+DIST_SOURCES = $(libmaranon_a_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -150,8 +150,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-noinst_LIBRARIES = libcoreHezelnut.a
-libcoreHezelnut_a_SOURCES = CHNAllocator.c  CHNClass.c  CHNCollection.c  CHNObject.c
+noinst_LIBRARIES = libmaranon.a
+libmaranon_a_SOURCES = classes.c chn-selector.c objects.c utils.c
 all: all-am
 
 .SUFFIXES:
@@ -189,10 +189,10 @@ $(am__aclocal_m4_deps):
 
 clean-noinstLIBRARIES:
 	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
-libcoreHezelnut.a: $(libcoreHezelnut_a_OBJECTS) $(libcoreHezelnut_a_DEPENDENCIES) 
-	-rm -f libcoreHezelnut.a
-	$(libcoreHezelnut_a_AR) libcoreHezelnut.a $(libcoreHezelnut_a_OBJECTS) $(libcoreHezelnut_a_LIBADD)
-	$(RANLIB) libcoreHezelnut.a
+libmaranon.a: $(libmaranon_a_OBJECTS) $(libmaranon_a_DEPENDENCIES) 
+	-rm -f libmaranon.a
+	$(libmaranon_a_AR) libmaranon.a $(libmaranon_a_OBJECTS) $(libmaranon_a_LIBADD)
+	$(RANLIB) libmaranon.a
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -200,10 +200,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CHNAllocator.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CHNClass.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CHNCollection.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CHNObject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chn-selector.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/classes.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/objects.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

@@ -1,0 +1,31 @@
+* まだ考え中
+
++ include/core-hezelnut/CHNClass.h:
+++ CHNClass.h を追加。
+
++ include/core-hezelnut/CHNGenericTypes.h:
+++ CHNGenericTypes.h を追加。
+
++ include/core-hezelnut/CHNObject.h:
+++ CHNObject.h を追加。
+
++ include/core-hezelnut/chn-internal.h:
+++ CHNInternal.h から chn-internal.h に変名。
+
++ include/core-hezelnut/coreHezelnut.h:
+++ coreHezelnut.h を追加。
+
++ src/CHNClass.c:
+++ chn_class 構造体とか、chn_class_node 構造体とかの宣言を削除。
+
++ src/CHNInternal.c:
+++ CHNObject の派生インスタンスで使用する関数の実装を追加。
+
++ src/CHNObject.c:
+++ 色々書きなおし。
+
++ src/chn-selector.h:
+++ 後で *.c に直す。
+
++ src/objacts.c:
+++ CHNObject 以下派生インスタンスで使用する関数の実装を追加。
