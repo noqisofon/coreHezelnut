@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNObject.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,39 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
-
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+//
+#ifndef coreHezelnut_classes_CHNObject_h
+#define coreHezelnut_classes_CHNObject_h
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+CHN_EXPORT const CHNClass_ref CHNObject;
+
+
+#define CHN_ASOBJECT(_that_) ((id)_that_)
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNObject_alloc(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNObject_init(id self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNObject_new(void);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNObject_h */

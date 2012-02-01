@@ -39,7 +39,6 @@ CHN_EXPORT CHNBoolean __CHNRange_isInclude(CHNRange range, int x)
 }
 
 
-CHN_EXPORT void chn_error(void* object, int error_code, const char* format, ...)
+CHN_EXPORT void chn_error(id object, int error_code, const char* format, ...)
 {
-    
 }

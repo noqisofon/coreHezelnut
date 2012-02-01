@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNSymbol.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,38 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
-
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+//
+#ifndef coreHezelnut_classes_CHNSymbol_h
+#define coreHezelnut_classes_CHNSymbol_h
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+CHN_EXPORT const CHNClass_ref CHNSymbol;
+
+
+#define CHN_ASSYMBOL(_that_) ((CHNSymbol_ref)_that_)
+
+#define CHN_LITERAL_SYMBOL(_symbol_) CHNSymbol_fromCString( # _symbol_ )
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNSymbol_ref CHNSymbol_fromCString(const char* cstring);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNBoolean CHNSymbol_equals(CHNSymbol_ref left, CHNSymbol_ref right);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNSymbol_h */
+// Local Variables:
+//   coding: utf-8
+// End:

@@ -1,5 +1,5 @@
 //  
-//  mar-internal.h
+//  chn-internal.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -27,7 +27,6 @@
 #if defined(__GNU__) || defined(CORE_HEZELNUT_TARGET_OS_WIN32)
 #   include <stdint.h>
 #endif  /* defined(__GNU__) || defined(CORE_HEZELNUT_TARGET_OS_WIN32) */
-
 
 #if !defined(CHN_EXTERN_C_BEGIN)
 #   ifdef __cplusplus
@@ -104,11 +103,29 @@ typedef unsigned int CHNHashCode;
 
 typedef const void* CHNValue_ref;
 
+typedef struct chn_object {
+    struct chn_class* class_pointer;
+} *id;
 
 typedef const struct chn_string* CHNConstantString_ref;
 typedef       struct chn_string* CHNMutableString_ref;
 
 #define CHNString_ref CHNConstantString_ref
+
+
+typedef struct chn_ordered_collection* CHNOrderedCollection_ref;
+typedef struct chn_dictionary* CHNDictionary_ref;
+typedef struct chn_stream* CHNStream_ref;
+typedef struct chn_write_stream* CHNWriteStream_ref;
+typedef struct chn_symbol* CHNSymbol_ref;
+typedef struct chn_array* CHNArray_ref;
+typedef struct chn_iterator* CHNIterator_ref;
+typedef struct chn_integer_array* CHNIntegerArray_ref;
+typedef struct chn_byte_array* CHNByteArray_ref;
+typedef struct chn_message* CHNMessage_ref;
+typedef struct chn_block_closure* CHNBlockClosure_ref;
+typedef struct chn_compiled_method* CHNCompiledMethod_ref;
+typedef struct chn_bihavior* CHNBihavior_ref;
 
 
 enum __CHNComparisonResults {
@@ -117,6 +134,9 @@ enum __CHNComparisonResults {
     CHNComparisonResults_GreaterThan =  1,  //!< left が right より大きい時に返されます。
 };
 typedef int CHNComparisonResult;
+
+
+typedef CHNComparisonResult (*CHNComparisonFunction)(id left, id right);
 
 
 enum __CHNAccessResults {
@@ -171,8 +191,6 @@ CHN_EXPORT CHNBoolean __CHNRange_between(CHNRange range, int x);
 #define INVOKE_CALLBACK4(_func_, _arg0_, _arg1_, _arg2_, _arg3_)           (*_func_)( _arg0_, _arg1_, _arg2_, _arg3_ )
 #define INVOKE_CALLBACK5(_func_, _arg0_, _arg1_, _arg2_, _arg3_, _arg4_)   (*_func_)( _arg0_, _arg1_, _arg2_, _arg3_, _arg4_ )
 
-
-CHN_EXPORT void chn_error(void* context, int error_code, const char* format, ...);
 
 
 CHN_EXTERN_C_END

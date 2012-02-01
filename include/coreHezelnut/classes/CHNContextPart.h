@@ -1,5 +1,5 @@
 //  
-//  classes.h
+//  CHNContextPart.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,39 +19,60 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-#ifndef coreHezelnut_classes_h
-#define coreHezelnut_classes_h
+#ifndef coreHezelnut_classes_CHNContextPart_h
+#define coreHezelnut_classes_CHNContextPart_h
 
 
 CHN_EXTERN_C_BEGIN
 
 
-#define Nil ((CHNClass_ref)0)
 
-//typedef char* CString_ref;
-
-#define CHN_CLASSOF(_object_)  ((_object_)->class_pointer)
+typedef struct chn_context_part* CHNContextPart_ref;
 
 
-typedef struct chn_class* CHNMetaClass_ref;
-typedef struct chn_class* CHNClass_ref;
-struct chn_class {
-    CHNMetaClass_ref           class_pointer;
+const CHNClass_ref CHNContextPart;
 
-    CHNClass_ref               super_class;
 
-    const char*                name;
+/*!
+ * 
+ */
+CHN_EXPORT int CHNContextPart_class_spindex(void);
 
-    int                        version;
-    unsigned int               info;
-    unsigned int               instance_size;
 
-    struct chn_varible_list*   variables;
-    struct chn_method_list*    methods;
-};
+/*!
+ * 
+ */
+CHN_EXPORT id CHNContextPart_class_backtrace(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNContextPart_class_backtraceOn(CHNStream_ref a_stream);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNContextPart_ref CHNContextPart_class_thisContext(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNContextPart_backtrace(CHNContextPart_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNContextPart_backtraceOn(CHNContextPart_ref self, CHNStream_ref a_stream);
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_h */
+#endif  /* coreHezelnut_classes_CHNContextPart_h */
+// Local Variables:
+//   coding: utf-8
+// End:

@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNCharacter.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,12 +19,26 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
-
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+#ifndef coreHezelnut_classes_CHNCharacter_h
+#define coreHezelnut_classes_CHNCharacter_h
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+const CHNClass_ref CHNCharacter;
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNCharacter_ref CHNCharacter_value(int char_code);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNCharacter_h */
+// Local Variables:
+//   coding: utf-8
+// End:

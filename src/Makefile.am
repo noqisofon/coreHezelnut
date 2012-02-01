@@ -1,3 +1,6 @@
-noinst_LIBRARIES = libmaranon.a
+SUBDIRS = classes
 
-libmaranon_a_SOURCES = classes.c chn-selector.c objects.c utils.c
+lib_LTLIBRARIES = libcoreHezelnut.la
+
+libcoreHezelnut_la_SOURCES = classes.c chn-selector.c objects.c utils.c
+

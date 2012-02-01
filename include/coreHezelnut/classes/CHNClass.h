@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNClass.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,24 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
-
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+//
+#ifndef coreHezelnut_classes_CHNClass_h
+#define coreHezelnut_classes_CHNClass_h
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+const CHNClass_ref CHNClass;
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNSymbol_ref CHNClass_get_shape(CHNClass_ref self);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNClass_h */

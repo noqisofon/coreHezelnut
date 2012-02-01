@@ -7,8 +7,11 @@
 *.dylib
 *.a
 *.log
+*.tmp
 *.diff
-
+*.lo
+*.la
+*.Po
 
 compile
 config.guess
@@ -25,11 +28,26 @@ texinfo.tex
 ylwrap
 
 aclocal.m4
+libtool
+ltmain.sh
 configure
+configure.ac
 Makefile
+
+OMakefile
+OMakefile.omc
+OMakeroot
+OMakeroot.omc
+.omakedb
+.omakedb.lock
 
 autom4te.cache/
 
 include/config.h
 include/stamp-h1
+
 src/.deps
+src/.libs
+
+src/classes/.deps
+src/classes/.libs

@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  messaging.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,40 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
+//
+#ifndef coreHezelnut_messaging_h
+#define coreHezelnut_messaging_h
 
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+#include "coreHezelnut/runtime.h"
+#include "coreHezelnut/selector.h"
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+CHN_EXPORT IMP (*__CHN_message_forward)(SEL);
+CHN_EXPORT IMP (*__CHN_message_forward2)(id, SEL);
+
+
+/*!
+ *
+ */
+CHN_EXPORT IMP chn_message_lookup(id receiver, SEL op);
+
+
+CHN_INLINE IMP chn_method_get_imp(Method_ref method)
+{
+    return (method != METHOD_NULL) ? method->method_imp : NULL;
+}
+
+
+/*!
+ *
+ */
+CHN_EXPORT IMP chn_get_imp(CHNClass_ref klass, SEL selector);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_messaging_h */

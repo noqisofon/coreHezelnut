@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNIterator.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,12 +19,40 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
+#ifndef coreHezelnut_classes_CHNIterator_h
+#define coreHezelnut_classes_CHNIterator_h
 
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
-
+#include "coreHezelnut/classes/CHNObject.h"
 
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+CHN_EXTERN_C_BEGIN
+
+
+typedef struct chn_iterator* CHNIterator_ref;
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNBoolean CHNIterator_finished(CHNIterator_ref id);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNIterator_next(CHNIterator_ref id);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNIterator_current(CHNIterator_ref id);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNIterator_h */
+// Local Variables:
+//   coding: utf-8
+// End:

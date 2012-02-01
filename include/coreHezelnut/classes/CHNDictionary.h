@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNDictionary.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,41 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
+//
+#ifndef coreHezelnut_classes_CHNDictionary_h
+#define coreHezelnut_classes_CHNDictionary_h
 
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
-
+#include "coreHezelnut/classes.h"
 
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+CHN_EXTERN_C_BEGIN
+
+
+CHN_EXPORT const CHNClass_ref CHNDictionary;
+
+
+#define CHN_ASDICTIONARY(_that_) ((CHNDictionary_ref)_that_)
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNDictionary_alloc(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNDictionary_init(id self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNDictionary_new(void);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNDictionary_h */

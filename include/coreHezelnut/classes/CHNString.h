@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNString.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,41 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
-
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+//
+#ifndef coreHezelnut_classes_CHNString_h
+#define coreHezelnut_classes_CHNString_h
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+CHN_EXPORT const CHNClass_ref CHNString;
+
+
+#define CHN_ASSTRING(_that_) ((CHNString_ref)_that_)
+
+#define _S(_cstring_) CHNString_initWithCString( CHNString_class_alloc( CHNString ), _cstring_ )
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNString_ref CHNString_class_alloc(CHNClass_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNString_ref CHNString_initWithCString(CHNString_ref self, const char* cstring);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNSymbol_ref CHNString_asSymbol(CHNString_ref self);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNString_h */

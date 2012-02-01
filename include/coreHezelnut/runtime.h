@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  runtime.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,13 +18,42 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
+//
+#ifndef coreHezelnut_runtime_h
+#define coreHezelnut_runtime_h
 
-#include "coreHezelnut/chn-internal.h"
+#include <stdio.h>
+#include <stddef.h>
+#include <stdarg.h>
+#include <ctype.h>
+#include <assert.h>
+
+#include "coreHezelnut/coreHezelnut.h"
 #include "coreHezelnut/chn-api.h"
+#include "coreHezelnut/threading.h"
+#include "coreHezelnut/hashing.h"
 
 
+CHN_EXTERN_C_BEGIN
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+
+typedef CHNClass_ref (*_chn_class_initialize)(const char*);
+
+
+#ifdef CHN_DEBUG_RUNTIME
+#   define CHN_DEBUG_PRINTF(format, args, ...)    printf( format, ## args )
+#else
+#   define CHN_DEBUG_PRINTF(format, args, ...)
+#endif  /* def CHN_DEBUG_RUNTIME */
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBoolean __chn_responds_to(id object, SEL selector);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_runtime_h */

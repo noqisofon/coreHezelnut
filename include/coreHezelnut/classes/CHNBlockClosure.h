@@ -1,5 +1,5 @@
 //  
-//  coreHezelnut.h
+//  CHNBlockClosure.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,12 +19,46 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-#ifndef coreHezelnut_coreHezelnut_h
-#define coreHezelnut_coreHezelnut_h
+#ifndef coreHezelnut_classes_CHNBlockClosure_h
+#define coreHezelnut_classes_CHNBlockClosure_h
 
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
-
+#include "coreHezelnut/classes/CHNObject.h"
 
 
-#endif  /* coreHezelnut_coreHezelnut_h */
+CHN_EXTERN_C_BEGIN
+
+
+CHN_EXPORT const CHNClass_ref CHNBlockClosure;
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNBlockClosure_class_alloc(void);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_new(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_init(id self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_exceptionHandlerResetBlock(void);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNBlockClosure_h */
+// Local Variables:
+//   coding: utf-8
+// End:

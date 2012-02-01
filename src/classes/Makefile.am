@@ -1,0 +1,3 @@
+lib_LTLIBRARIES = libcoreHezelnut_classes.la
+
+libcoreHezelnut_classes_la_SOURCES = CHNArray.c  CHNBihavior.c  CHNBlockClosure.c  CHNCollection.c  CHNContextPart.c  CHNStream.c

@@ -19,18 +19,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
+#include "coreHezelnut/coreHezelnut.h"
+
 #include "coreHezelnut/classes.h"
-
-
-typedef struct chn_varible {
-    const char* var_name;
-    const char* var_type;
-    int var_offset;
-} *CHNVariable_ref;
-
-
-typedef struct chn_varible_list {
-    struct chn_varible* head;
-    struct chn_varible_list* tail;
-} *ChnVariableList_ref;
 
