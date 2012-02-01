@@ -118,6 +118,7 @@ typedef struct chn_dictionary* CHNDictionary_ref;
 typedef struct chn_stream* CHNStream_ref;
 typedef struct chn_write_stream* CHNWriteStream_ref;
 typedef struct chn_symbol* CHNSymbol_ref;
+typedef struct chn_character* CHNCharacter_ref;
 typedef struct chn_array* CHNArray_ref;
 typedef struct chn_iterator* CHNIterator_ref;
 typedef struct chn_integer_array* CHNIntegerArray_ref;

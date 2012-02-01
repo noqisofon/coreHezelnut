@@ -118,6 +118,12 @@ CHN_EXPORT CHNBoolean CHN_isNil(id self);
 /*!
  * 
  */
+CHN_EXPORT CHNBoolean CHN_isSymbol(id self);
+
+
+/*!
+ * 
+ */
 CHN_EXPORT CHNBoolean CHN_respondsTo(id self, CHNSymbol_ref a_symbol);
 
 

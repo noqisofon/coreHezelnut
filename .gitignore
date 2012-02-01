@@ -11,6 +11,8 @@
 *.diff
 *.lo
 *.la
+*.lai
+*.so.*.*.*
 *.Po
 
 compile

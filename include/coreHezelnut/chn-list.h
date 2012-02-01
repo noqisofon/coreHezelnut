@@ -1,10 +1,10 @@
 //  
-//  CHNMessage.h
+//  chn-list.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
 // 
-//  Copyright (c) 2012 rihine All rights reserved.
+//  Copyright (c) 2011 rihine All rights reserved.
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,27 +18,20 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNMessage_h
-#define coreHezelnut_classes_CHNMessage_h
+//
+#ifndef coreHezelnut_chn_list_h
+#define coreHezelnut_chn_list_h
 
 
-CHN_EXTERN_C_BEGIN
-
-
-const CHNClass_ref CHNMessage;
-
+struct chn_list {
+    void* head;
+    struct chn_list* tail;
+};
 
 /*!
- *
+ * 
  */
-CHN_EXPORT id CHNMessage_selector_arguments(CHNMessage_ref self, CHNArray_ref arguments);
+CHN_EXPORT void* chn_list_nth(struct chn_list* list, int index);
 
 
-CHN_EXTERN_C_END
-
-
-#endif  /* coreHezelnut_classes_CHNMessage_h */
-// Local Variables:
-//   coding: utf-8
-// End:
+#endif  /* coreHezelnut_chn_list_h */

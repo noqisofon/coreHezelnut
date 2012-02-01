@@ -23,6 +23,7 @@
 #include "coreHezelnut/chn-internal.h"
 #include "coreHezelnut/callbacks.h"
 #include "coreHezelnut/allocator.h"
+#include "coreHezelnut/chn-list.h"
 
 #include "coreHezelnut/classes.h"
 #include "coreHezelnut/classes/CHNClass.h"
@@ -174,6 +175,12 @@ CHN_EXPORT CHNBoolean CHN_isReadOnly(id self)
 CHN_EXPORT CHNBoolean CHN_isNil(id self)
 {
     return self == nil;
+}
+
+
+CHN_EXPORT CHNBoolean CHN_isSymbol(id self)
+{
+    return FALSE;
 }
 
 
@@ -329,13 +336,13 @@ CHN_EXPORT id CHN_checkIndexableBounds(id self, int index)
     else if ( index > CHN_basicSize( self ) )
         return CHNIndexOutOfRangeError_signalOn_withIndex( self, index );
 
-    return chn_list_nth( CHN_CLASSOF(self)->variables, index );
+    return CHN_ASOBJECT(chn_list_nth( (struct chn_list *)(CHN_CLASSOF(self)->variables), index ));
 }
 
 
 CHN_EXPORT id CHN_checkIndexableBounds_put(id self, int index, id object)
 {
-    CHNSymbol_ref shape = nil;
+    CHNSymbol_ref shape = CHN_ASSYMBOL(nil);
     int size = 0;
 
     if ( CHNClass_isFixed( CHN_CLASSOF(self) ) )
@@ -390,21 +397,21 @@ CHN_EXPORT id CHN_at(id self, int index)
 }
 
 
-CHN_EXPORT void CHN_at_put(id self, int index, id value)
+CHN_EXPORT id CHN_at_put(id self, int index, id value)
 {
-    CHN_checkIndexableBounds_put( self, index, value );
+    return CHN_checkIndexableBounds_put( self, index, value );
 }
 
 
 CHN_EXPORT id CHN_become(id self, id other_object)
 {
-    return CHNReadOnlyObjectError_signal();
+    return CHN_ASOBJECT(CHNReadOnlyObjectError_signal());
 }
 
 
-CHN_EXPORT id CHN_becomeFoward(id self)
+CHN_EXPORT id CHN_becomeFoward(id self, id other_object)
 {
-    return CHNReadOnlyObjectError_signal();
+    return CHN_ASOBJECT(CHNReadOnlyObjectError_signal());
 }
 
 
@@ -432,15 +439,14 @@ CHN_EXPORT id CHN_perform(id self, id selector_or_message_or_method)
         if ( CHN_respondsTo( self, CHN_ASSYMBOL(selector_or_message_or_method) ) )
             return CHNWrongArgumentCount_signal();
         else {
-            return CHN_doseNotUnderstand( self,
-                                          CHNMessage_selector( selector_or_message_or_method ),
-                                          CHNARRAY_LITERAL_EMPTY );
+            return CHN_doesNotUnderstand( self,
+                                          CHNMessage_selector( selector_or_message_or_method, CHN_ARRAY_LITERAL_EMPTY ) );
         }
     }
     if ( CHN_isKindOf( selector_or_message_or_method, CHNCompiledMethod ) )
         return CHNWrongArgumentCount_signal();
 
-    return CHNMethod_sendTo( method, self );
+    return CHNMethod_sendTo( selector_or_message_or_method, self );
 }
 
 
@@ -450,11 +456,12 @@ CHN_EXPORT id CHN_perform_with0(id self, id selector_or_method, id arg0)
         return CHNWrongArgumentCount_signal();
     if ( !CHN_isSymbol( selector_or_method ) )
         return CHNWrongClassError_signalOn_mustBe( selector_or_method, CHNSymbol );
-    if ( CHN_respondsTo( selector_or_method ) )
+    if ( CHN_respondsTo( self, selector_or_method ) )
         return CHNWrongArgumentCount_signal();
     else
-        return CHN_doseNotUnderstand( CHNMessage_selector_arguments( selector_or_method,
-                                                                     CHNARRAY_LITERAL1(arg0) ) );
+        return CHN_doesNotUnderstand( self,
+                                      CHNMessage_selector_arguments( selector_or_method,
+                                                                     CHN_ARRAY_LITERAL1(arg0) ) );
 }
 
 
@@ -464,11 +471,12 @@ CHN_EXPORT id CHN_perform_with1(id self, id selector_or_method, id arg0, id arg1
         return CHNWrongArgumentCount_signal();
     if ( !CHN_isSymbol( selector_or_method ) )
         return CHNWrongClassError_signalOn_mustBe( selector_or_method, CHNSymbol );
-    if ( CHN_respondsTo( selector_or_method ) )
+    if ( CHN_respondsTo( self, selector_or_method ) )
         return CHNWrongArgumentCount_signal();
     else
-        return CHN_doseNotUnderstand( CHNMessage_selector_arguments( selector_or_method,
-                                                                     CHNARRAY_LITERAL2(arg0, arg1) ) );
+        return CHN_doesNotUnderstand( self,
+                                      CHNMessage_selector_arguments( selector_or_method,
+                                                                     CHN_ARRAY_LITERAL2(arg0, arg1) ) );
 }
 
 
@@ -478,11 +486,12 @@ CHN_EXPORT id CHN_perform_with2(id self, id selector_or_method, id arg0, id arg1
         return CHNWrongArgumentCount_signal();
     if ( !CHN_isSymbol( selector_or_method ) )
         return CHNWrongClassError_signalOn_mustBe( selector_or_method, CHNSymbol );
-    if ( CHN_respondsTo( selector_or_method ) )
+    if ( CHN_respondsTo( self, selector_or_method ) )
         return CHNWrongArgumentCount_signal();
     else
-        return CHN_doseNotUnderstand( CHNMessage_selector_arguments( selector_or_method,
-                                                                     CHNARRAY_LITERAL3(arg0, arg1, arg2) ) );
+        return CHN_doesNotUnderstand( self,
+                                      CHNMessage_selector_arguments( selector_or_method,
+                                                                     CHN_ARRAY_LITERAL3(arg0, arg1, arg2) ) );
 }
 
 
@@ -492,11 +501,12 @@ CHN_EXPORT id CHN_perform_with3(id self, id selector_or_method, id arg0, id arg1
         return CHNWrongArgumentCount_signal();
     if ( !CHN_isSymbol( selector_or_method ) )
         return CHNWrongClassError_signalOn_mustBe( selector_or_method, CHNSymbol );
-    if ( CHN_respondsTo( selector_or_method ) )
+    if ( CHN_respondsTo( self, selector_or_method ) )
         return CHNWrongArgumentCount_signal();
     else
-        return CHN_doseNotUnderstand( CHNMessage_selector_arguments( selector_or_method,
-                                                                     CHNARRAY_LITERAL4(arg0, arg1, arg2, arg3) ) );
+        return CHN_doesNotUnderstand( self,
+                                      CHNMessage_selector_arguments( selector_or_method,
+                                                                     CHN_ARRAY_LITERAL4(arg0, arg1, arg2, arg3) ) );
 }
 
 
@@ -506,22 +516,24 @@ CHN_EXPORT id CHN_perform_withArguments(id self, id selector_or_method, CHNArray
         return CHNWrongArgumentCount_signal();
     if ( !CHN_isSymbol( selector_or_method ) )
         return CHNWrongClassError_signalOn_mustBe( selector_or_method, CHNSymbol );
-    if ( CHN_respondsTo( selector_or_method ) )
+    if ( CHN_respondsTo( self, selector_or_method ) )
         return CHNWrongArgumentCount_signal();
     else
-        return CHN_doseNotUnderstand( CHNMessage_selector_arguments( selector_or_method,
+        return CHN_doesNotUnderstand( self,
+                                      CHNMessage_selector_arguments( selector_or_method,
                                                                      argument_array ) );
 }
 
 
 CHN_EXPORT id CHN_error(id self, CHNString_ref message)
 {
+    return nil;
 }
 
 
 CHN_EXPORT id CHN_doesNotUnderstand(id self, CHNMessage_ref message)
 {
-    
+    return nil;
 }
 
 
