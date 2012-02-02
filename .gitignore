@@ -32,7 +32,6 @@ aclocal.m4
 libtool
 ltmain.sh
 configure
-configure.ac
 Makefile
 Makefile.in
 config.h.in
