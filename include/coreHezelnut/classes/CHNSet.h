@@ -1,5 +1,5 @@
 //  
-//  callbacks.h
+//  CHNSet.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,23 +19,38 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#ifndef coreHezelnut_callbacks_h
-#define coreHezelnut_callbacks_h
+#ifndef coreHezelnut_classes_CHNSet_h
+#define coreHezelnut_classes_CHNSet_h
 
 
-typedef id (*chn_if_absent_callback)(void* pcontext);
+CHN_EXTERN_C_BEGIN
 
 
-typedef id (*chn_doing_callback)(void* pcontext, id element);
+CHN_EXPORT const CHNClass_ref CHNSet;
 
 
-typedef CHNBoolean (*chn_predicate1_callback)(void* pcontext, id element);
+#define CHN_ASSET(_that_) ((CHNSet_ref)_that_)
 
 
-typedef id (*chn_if_error_callback)(void* pcontext);
+/*!
+ * 
+ */
+CHN_EXPORT id CHNSet_alloc(void);
 
 
-#endif  /* coreHezelnut_callbacks_h */
-// Local Variables:
-//   coding: utf-8
-// End:
+/*!
+ * 
+ */
+CHN_EXPORT id CHNSet_init(id self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNSet_ref CHNSet_new(void);
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNSet_h */

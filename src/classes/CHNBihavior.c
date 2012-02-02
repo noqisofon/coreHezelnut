@@ -26,7 +26,7 @@
 #include "coreHezelnut/classes/CHNIterator.h"
 #include "coreHezelnut/classes/CHNIODescriptor.h"
 #include "coreHezelnut/classes/CHNCollection.h"
-#include "coreHezelnut/classes/CHNDictionary.h"
+#include "coreHezelnut/classes/CHNSet.h"
 #include "coreHezelnut/classes/CHNStream.h"
 #include "coreHezelnut/classes/CHNWriteStream.h"
 #include "coreHezelnut/classes/CHNByteArray.h"
@@ -45,7 +45,7 @@ struct chn_bihavior {
     CHNClass_ref              class_pointer;
 
     CHNClass_ref              super_class;
-    CHNDictionary_ref         method_dictionary;
+    CHNSet_ref                method_dictionary;
     unsigned int              instance_spec;
     CHNOrderedCollection_ref  sub_classes;
     CHNOrderedCollection_ref  instance_variables;
@@ -188,8 +188,8 @@ CHN_EXPORT id CHNBihavior_set_instanceVariableNames(CHNBihavior_ref self, CHNCol
     int old_size = CHN_size( CHN_ASOBJECT(old_inst_var_names) );
     
     if ( CHN_size( CHN_ASOBJECT(variable_array) ) < old_size
-         || CHNCollection_equals( temp0 = CHNCollection_first_take( CHN_ASCOLLECTION(variable_array), old_size ),
-                                  temp1 = CHNCollection_first_take( CHN_ASCOLLECTION(old_inst_var_names), old_size ) ) )
+         || CHNCollection_equals( temp0 = CHNCollection_firstTake( CHN_ASCOLLECTION(variable_array), old_size ),
+                                  temp1 = CHNCollection_firstTake( CHN_ASCOLLECTION(old_inst_var_names), old_size ) ) )
         changed = TRUE;
     else
         changed = FALSE;
@@ -282,16 +282,16 @@ static id __method_dict_collect0(void* pcontext, id each)
 }
 
 
-CHN_EXPORT id CHNBihavior_methodDictionary(CHNBihavior_ref self, CHNDictionary_ref a_dictionary)
+CHN_EXPORT id CHNBihavior_set_methodDictionary(CHNBihavior_ref self, CHNSet_ref a_dictionary)
 {
-    CHNDictionary_ref new_dictionary;
+    CHNSet_ref new_dictionary;
 
     if ( !CHN_isNil( CHN_ASOBJECT(a_dictionary) ) ) {
         struct temp_simple_context0 context;
 
-        new_dictionary = CHNDictionary_collect( a_dictionary,
-                                                &context,
-                                                __method_dict_collect0 );
+        new_dictionary = CHNSet_collect( a_dictionary,
+                                         &context,
+                                         __method_dict_collect0 );
         CHNDictionary_become( a_dictionary, new_dictionary );
     }
     CHNBihavior_flushCache();
@@ -348,7 +348,7 @@ static id __remove_selector_ifAbsent0(void* pcontext)
 
 CHN_EXPORT id CHNBihavior_removeSelector_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_abesent_callback a_block)
 {
-    CHNDictionary_ref self_method_dictionary = chn_var_named( self, "methodDictionary" );
+    CHNSet_ref self_method_dictionary = self->method_dictionary;
     
     struct tmp_remove_selector_context0 context;
     context.receiver = self;
@@ -426,7 +426,7 @@ static id __compile_all_subclasses0(void* pcontext, CHNBihavior_ref subclass)
 
 CHN_EXPORT id CHNBihavior_compileAllSubclasses(CHNBihavior_ref self)
 {
-    return CHNBihavior_allSubclassesDo( self, __compile_all_subclasses0 );
+    return CHNBihavior_allSubclassesDo( self, NULL, __compile_all_subclasses0 );
 }
 
 
@@ -459,7 +459,86 @@ CHN_EXPORT CHNSymbol_ref CHNBihavior_get_shape(CHNBihavior_ref self)
 }
 
 
-CHN_EXPORT id CHNBihavior_allSubclassesDo(CHNBihavior_ref self, chn_doing_callback a_block)
+CHN_EXPORT CHNClass_ref CHNBihavior_set_superclass(CHNBihavior_ref self, CHNBihavior_ref a_class)
+{
+    CHNClass_ref prev_super_class = self->super_class;
+
+    self->super_class = a_class;
+
+    if ( CHN_isNil( CHN_ASOBJECT(a_class) ) )
+        self->instance_spec = 0;
+    else
+        self->instance_spec = a_class->instance_spec;
+
+    return prev_super_class;
+}
+
+
+CHN_EXPORT id CHNBihavior_addSubclass(CHNBihavior_ref self, CHNClass_ref a_class)
+{
+    /*
+      Smalltalk のソースでは Array だけど、OrderedCollection にしてる。
+     */
+    if ( CHN_isNil( CHN_ASOBJECT(self->sub_classes) ) )
+        self->sub_classes = CHNOrderedCollection_new();
+
+    CHNOrderedCollection_addLast( self->sub_classes, a_class );
+
+    return CHN_ASOBJECT(self);
+}
+
+
+CHN_EXPORT id CHNBihavior_removeSubclass(CHNBihavior_ref self, CHNClass_ref a_class)
+{
+    CHNOrderedCollection_remove( self->sub_classes, a_class );
+
+    return CHN_ASOBJECT(self);
+}
+
+
+CHN_EXPORT CHNSet_ref CHNBihavior_get_selectors(CHNBihavior_ref self)
+{
+    if ( CHN_isNil( CHN_ASOBJECT(self->method_dictionary) ) )
+        return CHNSet_new();
+    else
+        return CHNSet_get_keys( self->method_dictionary );
+        
+}
+
+
+struct tmp_get_all_selectors_context0 {
+    id receiver;
+    id other;
+};
+
+
+static id __all_selectors_superclasses_do(void* pcontext, id each)
+{
+    struct tmp_get_all_selectors_context0* context = (struct tmp_get_all_selectors_context0 *)context;
+    CHNSet_ref a_set = CHN_ASSET(context->other);
+    CHNBihavior_ref klass = CHN_ASBIHAVIOR(each);
+
+    CHNSet_add( a_set, CHNBihavior_get_selectors( klass ) );
+
+    return nil;
+}
+
+
+CHN_EXPORT CHNSet_ref CHNBihavior_get_allSelectors(CHNBihavior_ref self)
+{
+    CHNSet_ref a_result_set = CHNBihavior_get_selectors( self );
+    struct tmp_get_all_selectors_context0 context;
+
+    context.receiver = self;
+    context.other = CHN_ASOBJECT(a_result_set);
+
+    CHNBihavior_allSuperclassesDo( self, a_result_set, __all_selectors_superclasses_do );
+
+    return a_result_set;
+}
+
+
+CHN_EXPORT id CHNBihavior_allSubclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block)
 {
     if ( CHN_isNil( CHN_ASOBJECT(self->sub_classes) ) )
         return self;
@@ -468,8 +547,8 @@ CHN_EXPORT id CHNBihavior_allSubclassesDo(CHNBihavior_ref self, chn_doing_callba
     for ( ; CHNIterator_finished( it ); CHNIterator_next( it ) ) {
         CHNBihavior_ref klass = CHN_ASBIHAVIOR(CHNIterator_current( it ));
 
-        INVOKE_CALLBACK2(a_block, NULL, CHN_ASOBJECT(klass));
-        CHNBihavior_allSubclassesDo( klass, a_block );
+        INVOKE_CALLBACK2(a_block, pcontext, CHN_ASOBJECT(klass));
+        CHNBihavior_allSubclassesDo( klass, pcontext, a_block );
     }
     CHN_release( CHN_ASOBJECT(it) );
 
@@ -477,7 +556,7 @@ CHN_EXPORT id CHNBihavior_allSubclassesDo(CHNBihavior_ref self, chn_doing_callba
 }
 
 
-CHN_EXPORT id CHNBihavior_allSuperclassesDo(CHNBihavior_ref self, chn_doing_callback a_block)
+CHN_EXPORT id CHNBihavior_allSuperclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block)
 {
     CHNBihavior_ref klass = self;
     CHNBihavior_ref super_class;
@@ -488,26 +567,26 @@ CHN_EXPORT id CHNBihavior_allSuperclassesDo(CHNBihavior_ref self, chn_doing_call
 
         if ( CHN_isNil( CHN_ASOBJECT(super_class) ) )
             break;
-    } while ( INVOKE_CALLBACK2(a_block, NULL, CHN_ASOBJECT(super_class)) );
+    } while ( INVOKE_CALLBACK2(a_block, pcontext, CHN_ASOBJECT(super_class)) );
 
     return self;
 }
 
 
-CHN_EXPORT id CHNBihavior_withAllSubclassesDo(CHNBihavior_ref self, chn_doing_callback a_block)
+CHN_EXPORT id CHNBihavior_withAllSubclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block)
 {
-    INVOKE_CALLBACK2(a_block, NULL, CHN_ASOBJECT(self));
+    INVOKE_CALLBACK2(a_block, pcontext, CHN_ASOBJECT(self));
 
-    return CHNBihavior_allSubclassesDo( self, a_block );
+    return CHNBihavior_allSubclassesDo( self, pcontext, a_block );
 }
 
 
-CHN_EXPORT id CHNBihavior_withAllSuperclassesDo(CHNBihavior_ref self, chn_doing_callback a_block)
+CHN_EXPORT id CHNBihavior_withAllSuperclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block)
 {
     CHNBihavior_ref klass = self;
 
     while ( CHN_isNil( CHN_ASOBJECT(klass) ) ) {
-        INVOKE_CALLBACK2(a_block, NULL, CHN_ASOBJECT(klass));
+        INVOKE_CALLBACK2(a_block, pcontext, CHN_ASOBJECT(klass));
         klass = CHN_get_superclass( CHN_ASOBJECT(klass) );
     }
     return self;

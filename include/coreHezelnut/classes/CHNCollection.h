@@ -91,7 +91,19 @@ CHN_EXPORT id CHNCollection_checkIndexableBounds_ifAbsent(CHNCollection_ref self
 /*!
  * 
  */
-CHN_EXPORT id Collection_copyReplaceFrom_to_with(CHNCollection_ref self, int start, int stop, CHNByteArray_ref byte_array, int replace_start);
+CHN_EXPORT id CHNCollection_copyReplaceFrom_to_with(CHNCollection_ref self, int start, int stop, CHNCollection_ref a_collection);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNCollection_ref CHNCollection_firstTake(CHNCollection_ref self, int n);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBoolean CHNCollection_anySatisfy(CHNCollection_ref self, void* pcontext, chn_predicate1_callback a_block);
 
 
 /*!

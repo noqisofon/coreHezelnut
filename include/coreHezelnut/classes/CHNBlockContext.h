@@ -1,5 +1,5 @@
 //  
-//  callbacks.h
+//  CHNBlockContext.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,29 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-#ifndef coreHezelnut_callbacks_h
-#define coreHezelnut_callbacks_h
+// 
+#ifndef coreHezelnut_classes_CHNBlockContext_h
+#define coreHezelnut_classes_CHNBlockContext_h
+
+#include "coreHezelnut/classes/CHNContextPart.h"
 
 
-typedef id (*chn_if_absent_callback)(void* pcontext);
+CHN_EXTERN_C_BEGIN
 
 
-typedef id (*chn_doing_callback)(void* pcontext, id element);
+const CHNClass_ref CHNBlockContext;
 
 
-typedef CHNBoolean (*chn_predicate1_callback)(void* pcontext, id element);
+/*!
+ *
+ */
+CHN_EXPORT id CHNBlockContext_class_fromClosure_parent(CHNBlockClosure_ref a_block_closure, CHNContextPart_ref parent_context);
 
 
-typedef id (*chn_if_error_callback)(void* pcontext);
+CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_callbacks_h */
+#endif  /* coreHezelnut_classes_CHNBlockContext_h */
 // Local Variables:
 //   coding: utf-8
 // End:

@@ -107,26 +107,28 @@ typedef struct chn_object {
     struct chn_class* class_pointer;
 } *id;
 
-typedef const struct chn_string* CHNConstantString_ref;
-typedef       struct chn_string* CHNMutableString_ref;
+typedef const struct chn_string*       CHNConstantString_ref;
+typedef       struct chn_string*       CHNMutableString_ref;
 
 #define CHNString_ref CHNConstantString_ref
 
 
 typedef struct chn_ordered_collection* CHNOrderedCollection_ref;
-typedef struct chn_dictionary* CHNDictionary_ref;
-typedef struct chn_stream* CHNStream_ref;
-typedef struct chn_write_stream* CHNWriteStream_ref;
-typedef struct chn_symbol* CHNSymbol_ref;
-typedef struct chn_character* CHNCharacter_ref;
-typedef struct chn_array* CHNArray_ref;
-typedef struct chn_iterator* CHNIterator_ref;
-typedef struct chn_integer_array* CHNIntegerArray_ref;
-typedef struct chn_byte_array* CHNByteArray_ref;
-typedef struct chn_message* CHNMessage_ref;
-typedef struct chn_block_closure* CHNBlockClosure_ref;
-typedef struct chn_compiled_method* CHNCompiledMethod_ref;
-typedef struct chn_bihavior* CHNBihavior_ref;
+typedef struct chn_set*                CHNSet_ref;
+typedef struct chn_stream*             CHNStream_ref;
+typedef struct chn_write_stream*       CHNWriteStream_ref;
+typedef struct chn_symbol*             CHNSymbol_ref;
+typedef struct chn_character*          CHNCharacter_ref;
+typedef struct chn_array*              CHNArray_ref;
+typedef struct chn_iterator*           CHNIterator_ref;
+typedef struct chn_integer_array*      CHNIntegerArray_ref;
+typedef struct chn_byte_array*         CHNByteArray_ref;
+typedef struct chn_message*            CHNMessage_ref;
+typedef struct chn_block_context*      CHNBlockContext_ref;
+typedef struct chn_context_part*       CHNContextPart_ref;
+typedef struct chn_block_closure*      CHNBlockClosure_ref;
+typedef struct chn_compiled_method*    CHNCompiledMethod_ref;
+typedef struct chn_bihavior*           CHNBihavior_ref;
 
 
 enum __CHNComparisonResults {

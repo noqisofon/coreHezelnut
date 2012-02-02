@@ -1,0 +1,3 @@
+SUBDIRS = coreHezelnut
+
+libcoreHezelnutincludedir = $(includedir)/

@@ -39,7 +39,7 @@ CHN_EXTERN_C_BEGIN
 struct chn_context_part {
     CHNClass_ref class_pointer;
 
-    id parent;
+    CHNContextPart_ref parent;
     id native_ip;
     id ip;
     id sp;
@@ -89,7 +89,7 @@ CHN_EXPORT id CHNContextPart_class_backtrace(void)
 {
     CHNContextPart_ref this_context = CHNContextPart_class_thisContext();
 
-    CHNContextPart_backtraceOn( CHNContextPart_parentContext( this_context ),
+    CHNContextPart_backtraceOn( CHNContextPart_get_parentContext( this_context ),
                                 CHNTranscript_class_get_instance() );
 
     CHN_release( CHN_ASOBJECT(this_context) );
@@ -102,7 +102,7 @@ CHN_EXPORT id CHNContextPart_class_backtraceOn(CHNStream_ref a_stream)
 {
     CHNContextPart_ref this_context = CHNContextPart_class_thisContext();
 
-    CHNContextPart_backtraceOn( CHNContextPart_parentContext( this_context ),
+    CHNContextPart_backtraceOn( CHNContextPart_get_parentContext( this_context ),
                                 a_stream );
 
     CHN_release( CHN_ASOBJECT(this_context) );
@@ -139,10 +139,86 @@ CHN_EXPORT id CHNContextPart_backtraceOn(CHNContextPart_ref self, CHNStream_ref 
             CHNStream_nl( a_stream );
         }
         temp_context = other_context;
-        other_context = CHNContextPart_parentContext( other_context );
+        other_context = CHNContextPart_get_parentContext( other_context );
         CHN_release( CHN_ASOBJECT(temp_context) );
     }
     return self;
+}
+
+
+CHN_EXPORT id CHNContextPart_get_client(CHNContextPart_ref self)
+{
+    return CHNContextPart_get_parentContext( self )->receiver;
+}
+
+
+CHN_EXPORT id CHNContextPart_get_environment(CHNContextPart_ref self)
+{
+    CHNContextPart_ref context = self;
+    CHNContextPart_ref next;
+
+    while ( !( CHNContextPart_isEnvironment( context ) ) ) {
+        next = CHNContextPart_get_parentContext( context );
+        context = next;
+    }
+    return CHN_ASOBJECT(context);
+}
+
+
+CHN_EXPORT int CHNContextPart_get_initialIP(CHNContextPart_ref self)
+{
+    return 0;
+}
+
+
+CHN_EXPORT CHNBoolean CHNContextPart_isDisabled(CHNContextPart_ref self)
+{
+    CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+
+    return FALSE;
+}
+
+
+CHN_EXPORT CHNBoolean CHNContextPart_isUnwind(CHNContextPart_ref self)
+{
+    CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+
+    return FALSE;
+}
+
+
+CHN_EXPORT CHNBoolean CHNContextPart_isEnvironment(CHNContextPart_ref self)
+{
+    CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+
+    return FALSE;
+}
+
+
+CHN_EXPORT CHNBoolean CHNContextPart_isProcess(CHNContextPart_ref self)
+{
+    return CHN_isNil( CHN_ASOBJECT(CHNContextPart_get_parentContext( self )) )
+        && !CHNContextPart_isEnvironment( self );
+}
+
+
+CHN_EXPORT CHNContextPart_ref CHNContextPart_get_parentContext(CHNContextPart_ref self)
+{
+    return self->parent;
+}
+
+
+CHN_EXPORT id CHNContextPart_set_parentContext(CHNContextPart_ref self, CHNContextPart_ref a_context)
+{
+    id retval = CHN_ASOBJECT(self->parent);
+
+    if ( CHNClass_equals( CHN_get_superclass( CHN_ASOBJECT(CHN_get_class( CHN_ASOBJECT(self) )) ), CHNContextPart )
+         || CHN_isNil( CHN_ASOBJECT(a_context) ) )
+        return CHNWrongClassError_signalOn_mustBe( CHN_ASOBJECT(a_context), CHNContextPart );
+
+    self->parent = a_context;
+
+    return retval;
 }
 
 

@@ -26,11 +26,10 @@
 CHN_EXTERN_C_BEGIN
 
 
-
-typedef struct chn_context_part* CHNContextPart_ref;
-
-
 const CHNClass_ref CHNContextPart;
+
+
+#define CHN_THIS_CONTEXT CHNContextPart_class_thisContext()
 
 
 /*!
@@ -67,6 +66,60 @@ CHN_EXPORT id CHNContextPart_backtrace(CHNContextPart_ref self);
  * 
  */
 CHN_EXPORT id CHNContextPart_backtraceOn(CHNContextPart_ref self, CHNStream_ref a_stream);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNContextPart_client(CHNContextPart_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNContextPart_get_environment(CHNContextPart_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT int CHNContextPart_get_initialIP(CHNContextPart_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNBoolean CHNContextPart_isDisabled(CHNContextPart_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBoolean CHNContextPart_isUnwind(CHNContextPart_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBoolean CHNContextPart_isEnvironment(CHNContextPart_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNBoolean CHNContextPart_isProcess(CHNContextPart_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNContextPart_ref CHNContextPart_get_parentContext(CHNContextPart_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNContextPart_set_parentContext(CHNContextPart_ref self, CHNContextPart_ref a_context);
 
 
 CHN_EXTERN_C_END

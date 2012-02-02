@@ -56,7 +56,7 @@ CHN_EXPORT CHNCollection_ref CHNBihavior_parseInstanceVariableString(CHNBihavior
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_methodDictionary(CHNBihavior_ref self, CHNDictionary_ref a_dictionary);
+CHN_EXPORT id CHNBihavior_set_methodDictionary(CHNBihavior_ref self, CHNSet_ref a_dictionary);
 
 
 /*!
@@ -128,25 +128,55 @@ CHN_EXPORT CHNSymbol_ref CHNBihavior_get_shape(CHNBihavior_ref self);
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_allSubclassesDo(CHNBihavior_ref self, chn_doing_callback a_block);
+CHN_EXPORT CHNClass_ref CHNBihavior_set_superclass(CHNBihavior_ref self, CHNBihavior_ref a_class);
+
+
+/*!
+ * self にサブクラスとして a_class を追加します。
+ */
+CHN_EXPORT id CHNBihavior_addSubclass(CHNBihavior_ref self, CHNClass_ref a_class);
+
+
+/*!
+ * self に含まれているサブクラスの a_class を削除します。
+ */
+CHN_EXPORT id CHNBihavior_removeSubclass(CHNBihavior_ref self, CHNClass_ref a_class);
 
 
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_allSuperclassesDo(CHNBihavior_ref self, chn_doing_callback a_block);
+CHN_EXPORT CHNSet_ref CHNBihavior_get_selectors(CHNBihavior_ref self);
 
 
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_withAllSubclassesDo(CHNBihavior_ref self, chn_doing_callback a_block);
+CHN_EXPORT CHNSet_ref CHNBihavior_get_allSelectors(CHNBihavior_ref self);
 
 
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_withAllSuperclassesDo(CHNBihavior_ref self, chn_doing_callback a_block);
+CHN_EXPORT id CHNBihavior_allSubclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNBihavior_allSuperclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNBihavior_withAllSubclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNBihavior_withAllSuperclassesDo(CHNBihavior_ref self, void* pcontext, chn_doing_callback a_block);
 
 
 #endif  /* coreHezelnut_CHNBihavior_h */
