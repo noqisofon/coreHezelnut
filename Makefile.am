@@ -1,4 +1,9 @@
-SUBDIRS = src
+SUBDIRS = include src
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = coreHezelnut.pc
+
+EXTRA_DIST = coreHezelnut.pc.in
 
 dist-hook: changelog
 

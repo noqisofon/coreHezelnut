@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: @PACKAGE@
+Description: Smalltalk like OOP library
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lcoreHezelnut
+Cflags: -I${includedir}

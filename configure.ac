@@ -6,6 +6,7 @@ AC_INIT(coreHezelnut, 0.1, ned.rihine@gmail.com)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/objects.c])
 AC_CONFIG_HEADERS([include/config.h])
+AC_CONFIG_FILES([coreHezelnut.pc:coreHezelnut.pc.in])
 
 # Checks for programs.
 AC_PROG_LIBTOOL

@@ -1,3 +1,126 @@
+commit 52badab050fe6c7c2097becd11592a2fff469281
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Fri Feb 3 13:26:18 2012 +0900
+
+    * 追加中。
+    
+    + include/coreHezelnut/allocation.h:
+    ++ allocation.h を追加。
+    
+    + include/coreHezelnut/chn-internal.h:
+    ++ インスタンスホルダーとして、CHNCompiledBlock_ref を追加。
+    
+    + include/coreHezelnut/classes/CHNBlockClosure.h:
+    ++ クラスメソッドに _class プレフィックスを付加。
+    ++ メソッド argumentCount の追加。
+    
+    + include/coreHezelnut/classes/CHNCompiledBlock.h:
+    ++ CHNCompiledBlock.h を追加。
+    
+    + include/coreHezelnut/classes/CHNCompiledMethod.h:
+    ++ methodCategory, selector, argumentCount を追加。
+    
+    + include/coreHezelnut/classes/CHNInteger.h:
+    ++ CHNInteger.h を追加。
+    
+    + include/coreHezelnut/classes/Makefile.am:
+    ++ CHNCompiledBlock.h を追加。
+    
+    + include/coreHezelnut/error-handling.h:
+    ++ error-handling.h を追加。
+    
+    + src/Makefile.am:
+    ++ 後々ソースファイルを追加するの面倒なので、縦に並べた。
+    
+    + src/allocation.c:
+    ++ allocation.c の追加。
+    
+    + src/classes/CHNBlockClosure.c:
+    ++ struct chn_block_closure のメンバの型を変更。
+    ++ クラスメソッドに _class プレフィックスを付加。
+    
+    + src/classes/CHNCompiledBlock.c:
+    ++ CHNCompiledBlock.c の追加。
+    
+    + src/classes/Makefile.am:
+    ++ 後々ソースファイルを追加するの面倒なので、縦に並べた。
+    
+    + src/error-handling.c:
+    ++ error-handling.c
+    
+    + src/objects.c:
+    ++ allocator.h を allocation.h に変名したので修正。
+    
+    + src/utils.c:
+    ++ chn_error 関数を error-handling.c に移したので削除。
+
+ configure.ac                                     |    1 +
+ include/coreHezelnut/Makefile.am                 |   13 +++-
+ include/coreHezelnut/allocation.h                |   76 ++++++++++++++
+ include/coreHezelnut/chn-internal.h              |    1 +
+ include/coreHezelnut/classes/CHNBlockClosure.h   |   10 ++-
+ include/coreHezelnut/classes/CHNCompiledBlock.h  |   94 ++++++++++++++++++
+ include/coreHezelnut/classes/CHNCompiledMethod.h |   30 ++++++
+ include/coreHezelnut/classes/CHNInteger.h        |   38 +++++++
+ include/coreHezelnut/classes/Makefile.am         |    1 +
+ include/coreHezelnut/error-handling.h            |   72 ++++++++++++++
+ src/Makefile.am                                  |    8 ++-
+ src/allocation.c                                 |  114 ++++++++++++++++++++++
+ src/classes/CHNBlockClosure.c                    |   20 +++-
+ src/classes/CHNCompiledBlock.c                   |  112 +++++++++++++++++++++
+ src/classes/Makefile.am                          |   10 ++-
+ src/error-handling.c                             |   77 +++++++++++++++
+ src/objects.c                                    |    2 +-
+ src/utils.c                                      |    5 -
+ 18 files changed, 668 insertions(+), 16 deletions(-)
+
+commit ea31320e7a799a06028e4ae01f3c9a206d141504
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Thu Feb 2 16:14:55 2012 +0900
+
+    add configure.ac
+
+ .gitignore   |    1 -
+ configure.ac |   35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+), 1 deletions(-)
+
+commit f57fddd9e9562295f183883671afef0c9f6cffc8
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Thu Feb 2 16:06:59 2012 +0900
+
+    remove Makefile.in and config.h.in
+
+ .gitignore                                     |    4 +-
+ Makefile.in                                    |  740 ------------------------
+ include/Makefile.am                            |    3 +
+ include/config.h.in                            |   80 ---
+ include/coreHezelnut/Makefile.am               |    5 +
+ include/coreHezelnut/callbacks.h               |    3 +
+ include/coreHezelnut/chn-internal.h            |   32 +-
+ include/coreHezelnut/classes/CHNBihavior.h     |   40 ++-
+ include/coreHezelnut/classes/CHNBlockContext.h |   46 ++
+ include/coreHezelnut/classes/CHNCollection.h   |   14 +-
+ include/coreHezelnut/classes/CHNContextPart.h  |   59 ++-
+ include/coreHezelnut/classes/CHNSet.h          |   56 ++
+ include/coreHezelnut/classes/Makefile.am       |   38 ++
+ src/Makefile.am                                |    7 +-
+ src/Makefile.in                                |  682 ----------------------
+ src/classes/CHNBihavior.c                      |  121 ++++-
+ src/classes/CHNBlockContext.c                  |   47 ++
+ src/classes/CHNContextPart.c                   |   84 +++-
+ src/classes/Makefile.am                        |    2 +-
+ src/classes/Makefile.in                        |  532 -----------------
+ 20 files changed, 508 insertions(+), 2087 deletions(-)
+
+commit 2a970305aceee3cedf01bc159d4e9ce1347f5610
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Wed Feb 1 23:58:39 2012 +0900
+
+    update ChangeLog.
+
+ ChangeLog |  140 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 140 insertions(+), 0 deletions(-)
+
 commit 845d5b9ee3250a69e0e435b55b3d97a0d0df9477
 Author: ned rihine <ned.rihine@gmail.com>
 Date:   Wed Feb 1 19:18:44 2012 +0900
