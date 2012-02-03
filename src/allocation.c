@@ -21,6 +21,10 @@
 //
 #include "config.h"
 
+#ifdef HAVE_STDDEF_H
+#   include <stddef.h>
+#endif  /* def HAVE_STDDEF_H */
+
 #ifdef HAVE_STDLIB_H
 #   include <stdlib.h>
 #endif  /* def HAVE_STDLIB_H */
@@ -112,3 +116,6 @@ void chn_free(void* memp)
 
 
 CHN_EXTERN_C_END
+// Local Variables:
+//   coding: utf-8
+// End:

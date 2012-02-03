@@ -1,6 +1,6 @@
-libcoreHezelnutincludedir = $(includedir)/coreHezelnut/classes
+libcoreHezelnut_includedir = $(includedir)/coreHezelnut/classes
 
-libcoreHezelnutinclude_HEADERS = \
+libcoreHezelnut_include_HEADERS = \
 	CHNArgumentOutOfRangeError.h \
 	CHNArray.h \
 	CHNArrayedCollection.h \
@@ -15,7 +15,7 @@ libcoreHezelnutinclude_HEADERS = \
 	CHNCompiledMethod.h \
 	CHNContextPart.h \
 	CHNError.h \
-	CHNFloat.h \ \
+	CHNFloat.h \
 	CHNIODescriptor.h \
 	CHNIndexOutOfRangeError.h \
 	CHNIteratable.h \

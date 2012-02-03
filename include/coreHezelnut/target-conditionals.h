@@ -1,5 +1,5 @@
 //  
-//  allocator.h
+//  target-conditionals.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,20 +19,16 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-#ifndef coreHezelnut_allocator_h
-#define coreHezelnut_allocator_h
+#ifndef coreHezelnut_target_conditionals_h
+#define coreHezelnut_target_conditionals_h
 
 
-CHN_EXTERN_C_BEGIN
+#ifdef MSC_VER
+#   define CORE_HEZELNUT_TARGET_OS_WIN32 1
+#endif  /* def MSC_VER */
 
+#ifdef __LINUX__
+#   define CORE_HEZELNUT_TARGET_OS_LINUX 1
+#endif  /* def __LINUX__ */
 
-/*!
- *
- */
-CHN_EXPORT void* chn_malloc(size_t size);
-
-
-CHN_EXTERN_C_END
-
-
-#endif  /* coreHezelnut_allocator.h */
+#endif  /* coreHezelnut_target_conditionals_h */

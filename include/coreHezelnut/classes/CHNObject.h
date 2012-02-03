@@ -35,7 +35,19 @@ CHN_EXPORT const CHNClass_ref CHNObject;
 /*!
  * 
  */
-CHN_EXPORT id CHNObject_alloc(void);
+CHN_EXPORT void CHNObject_class_initialize(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNObject_class_alloc(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNObject_class_new(void);
 
 
 /*!
@@ -44,13 +56,10 @@ CHN_EXPORT id CHNObject_alloc(void);
 CHN_EXPORT id CHNObject_init(id self);
 
 
-/*!
- * 
- */
-CHN_EXPORT id CHNObject_new(void);
-
-
 CHN_EXTERN_C_END
 
 
 #endif  /* coreHezelnut_classes_CHNObject_h */
+// Local Variables:
+//   coding: utf-8
+// End:

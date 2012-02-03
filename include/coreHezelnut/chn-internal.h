@@ -22,10 +22,16 @@
 #ifndef coreHezelnut_chn_internal_h
 #define coreHezelnut_chn_internal_h
 
-#include <stddef.h>
+#include "coreHezelnut/target-conditionals.h"
+
+#ifdef HAVE_STDDEF_H
+#   include <stddef.h>
+#endif  /* def HAVE_STDDEF_H */
 
 #if defined(__GNU__) || defined(CORE_HEZELNUT_TARGET_OS_WIN32)
-#   include <stdint.h>
+#   ifdef HAVE_STDINT_H
+#       include <stdint.h>
+#   endif  /* def HAVE_STDINT_H */
 #endif  /* defined(__GNU__) || defined(CORE_HEZELNUT_TARGET_OS_WIN32) */
 
 #if !defined(CHN_EXTERN_C_BEGIN)

@@ -1,8 +1,8 @@
 SUBDIRS = classes
 
-libcoreHezelnutincludedir = $(includedir)/coreHezelnut
+libcoreHezelnut_includedir = $(includedir)/coreHezelnut
 
-libcoreHezelnutinclude_HEADERS = \
+libcoreHezelnut_include_HEADERS = \
 	allocation.h  \
 	callbacks.h  \
 	chn-api.h  \
@@ -13,4 +13,5 @@ libcoreHezelnutinclude_HEADERS = \
 	error-handling.h  \
 	messaging.h  \
 	objects.h  \
-	runtime.h
+	runtime.h  \
+	target-conditionals.h
