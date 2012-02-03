@@ -17,6 +17,7 @@ AC_CHECK_LIB(pthread, pthread_create, [LIBS="$LIBS -pthread"])
 AC_CHECK_LIB(gc, GC_malloc, [LIBS="$LIBS -lgc"])
 
 # Checks for header files.
+AC_CHECK_HEADERS([limits.h stddef.h stdio.h stdlib.h stdarg.h string.h])
 AC_CHECK_HEADERS(pthread.h,, [AC_MSG_ERROR([pthread.h required])])
 AC_CHECK_HEADERS(gc.h)
 

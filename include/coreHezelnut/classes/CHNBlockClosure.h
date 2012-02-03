@@ -40,7 +40,7 @@ CHN_EXPORT id CHNBlockClosure_class_alloc(void);
 /*!
  *
  */
-CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_new(void);
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_class_new(void);
 
 
 /*!
@@ -52,7 +52,13 @@ CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_init(id self);
 /*!
  * 
  */
-CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_exceptionHandlerResetBlock(void);
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_class_exceptionHandlerResetBlock(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT int CHNBlockClosure_argumentCount(CHNBlockClosure_ref self);
 
 
 CHN_EXTERN_C_END

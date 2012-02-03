@@ -127,6 +127,7 @@ typedef struct chn_message*            CHNMessage_ref;
 typedef struct chn_block_context*      CHNBlockContext_ref;
 typedef struct chn_context_part*       CHNContextPart_ref;
 typedef struct chn_block_closure*      CHNBlockClosure_ref;
+typedef struct chn_compiled_block*     CHNCompiledBlock_ref;
 typedef struct chn_compiled_method*    CHNCompiledMethod_ref;
 typedef struct chn_bihavior*           CHNBihavior_ref;
 

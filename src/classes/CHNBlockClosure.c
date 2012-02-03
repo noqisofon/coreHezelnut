@@ -23,14 +23,18 @@
 #include "coreHezelnut/classes.h"
 #include "coreHezelnut/callbacks.h"
 
+#include "coreHezelnut/classes/CHNInteger.h"
+#include "coreHezelnut/classes/CHNBlockContext.h"
+#include "coreHezelnut/classes/CHNCompiledBlock.h"
+
 #include "coreHezelnut/classes/CHNBlockClosure.h"
 
 
 struct chn_block_closure {
     CHNClass_ref class_pointer;
 
-    void*/*CHNContext_ref*/ other_context;
-    void* block;
+    CHNBlockContext_ref other_context;
+    CHNCompiledBlock_ref block;
     id receiver;
 };
 
@@ -43,7 +47,7 @@ CHN_EXPORT id CHNBlockClosure_class_alloc(void)
 }
 
 
-CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_new(void)
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_class_new(void)
 {
     return CHNBlockClosure_init( CHNBlockClosure_class_alloc() );
 }
@@ -57,11 +61,11 @@ CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_init(id self)
 
 static id __exception_handler_reset(id context)
 {
-    return CHN_at_put( CHNContext_numArgs( context ) + 1, 0 );
+    return CHN_at_put( context, CHNContextPart_numArgs( context ) + 1, CHNInteger_class_value( 0 ) );
 }
 
 
-CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_exceptionHandlerResetBlock(void)
+CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_class_exceptionHandlerResetBlock(void)
 {
     CHNBlockClosure_ref exception_handler_reset = CHNBlockClosure_new();
 
@@ -70,4 +74,10 @@ CHN_EXPORT CHNBlockClosure_ref CHNBlockClosure_exceptionHandlerResetBlock(void)
     exception_handler_reset->receiver = nil;
 
     return exception_handler_reset;
+}
+
+
+CHN_EXPORT int CHNBlockClosure_argumentCount(CHNBlockClosure_ref self)
+{
+    return CHNCompiledBlock_get_numArgs( self->block );
 }

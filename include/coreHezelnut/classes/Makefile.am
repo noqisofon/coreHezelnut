@@ -11,6 +11,7 @@ libcoreHezelnutinclude_HEADERS = \
 	CHNCharacter.h \
 	CHNClass.h \
 	CHNCollection.h \
+	CHNCompiledBlock.h \
 	CHNCompiledMethod.h \
 	CHNContextPart.h \
 	CHNError.h \

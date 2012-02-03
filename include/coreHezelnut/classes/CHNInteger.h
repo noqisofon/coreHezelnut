@@ -1,5 +1,5 @@
 //  
-//  utils.h
+//  CHNInteger.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,22 +18,21 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-#include "coreHezelnut/chn-internal.h"
+// 
+#ifndef coreHezelnut_classes_CHNInteger_h
+#define coreHezelnut_classes_CHNInteger_h
 
 
-CHN_EXPORT CHNRange __CHNRange_new(int first, int last)
-{
-    CHNRange new;
-
-    new.first = first;
-    new.last = last;
-
-    return new;
-}
+CHN_EXTERN_C_BEGIN
 
 
-CHN_EXPORT CHNBoolean __CHNRange_isInclude(CHNRange range, int x)
-{
-    return range.first <= x && x < range.last;
-}
+const CHNClass_ref CHNInteger;
+
+
+CHN_EXTERN_C_END
+
+
+#endif  /* coreHezelnut_classes_CHNInteger_h */
+// Local Variables:
+//   coding: utf-8
+// End:

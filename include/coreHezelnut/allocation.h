@@ -1,5 +1,5 @@
 //  
-//  CHNCompiledMethod.h
+//  allocation.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,57 +18,59 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-#ifndef coreHezelnut_classes_CHNCompiledMethod_h
-#define coreHezelnut_classes_CHNCompiledMethod_h
+// 
+#ifndef coreHezelnut_allocation_h
+#define coreHezelnut_allocation_h
 
 
 CHN_EXTERN_C_BEGIN
 
 
-CHN_EXPORT const CHNClass_ref CHNCompiledMethod;
-
-
-#define CHN_ASCOMPILED_METHOD(_that_) ((CHNCompiledMethod_ref)_that_)
+/*!
+ *
+ */
+CHN_EXPORT void* chn_malloc(size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT id CHNCompiledMethod_withNewMethodClass(CHNCompiledMethod_ref self, CHNBihavior_ref klass);
+CHN_EXPORT void* chn_atomic_malloc(size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT CHNString_ref CHNCompiledMethod_get_methodCategory(CHNCompiledMethod_ref self);
+CHN_EXPORT void* chn_vmalloc(size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT CHNString_ref CHNCompiledMethod_set_methodCategory(CHNCompiledMethod_ref self, CHNString_ref a_string);
+CHN_EXPORT void* chn_realloc(void* ptr, size_t new_size);
 
 
 /*!
  *
  */
-CHN_EXPORT CHNSymbol_ref CHNCompiledMethod_get_selector(CHNCompiledMethod_ref self);
+CHN_EXPORT void* chn_calloc(size_t nelem, size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT CHNSymbol_ref CHNCompiledMethod_set_selector(CHNCompiledMethod_ref self, CHNSymbol_ref a_symbol);
+CHN_EXPORT void chn_free(void* memp);
 
 
-/*!
- *
- */
-CHN_EXPORT int CHNCompiledMethod_get_argumentCount(CHNCompiledMethod_ref self);
+CHN_EXPORT void* (*_chn_malloc)(size_t);
+CHN_EXPORT void* (*_chn_atomic_malloc)(size_t);
+CHN_EXPORT void* (*_chn_valloc)(size_t);
+CHN_EXPORT void* (*_chn_realloc)(void*, size_t);
+CHN_EXPORT void* (*_chn_calloc)(size_t, size_t);
+CHN_EXPORT void  (*_chn_free)(void *);
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNCompiledMethod_h */
+#endif  /* coreHezelnut_allocation.h */
