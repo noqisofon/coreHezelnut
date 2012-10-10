@@ -22,8 +22,10 @@
 #ifndef coreHezelnut_coreHezelnut_h
 #define coreHezelnut_coreHezelnut_h
 
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/chn-api.h"
+#include "coreHezelnut/chn_internal.h"
+#include "coreHezelnut/chn_api.h"
+#include "coreHezelnut/classes.h"
+//#include "coreHezelnut/error_handling.h"
 
 
 

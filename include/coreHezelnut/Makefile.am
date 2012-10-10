@@ -5,13 +5,13 @@ libcoreHezelnut_includedir = $(includedir)/coreHezelnut
 libcoreHezelnut_include_HEADERS = \
 	allocation.h  \
 	callbacks.h  \
-	chn-api.h  \
-	chn-internal.h  \
-	chn-list.h  \
+	chn_api.h  \
+	chn_internal.h  \
+	chn_list.h  \
 	classes.h  \
 	coreHezelnut.h  \
-	error-handling.h  \
+	error_handling.h  \
 	messaging.h  \
 	objects.h  \
 	runtime.h  \
-	target-conditionals.h
+	target_conditionals.h

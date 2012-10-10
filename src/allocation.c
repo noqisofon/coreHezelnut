@@ -43,7 +43,7 @@
 
 #include "coreHezelnut/coreHezelnut.h"
 #include "coreHezelnut/objects.h"
-#include "coreHezelnut/error-handling.h"
+#include "coreHezelnut/error_handling.h"
 
 #include "coreHezelnut/allocation.h"
 

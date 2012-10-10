@@ -29,7 +29,28 @@ CHN_EXTERN_C_BEGIN
 CHN_EXPORT const CHNClass_ref CHNTranscript;
 
 
+/*!
+ *
+ */
+CHN_EXPORT void CHNTranscript_class_cr(void);
+
+
+/*!
+ *
+ */
+CHN_EXPORT void CHNTranscript_class_show(const char* a_cstring);
+
+
+/*!
+ *
+ */
+CHN_EXPORT void CHNTranscript_class_showCr(const char* a_cstring);
+
+
 CHN_EXTERN_C_END
 
 
 #endif  /* coreHezelnut_classes_CHNTranscript_h */
+// Local Variables:
+//   coding: utf-8
+// End:

@@ -1,5 +1,5 @@
 //  
-//  utils.h
+//  CHNTranscript.c
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -21,21 +21,30 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/chn_internal.h"
+#include <stdio.h>
+
+#include "coreHezelnut/coreHezelnut.h"
+#include "coreHezelnut/classes.h"
+#include "coreHezelnut/callbacks.h"
+
+#include "coreHezelnut/classes/CHNTranscript.h"
 
 
-CHN_EXPORT CHNRange __CHNRange_new(int first, int last)
+CHN_EXPORT void CHNTranscript_class_cr(void)
 {
-    CHNRange new;
-
-    new.first = first;
-    new.last = last;
-
-    return new;
 }
 
 
-CHN_EXPORT CHNBoolean __CHNRange_isInclude(CHNRange range, int x)
+CHN_EXPORT void CHNTranscript_class_show(const char* a_cstring)
 {
-    return range.first <= x && x < range.last;
+    printf( "%s", a_cstring );
 }
+
+
+CHN_EXPORT void CHNTranscript_class_showCr(const char* a_cstring)
+{
+    printf( "%s\n", a_cstring );
+}
+// Local Variables:
+//   coding: utf-8
+// End:

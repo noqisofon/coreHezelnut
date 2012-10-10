@@ -22,7 +22,7 @@
 #ifndef coreHezelnut_chn_internal_h
 #define coreHezelnut_chn_internal_h
 
-#include "coreHezelnut/target-conditionals.h"
+#include "coreHezelnut/target_conditionals.h"
 
 #ifdef HAVE_STDDEF_H
 #   include <stddef.h>
@@ -115,6 +115,7 @@ typedef struct chn_object {
 
 typedef const struct chn_string*       CHNConstantString_ref;
 typedef       struct chn_string*       CHNMutableString_ref;
+
 
 #define CHNString_ref CHNConstantString_ref
 

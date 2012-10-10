@@ -1,3 +1,6 @@
+
+SUBDIRS = classes
+
 lib_LTLIBRARIES = libcoreHezelnut.la
 
 libcoreHezelnut_la_LIBADD = classes/libcoreHezelnut_classes.la
@@ -6,10 +9,8 @@ libcoreHezelnut_la_DEPENDENCIES = classes/libcoreHezelnut_classes.la
 
 libcoreHezelnut_la_SOURCES = \
 	allocation.c  \
-	chn-selector.c  \
+	chn_selector.c  \
 	classes.c  \
-	error-handling.c  \
+	error_handling.c  \
 	objects.c  \
 	utils.c
-
-SUBDIRS = classes

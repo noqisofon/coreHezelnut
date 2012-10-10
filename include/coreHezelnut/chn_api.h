@@ -22,7 +22,7 @@
 #ifndef coreHezelnut_chn_api_h
 #define coreHezelnut_chn_api_h
 
-#include "coreHezelnut/chn-internal.h"
+#include "coreHezelnut/chn_internal.h"
 
 
 CHN_EXTERN_C_BEGIN
@@ -57,15 +57,15 @@ typedef id (*IMP)(id, SEL, ...);
 
 
 typedef struct chn_varible {
-    const char* var_name;
-    const char* var_type;
-    int var_offset;
+    const char*                         var_name;
+    const char*                         var_type;
+    int                                 var_offset;
 } *CHNVariable_ref;
 
 
 typedef struct chn_varible_list {
-    struct chn_varible* head;
-    struct chn_varible_list* tail;
+    struct chn_varible*                 head;
+    struct chn_varible_list*            tail;
 } *CHNVariableList_ref;
 
 

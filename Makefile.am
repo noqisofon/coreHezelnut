@@ -1,4 +1,7 @@
 SUBDIRS = include src
+if TESTS
+  SUBDIRS += tests
+endif
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = coreHezelnut.pc

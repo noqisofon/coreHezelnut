@@ -18,8 +18,27 @@ AC_PROG_CC
 AC_HEADER_STDC
 
 AC_ARG_ENABLE(gc,
-    [   --enable-gc Enable OpenGL suppert [default=yes]],
+    [   --enable-gc Enable GC suppert [default=yes]],
     , enable_gc=yes)
+
+AC_ARG_ENABLE(tests,
+    AC_HELP_STRING([--enable-tests],
+    [enable test suites [default=no]]),
+    ,enable_tests=no)
+AC_ARG_ENABLE(debug,
+              AC_HELP_STRING([--enable-debug],
+                            [use 'DEBUG' configuration [default=no]]),
+                            , enable_debug=no)
+
+if test x$enable_debug = xyes; then
+  CFLAGS="$CFLAGS -g -W -Wall"
+else
+  CFLAGS="$CFLAGS -O2 -W -Wall"
+fi
+
+AC_DEFINE([PLUTO_BUILD], [1], [build the libpluto])
+
+AM_CONDITIONAL(TESTS, test x$enable_tests = xyes)
 
 # Checks for libraries.
 AC_CHECK_LIB(pthread, pthread_create, [LIBS="$LIBS -pthread"])
@@ -51,5 +70,7 @@ AC_CONFIG_FILES([Makefile
     include/coreHezelnut/Makefile
     include/coreHezelnut/classes/Makefile
     src/Makefile
-    src/classes/Makefile])
+    src/classes/Makefile
+    tests/Makefile
+    tests/hello/Makefile])
 AC_OUTPUT

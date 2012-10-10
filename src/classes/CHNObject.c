@@ -21,11 +21,11 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/chn-api.h"
-#include "coreHezelnut/chn-internal.h"
-#include "coreHezelnut/callbacks.h"
-#include "coreHezelnut/chn-list.h"
+#include "coreHezelnut/chn_api.h"
+#include "coreHezelnut/chn_internal.h"
 #include "coreHezelnut/classes.h"
+#include "coreHezelnut/callbacks.h"
+#include "coreHezelnut/chn_list.h"
 
 #include "coreHezelnut/classes/CHNClass.h"
 #include "coreHezelnut/classes/CHNSmallInteger.h"
