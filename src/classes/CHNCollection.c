@@ -36,59 +36,59 @@ CHN_EXPORT CHNCollection_ref CHNCollection_class_from(CHNClass_ref self, CHNArra
 
 CHN_EXPORT CHNCollection_ref CHNCollection_class_withAll(CHNClass_ref self, CHNCollection_ref a_collection)
 {
-    return CHN_yourself( CHNCollection_addAll( CHN_new( self ), a_collection ) );
+    return CHNObject_yourself( CHNCollection_addAll( CHNObject_class_new( self ), a_collection ) );
 }
 
 
 CHN_EXPORT CHNCollection_ref CHNCollection_class_with1(CHNClass_ref self, id an_object)
 {
-    CHNCollection_ref new = CHN_new( self );
+    CHNCollection_ref new = CHNObject_class_new( self );
 
     CHNCollection_add( new, an_object );
 
-    return CHN_yourself( new );
+    return CHNObject_yourself( new );
 }
 
 
 CHN_EXPORT CHNCollection_ref CHNCollection_class_with2(CHNClass_ref self, id first_object, id second_object)
 {
-    CHNCollection_ref new = CHN_new( self );
+    CHNCollection_ref new = CHNObject_class_new( self );
 
     CHNCollection_add( new, first_object );
     CHNCollection_add( new, second_object ); 
 
-    return CHN_yourself( new );
+    return CHNObject_yourself( new );
 }
 
 
 CHN_EXPORT CHNCollection_ref CHNCollection_class_with3(CHNClass_ref self, id first_object, id second_object, id third_object)
 {
-    CHNCollection_ref new = CHN_new( self );
+    CHNCollection_ref new = CHNObject_class_new( self );
 
     CHNCollection_add( new, first_object );
     CHNCollection_add( new, second_object );
     CHNCollection_add( new, third_object ); 
 
-    return CHN_yourself( new );
+    return CHNObject_yourself( new );
 }
 
 
 CHN_EXPORT CHNCollection_ref CHNCollection_class_with4(CHNClass_ref self, id first_object, id second_object, id third_object, id fourth_object)
 {
-    CHNCollection_ref new = CHN_new( self );
+    CHNCollection_ref new = CHNObject_class_new( self );
 
     CHNCollection_add( new, first_object );
     CHNCollection_add( new, second_object );
     CHNCollection_add( new, third_object );
     CHNCollection_add( new, fourth_object );
 
-    return CHN_yourself( new );
+    return CHNObject_yourself( new );
 }
 
 
 CHN_EXPORT CHNCollection_ref CHNCollection_class_with5(CHNClass_ref self, id first_object, id second_object, id third_object, id fourth_object, id fifth_object)
 {
-    CHNCollection_ref new = CHN_new( self );
+    CHNCollection_ref new = CHNObject_class_new( self );
 
     CHNCollection_add( new, first_object );
     CHNCollection_add( new, second_object );
@@ -96,5 +96,5 @@ CHN_EXPORT CHNCollection_ref CHNCollection_class_with5(CHNClass_ref self, id fir
     CHNCollection_add( new, fourth_object );
     CHNCollection_add( new, fifth_object );
 
-    return CHN_yourself( new );
+    return CHNObject_yourself( new );
 }

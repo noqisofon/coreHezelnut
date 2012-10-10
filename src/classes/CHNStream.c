@@ -52,13 +52,13 @@ CHN_EXPORT CHNString_ref CHNStream_get_name(CHNStream_ref self)
 
 CHN_EXPORT id CHNStream_next(CHNStream_ref self)
 {
-    return CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+    return CHNObject_subclassResponsibility( CHN_ASOBJECT(self) );
 }
 
 
 CHN_EXPORT id CHNStream_nextTake(CHNStream_ref self, int an_integer)
 {
-    id answer = CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), an_integer );
+    id answer = CHNObject_class_newWithSize( CHNStream_species( self ), an_integer );
 
     CHNStream_next_into_startingAt( self, an_integer, answer, 0 );
 
@@ -107,15 +107,17 @@ CHN_EXPORT id CHNStream_nextAvailable(CHNStream_ref self, int an_integer)
 {
     int n;
     id answer;
+    id temp;
 
-    answer = CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), an_integer );
+    answer = CHNObject_class_newWithSize( CHNStream_species( self ), an_integer );
     n = CHNStream_nextAvailable_into_startingAt( self, an_integer, answer, 0 );
 
     if ( n < an_integer ) {
-        id temp = answer;
+        temp = answer;
 
         answer = CHNCollection_copyFrom( CHN_ASCOLLECTION(answer), 0, n );
-        CHN_release( temp );
+
+        CHNObject_release( temp );
     }
     return answer;
 }
@@ -126,14 +128,14 @@ CHN_EXPORT int CHNStream_nextAvailable_putAllOn(CHNStream_ref self, int an_integ
     int n = chn_int_min( an_integer, 1024 );
     id collection;
 
-    collection = CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), an_integer );
+    collection = CHNObject_class_newWithSize( CHNStream_species( self ), an_integer );
     n = CHNStream_nextAvailable_into_startingAt( n,
                                                  an_integer,
                                                  collection,
                                                  0 );
 
     CHNStream_next_putAll_startingAt( a_stream, n, collection , 0 );
-    CHN_release( collection );
+    CHNObject_release( collection );
 
     return n;
 }
@@ -146,7 +148,9 @@ CHN_EXPORT int CHNStream_nextAvailable_into_startingAt(CHNStream_ref self, int a
     while ( i != an_integer ) {
         if ( CHNStream_atEnd( self ) )
             return i;
+
         CHNCollection_at_put( collection, i + pos, CHNStream_next( self ) );
+
         ++ i;
     }
     return an_integer;
@@ -155,7 +159,7 @@ CHN_EXPORT int CHNStream_nextAvailable_into_startingAt(CHNStream_ref self, int a
 
 CHN_EXPORT CHNBoolean CHNStream_nextMatchFor(CHNStream_ref self, id an_object)
 {
-    return CHN_equals( an_object, CHNStream_next( self ) );
+    return CHNObject_equals( an_object, CHNStream_next( self ) );
 }
 
 
@@ -182,12 +186,12 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_contents(CHNStream_ref self)
 CHN_EXPORT CHNOrderedCollection_ref CHNStream_upToEnd(CHNStream_ref self)
 {
     CHNOrderedCollection_ref result;
-    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), 8 ) );
+    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 8 ) );
 
     CHNStream_nextPutAllOn( self, write_stream );
 
     result = CHNStream_contents( write_stream );
-    CHN_release( CHN_ASOBJECT(write_stream) );
+    CHNWriteStream_release( write_stream );
 
     return result;
 }
@@ -198,16 +202,16 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_nextLine(CHNStream_ref self)
     CHNOrderedCollection_ref result;
 
     id next;
-    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), 40 ) );
+    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 40 ) );
 
     while ( !( CHNStream_atEnd( self )
-               || CHN_equals( next = CHNStream_next( self ), CHNCharacter_cr() )
-               || CHN_equals( next = CHNStream_next( self ), CHNCharacter_nl() )
+               || CHNObject_equals( next = CHNStream_next( self ), CHNCharacter_cr() )
+               || CHNObject_equals( next = CHNStream_next( self ), CHNCharacter_nl() )
                || CHN_isNil( next ) ) ) {
         CHNWriteStream_nextPut( write_stream, next );
     }
     result = CHNStream_contents( write_stream );
-    CHN_release( CHN_ASOBJECT(write_stream) );
+    CHNWriteStream_release( write_stream );
 
     return result;
 }
@@ -217,14 +221,14 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_upTo(CHNStream_ref self, id an_obj
 {
     id next;
     CHNOrderedCollection_ref result;
-    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), 8 ) );
+    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 8 ) );
 
-    while ( !( CHNStream_atEnd( self ) || CHN_equals( ( next = CHNStream_next( self ) ), an_object ) ) ) {
+    while ( !( CHNStream_atEnd( self ) || CHNObject_equals( ( next = CHNStream_next( self ) ), an_object ) ) ) {
         CHNWriteStream_nextPut( write_stream, next );
     }
 
     result = CHNStream_contents( write_stream );
-    CHN_release( CHN_ASOBJECT(write_stream) );
+    CHNWriteStream_release( write_stream );
 
     return result;
 }
@@ -232,26 +236,31 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_upTo(CHNStream_ref self, id an_obj
 
 CHN_EXPORT CHNOrderedCollection_ref CHNStream_upToAll(CHNStream_ref self, CHNCollection_ref a_collection)
 {
-    if ( CHNStream_atEnd( self ) )
-        return CHN_new( CHN_species( CHN_ASOBJECT(self) ) );
-    if ( CHNCollection_isEmpty( a_collection ) )
-        return CHN_new( CHN_species( CHN_ASOBJECT(self) ) );
+    CHNWriteStream_ref result_stream;
+    CHNIntegerArray_ref prefix;
+    id ch;
+    CHNOrderedCollection_ref result;
+    int j;
 
-    CHNWriteStream_ref result_stream = CHNWriteStream_on( CHN_newWithInt( CHN_species( CHN_ASOBJECT(self) ), 20 ) );
+    if ( CHNStream_atEnd( self ) )
+        return CHNObject_class_new( CHNStream_species( self ) );
+    if ( CHNCollection_isEmpty( a_collection ) )
+        return CHNObject_class_new( CHNStream_species( self ) );
+
+    result_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 20 ) );
     /*
       prefix の型は CHNIntegerArray で、プリミティブの int 型の要素で成り立っている…ことにしておく。
      */
-    CHNIntegerArray_ref prefix = CHNStream_prefixTableFor( self, a_collection );
-    id ch = CHNStream_next( self );
-    CHNOrderedCollection_ref result;
-    int j = 0;
+    prefix = CHNStream_prefixTableFor( self, a_collection );
+    ch     = CHNStream_next( self );
 
-    CHN_release( CHN_ASOBJECT(a_collection) );
+    CHNCollection_release( a_collection );
 
     CHNStream_nextPut( result_stream, ch );
 
+    j = 0;
     for ( ; ; ) {
-        if ( ( CHN_equals( ch, CHNCollection_at( a_collection, j ) )
+        if ( ( CHNObject_equals( ch, CHNCollection_at( a_collection, j ) )
                || ( j = CHNIntegerArray_at( prefix, j ) ) == 0 ) ) {
             ++ j;
 
@@ -259,16 +268,16 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_upToAll(CHNStream_ref self, CHNCol
                 CHNWriteStream_skip( result_stream, chn_int_negated( CHNCollection_size( a_collection ) ) );
 
                 result = CHNWriteStream_contents( result_stream );
-                CHN_release( CHN_ASOBJECT(result_stream) );
-                CHN_release( CHN_ASOBJECT(prefix) );
+                CHNObject_release( CHN_ASOBJECT(result_stream) );
+                CHNObject_release( CHN_ASOBJECT(prefix) );
 
                 return result;
             }
 
             if ( CHNStream_atEnd( self ) ) {
                 result = CHNWriteStream_contents( result_stream );
-                CHN_release( CHN_ASOBJECT(result_stream) );
-                CHN_release( CHN_ASOBJECT(prefix) );
+                CHNObject_release( CHN_ASOBJECT(result_stream) );
+                CHNObject_release( CHN_ASOBJECT(prefix) );
 
                 return result;
             }
