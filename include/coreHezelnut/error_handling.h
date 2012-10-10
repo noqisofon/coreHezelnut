@@ -29,13 +29,13 @@ CHN_EXTERN_C_BEGIN
 /*!
  *
  */
-CHN_EXPORT void chn_error(id object, int code, const char* format, ...);
+CHN_EXPORT void CHN_error(id object, int code, const char* format, ...);
 
 
 /*!
  *
  */
-CHN_EXPORT void chn_verror(id object, int code, const char* format, va_list argument);
+CHN_EXPORT void CHN_verror(id object, int code, const char* format, va_list argument);
 
 
 typedef CHNBoolean (*chn_error_handler)(id, int, const char* format, va_list);
@@ -44,13 +44,13 @@ typedef CHNBoolean (*chn_error_handler)(id, int, const char* format, va_list);
 /*!
  *
  */
-CHN_EXPORT chn_error_handler chn_get_error_handler(void);
+CHN_EXPORT chn_error_handler CHN_get_error_handler(void);
 
 
 /*!
  *
  */
-CHN_EXPORT chn_error_handler chn_set_error_handler(chn_error_handler handler);
+CHN_EXPORT chn_error_handler CHN_set_error_handler(chn_error_handler handler);
 
 
 #define CHN_ERR_UNKNOWN                        0x0001

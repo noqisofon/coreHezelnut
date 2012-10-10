@@ -22,7 +22,5 @@
 #ifndef coreHezelnut_CHNError_h
 #define coreHezelnut_CHNError_h
 
-#include "coreHezelnut/objects.h"
-
 
 #endif  /* coreHezelnut_CHNError_h */

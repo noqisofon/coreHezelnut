@@ -37,7 +37,7 @@ CHN_EXTERN_C_BEGIN
 
 
 struct chn_context_part {
-    CHNClass_ref class_pointer;
+    CHNClass_ref prototype;
 
     CHNContextPart_ref parent;
     id native_ip;
@@ -56,7 +56,7 @@ static struct chn_class __chn_context_part_class;
 
 CHN_EXPORT void CHNContextPart_class_initialize(void)
 {
-    __chn_context_part_metaclass.class_pointer = CHNClass;
+    __chn_context_part_metaclass.prototype = CHNClass;
     __chn_context_part_metaclass.super_class = CHNClass;
     __chn_context_part_metaclass.name = "CHNContextPartMetaClass";
     __chn_context_part_metaclass.version = 0;
@@ -65,7 +65,7 @@ CHN_EXPORT void CHNContextPart_class_initialize(void)
     __chn_context_part_metaclass.variables = NULL;
     __chn_context_part_metaclass.methods = NULL;
 
-    __chn_context_part_class.class_pointer = &__chn_context_part_metaclass;
+    __chn_context_part_class.prototype = &__chn_context_part_metaclass;
     __chn_context_part_class.super_class = CHNObject;
     __chn_context_part_class.name = "CHNContextPart";
     __chn_context_part_class.version = 0;

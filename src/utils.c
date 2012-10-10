@@ -21,7 +21,7 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/chn_internal.h"
+#include "coreHezelnut/chn_api.h"
 
 
 CHN_EXPORT CHNRange __CHNRange_new(int first, int last)

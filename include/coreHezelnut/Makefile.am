@@ -12,6 +12,5 @@ libcoreHezelnut_include_HEADERS = \
 	coreHezelnut.h  \
 	error_handling.h  \
 	messaging.h  \
-	objects.h  \
 	runtime.h  \
 	target_conditionals.h

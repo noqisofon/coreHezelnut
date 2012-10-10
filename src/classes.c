@@ -21,7 +21,7 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/coreHezelnut.h"
+#include "coreHezelnut/chn_api.h"
 
 #include "coreHezelnut/classes.h"
 

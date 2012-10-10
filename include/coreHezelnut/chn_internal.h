@@ -98,20 +98,25 @@ typedef unsigned char CHNBoolean;
 
 
 typedef void* retval_t;
-typedef void(*apply_t)(void);
+typedef void (*apply_t)(void);
 
 typedef unsigned int CHNClassID;
 typedef unsigned int CHNBitField;
 typedef unsigned int CHNIndex;
 typedef unsigned int CHNCount;
-typedef unsigned int CHNVolume;
+typedef unsigned int CHNSize;
 typedef unsigned int CHNHashCode;
+
 
 typedef const void* CHNValue_ref;
 
+
 typedef struct chn_object {
-    struct chn_class* class_pointer;
+    struct chn_class* prototype;
 } *id;
+
+
+#define nil ((id)0)
 
 typedef const struct chn_string*       CHNConstantString_ref;
 typedef       struct chn_string*       CHNMutableString_ref;
@@ -147,7 +152,7 @@ enum __CHNComparisonResults {
 typedef int CHNComparisonResult;
 
 
-typedef CHNComparisonResult (*CHNComparisonFunction)(id left, id right);
+typedef CHNComparisonResult (*chn_comparison_func)(id left, id right);
 
 
 enum __CHNAccessResults {

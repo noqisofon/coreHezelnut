@@ -29,8 +29,8 @@ CHN_EXTERN_C_BEGIN
 
 
 typedef struct chn_selector {
-    void* actual_id;            /*!< 関数ポインタ。 */
-    const char* func_type;       /*!< その関数の型。 */
+    void*               actual_id;       /*!< 関数ポインタ。 */
+    const char*         func_type;       /*!< その関数の型。 */
 } *SEL;
 
 
@@ -51,9 +51,6 @@ CHN_EXPORT CHNBoolean __sel_eq(SEL left, SEL right);
 
 
 typedef id (*IMP)(id, SEL, ...);
-
-
-#define nil ((id)0)
 
 
 typedef struct chn_varible {

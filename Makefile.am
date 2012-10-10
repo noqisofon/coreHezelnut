@@ -8,6 +8,8 @@ pkgconfig_DATA = coreHezelnut.pc
 
 EXTRA_DIST = coreHezelnut.pc.in
 
+ACLOCAL_AMFLAGS = -I builds/m4
+
 dist-hook: changelog
 
 changelog: $(top_srcdir)/.git/HEAD

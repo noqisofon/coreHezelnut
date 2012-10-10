@@ -4,8 +4,9 @@
 AC_PREREQ([2.68])
 AC_INIT(coreHezelnut, 0.1, ned.rihine@gmail.com)
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([src/objects.c])
+AC_CONFIG_SRCDIR([src/allocation.c])
 AM_CONFIG_HEADER([include/config.h])
+AC_CONFIG_MACRO_DIR([builds/m4])
 AC_CONFIG_FILES([coreHezelnut.pc:coreHezelnut.pc.in])
 
 
@@ -13,7 +14,6 @@ AC_CONFIG_FILES([coreHezelnut.pc:coreHezelnut.pc.in])
 AC_PROG_LIBTOOL
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_INSTALL
-#AC_PROG_RANLIB
 AC_PROG_CC
 AC_HEADER_STDC
 
@@ -35,8 +35,6 @@ if test x$enable_debug = xyes; then
 else
   CFLAGS="$CFLAGS -O2 -W -Wall"
 fi
-
-AC_DEFINE([PLUTO_BUILD], [1], [build the libpluto])
 
 AM_CONDITIONAL(TESTS, test x$enable_tests = xyes)
 

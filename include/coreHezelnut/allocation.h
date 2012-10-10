@@ -29,37 +29,37 @@ CHN_EXTERN_C_BEGIN
 /*!
  *
  */
-CHN_EXPORT void* chn_malloc(size_t size);
+CHN_EXPORT void* CHN_malloc(size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT void* chn_atomic_malloc(size_t size);
+CHN_EXPORT void* CHN_atomic_malloc(size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT void* chn_vmalloc(size_t size);
+CHN_EXPORT void* CHN_vmalloc(size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT void* chn_realloc(void* ptr, size_t new_size);
+CHN_EXPORT void* CHN_realloc(void* ptr, size_t new_size);
 
 
 /*!
  *
  */
-CHN_EXPORT void* chn_calloc(size_t nelem, size_t size);
+CHN_EXPORT void* CHN_calloc(size_t nelem, size_t size);
 
 
 /*!
  *
  */
-CHN_EXPORT void chn_free(void* memp);
+CHN_EXPORT void CHN_free(void* memp);
 
 
 CHN_EXPORT void* (*_chn_malloc)(size_t);

@@ -33,8 +33,7 @@
 #   include <stdlib.h>
 #endif  /* def HAVE_STDLIB_H */
 
-#include "coreHezelnut/coreHezelnut.h"
-#include "coreHezelnut/objects.h"
+#include "coreHezelnut/chn_api.h"
 
 #include "coreHezelnut/error_handling.h"
 
@@ -48,17 +47,17 @@ static chn_error_handler _chn_error_handler = NULL;
 #define CHN_ERROR_HANDLE(_object_, _code_, _format_, _argument_)   (*_chn_error_handler)( _object_, _code_, _format_, _argument_ )
 
 
-CHN_EXPORT void chn_error(id object, int code, const char* format, ...)
+CHN_EXPORT void CHN_error(id object, int code, const char* format, ...)
 {
     va_list argument;
 
     va_start(argument, format);
-    chn_verror( object, code, format, argument );
+    CHN_verror( object, code, format, argument );
     va_end(argument);
 }
 
 
-CHN_EXPORT void chn_verror(id object, int code, const char* format, va_list argument)
+CHN_EXPORT void CHN_verror(id object, int code, const char* format, va_list argument)
 {
     CHNBoolean result = FALSE;
 

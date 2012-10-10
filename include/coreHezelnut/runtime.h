@@ -28,7 +28,6 @@
 #include <ctype.h>
 #include <assert.h>
 
-#include "coreHezelnut/coreHezelnut.h"
 #include "coreHezelnut/chn_api.h"
 #include "coreHezelnut/threading.h"
 #include "coreHezelnut/hashing.h"

@@ -21,8 +21,7 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/coreHezelnut.h"
-#include "coreHezelnut/objects.h"
+#include "coreHezelnut/chn_api.h"
 
 
 CHN_EXPORT CHNBoolean __sel_eq(SEL left, SEL right)

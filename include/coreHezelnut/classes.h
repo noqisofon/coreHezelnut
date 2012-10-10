@@ -30,15 +30,13 @@ CHN_EXTERN_C_BEGIN
 
 //typedef char* CString_ref;
 
-#define CHN_CLASSOF(_object_)  ((_object_)->class_pointer)
+#define CHN_CLASSOF(_object_)  ((_object_)->prototype)
 
 
-typedef struct chn_class* CHNMetaClass_ref;
-typedef struct chn_class* CHNClass_ref;
 struct chn_class {
-    CHNMetaClass_ref           class_pointer;
+    struct chn_class*          prototype;
 
-    CHNClass_ref               super_class;
+    struct chn_class*          super_class;
 
     const char*                name;
 
@@ -49,6 +47,10 @@ struct chn_class {
     struct chn_varible_list*   variables;
     struct chn_method_list*    methods;
 };
+
+
+typedef struct chn_class* CHNMetaClass_ref;
+typedef struct chn_class* CHNClass_ref;
 
 
 CHN_EXTERN_C_END
