@@ -25,6 +25,7 @@
 
 #include "coreHezelnut/classes/CHNIteratable.h"
 #include "coreHezelnut/classes/CHNIterator.h"
+#include "coreHezelnut/classes/CHNCompiledBlock.h"
 #include "coreHezelnut/classes/CHNOrderedCollection.h"
 #include "coreHezelnut/classes/CHNIODescriptor.h"
 #include "coreHezelnut/classes/CHNStream.h"
@@ -42,7 +43,7 @@ CHN_EXPORT CHNArray_ref CHNArray_class_from(CHNArray_ref an_array)
 }
 
 
-CHN_EXPORT id CHNArray_at_ifAbsent(CHNArray_ref self, int an_index, chn_if_absent_callback a_block)
+CHN_EXPORT id CHNArray_at_ifAbsent(CHNArray_ref self, int an_index, CHNCompiledBlock_ref a_block)
 {
     return CHNCollection_checkIndexableBounds_ifAbsent( CHN_ASCOLLECTION(self),
                                                         an_index,
@@ -52,18 +53,19 @@ CHN_EXPORT id CHNArray_at_ifAbsent(CHNArray_ref self, int an_index, chn_if_absen
 
 CHN_EXPORT id CHNArray_printOn(CHNArray_ref self, CHNStream_ref a_stream)
 {
-    CHNIterator_ref it;
+    CHNIterator_ref   it;
+    id                element;
 
     CHNStream_nextPutCh( a_stream, '(' );
 
     it = CHNCollection_get_iterator( CHN_ASCOLLECTION(self) );
     for ( ; CHNIterator_finished( it ); CHNIterator_next( it ) ) {
-        id element = CHNIterator_current( it );
+        element = CHNIterator_current( it );
 
-        CHN_printOn( element, a_stream );
+        CHNObject_printOn( element, a_stream );
         CHNStream_space( a_stream );
     }
-    CHN_relase( CHN_ASOBJECT(it) );
+    CHNIterator_release( it );
 
     CHNStream_nextPutCh( a_stream, ')' );
 
@@ -73,7 +75,7 @@ CHN_EXPORT id CHNArray_printOn(CHNArray_ref self, CHNStream_ref a_stream)
 
 CHN_EXPORT CHNBoolean CHNArray_isLiteralObject(CHNArray_ref self)
 {
-    return !CHN_isReadOnly( CHN_ASOBJECT(self) );
+    return !CHNArray_isReadOnly( self );
 }
 
 
@@ -89,22 +91,23 @@ CHN_EXPORT id CHNArray_replaceFrom_to_with_startingAt(CHNArray_ref self, int sta
 
 CHN_EXPORT id CHNArray_storeLiteralOn(CHNArray_ref self, CHNStream_ref a_stream)
 {
-    if ( CHNClass_equals( CHN_get_class( CHN_ASOBJECT(self) ), CHNArray ) )
-        return CHNArrayCollection_storeLiteralOn( CHN_ASARRAYED_COLLECTION(self), a_stream );
+    CHNIterator_ref   it;
+    id                element;
 
-    CHNIterator_ref it;
+    if ( CHNClass_equals( CHNObject_get_class( CHN_ASOBJECT(self) ), CHNArray ) )
+        return CHNArrayCollection_storeLiteralOn( CHN_ASARRAYED_COLLECTION(self), a_stream );
 
     CHNStream_nextPutCh( a_stream, '#' );
     CHNStream_nextPutCh( a_stream, '(' );
 
     it = CHNCollection_get_iterator( CHN_ASCOLLECTION(self) );
     for ( ; CHNIterator_finished( it ); CHNIterator_next( it ) ) {
-        id element = CHNIterator_current( it );
+        element = CHNIterator_current( it );
 
-        CHN_storeLiteralOn( element, a_stream );
+        CHNObject_storeLiteralOn( element, a_stream );
         CHNStream_space( a_stream );
     }
-    CHN_relase( CHN_ASOBJECT(it) );
+    CHNIterator_release( it );
 
     CHNStream_nextPutCh( a_stream, ')' );
 
@@ -114,22 +117,23 @@ CHN_EXPORT id CHNArray_storeLiteralOn(CHNArray_ref self, CHNStream_ref a_stream)
 
 CHN_EXPORT id CHNArray_storeOn(CHNArray_ref self, CHNStream_ref a_stream)
 {
-    if ( CHNClass_equals( CHN_get_class( CHN_ASOBJECT(self) ), CHNArray ) )
-        return CHNArrayCollection_storeOn( CHN_ASARRAYED_COLLECTION(self), a_stream );
+    CHNIterator_ref   it;
+    id                element;
 
-    CHNIterator_ref it;
+    if ( CHNClass_equals( CHNObject_get_class( CHN_ASOBJECT(self) ), CHNArray ) )
+        return CHNArrayCollection_storeOn( CHN_ASARRAYED_COLLECTION(self), a_stream );
 
     CHNStream_nextPutCh( a_stream, '#' );
     CHNStream_nextPutCh( a_stream, '(' );
 
     it = CHNCollection_get_iterator( CHN_ASCOLLECTION(self) );
     for ( ; CHNIterator_finished( it ); CHNIterator_next( it ) ) {
-        id element = CHNIterator_current( it );
+        element = CHNIterator_current( it );
 
-        CHN_storeOn( element, a_stream );
+        CHNObject_storeOn( element, a_stream );
         CHNStream_space( a_stream );
     }
-    CHN_relase( CHN_ASOBJECT(it) );
+    CHNIterator_release( it );
 
     CHNStream_nextPutCh( a_stream, ')' );
 
@@ -139,7 +143,8 @@ CHN_EXPORT id CHNArray_storeOn(CHNArray_ref self, CHNStream_ref a_stream)
 
 CHN_EXPORT id CHNArray_multiBecome(CHNArray_ref self, CHNArray_ref an_array)
 {
-    int index = 0;
+    int   index = 0;
+    id    object;
 #if 0
     return CHNCollection_collect( self,  );
 #else
@@ -148,16 +153,16 @@ CHN_EXPORT id CHNArray_multiBecome(CHNArray_ref self, CHNArray_ref an_array)
 
     it = CHNCollection_get_iterator( CHN_ASCOLLECTION(self) );
     for ( ; CHNIterator_finished( it ); CHNIterator_next( it ) ) {
-        id object = CHNIterator_current( it );
+        object = CHNIterator_current( it );
 
-        CHN_become( object, CHNArray_at( an_array, index ) );
+        CHNObject_become( object, CHNArray_at( an_array, index ) );
         ++ index;
     }
-    CHN_relase( CHN_ASOBJECT(it) );
+    CHNIterator_release( it );
     /*
       an_array は引数リスト内で動的に作成されたものかもしれない。
      */
-    CHN_relase( CHN_ASOBJECT(an_array) );
+    CHNArray_release( an_array );
 
     return CHN_ASOBJECT(prev_self);
 #endif 

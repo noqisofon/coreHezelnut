@@ -55,7 +55,7 @@ CHN_EXPORT CHNArray_ref CHNArray_copy(CHNArray_ref self);
 /*!
  * 
  */
-CHN_EXPORT id CHNArray_at_ifAbsent(CHNArray_ref self, int an_index, chn_if_absent_callback a_block);
+CHN_EXPORT id CHNArray_at_ifAbsent(CHNArray_ref self, int an_index, CHNCompiledBlock_ref a_block);
 
 
 /*!

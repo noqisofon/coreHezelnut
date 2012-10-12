@@ -37,43 +37,43 @@ typedef struct chn_collection* CHNCollection_ref;
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_from(CHNClass_ref self, CHNArray_ref an_array);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_from(CHNArray_ref an_array);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_withAll(CHNClass_ref self, CHNCollection_ref a_collection);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_withAll(CHNCollection_ref a_collection);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_with1(CHNClass_ref self, id an_object);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_with1(id an_object);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_with2(CHNClass_ref self, id first_object, id second_object);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_with2(id first_object, id second_object);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_with3(CHNClass_ref self, id first_object, id second_object, id third_object);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_with3(id first_object, id second_object, id third_object);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_with4(CHNClass_ref self, id first_object, id second_object, id third_object, id fourth_object);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_with4(id first_object, id second_object, id third_object, id fourth_object);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNCollection_ref CHNCollection_class_with5(CHNClass_ref self, id first_object, id second_object, id third_object, id fourth_object, id fifth_object);
+CHN_EXPORT CHNCollection_ref CHNCollection_class_with5(id first_object, id second_object, id third_object, id fourth_object, id fifth_object);
 
 
 /*!
@@ -83,9 +83,45 @@ CHN_EXPORT CHNIterator_ref CHNCollection_get_iterator(CHNCollection_ref self);
 
 
 /*!
+ *
+ */
+CHN_EXPORT id CHNCollection_add(CHNCollection_ref self, id new_object);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNCollection_ref CHNCollection_addAll(CHNCollection_ref self, CHNCollection_ref a_collection);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNCollection_ref CHNCollection_empty(CHNCollection_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNCollection_remove(CHNCollection_ref self, id old_object);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNCollection_remove_ifAbsent(CHNCollection_ref self, id old_object, CHNCompiledBlock_ref a_block);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNCollection_ref CHNCollection_removeAllSuchThat(CHNCollection_ref self, CHNCompiledBlock_ref a_block);
+
+
+/*!
  * 
  */
-CHN_EXPORT id CHNCollection_checkIndexableBounds_ifAbsent(CHNCollection_ref self, int index, chn_if_absent_callback a_block);
+CHN_EXPORT id CHNCollection_checkIndexableBounds_ifAbsent(CHNCollection_ref self, int index, CHNCompiledBlock_ref a_block);
 
 
 /*!
@@ -103,7 +139,7 @@ CHN_EXPORT CHNCollection_ref CHNCollection_firstTake(CHNCollection_ref self, int
 /*!
  * 
  */
-CHN_EXPORT CHNBoolean CHNCollection_anySatisfy(CHNCollection_ref self, void* pcontext, chn_predicate1_callback a_block);
+CHN_EXPORT CHNBoolean CHNCollection_anySatisfy(CHNCollection_ref self, void* pcontext, CHNCompiledBlock_ref a_block);
 
 
 /*!

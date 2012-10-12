@@ -21,7 +21,7 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/coreHezelnut.h"
+#include "coreHezelnut/chn_api.h"
 #include "coreHezelnut/classes.h"
 #include "coreHezelnut/callbacks.h"
 
@@ -34,17 +34,15 @@ CHN_EXTERN_C_BEGIN
 
 
 struct chn_compiled_block {
-    CHNClass_ref class_pointer;
+    CHNClass_ref            prototype;
 
-    CHNCompiledMethod_ref method;
+    CHNCompiledMethod_ref   method;
 };
 
 
 CHN_EXPORT id CHNCompiledBlock_class_alloc(void)
 {
-    id new  = CHN_alloc( CHNCompiledBlock );
-
-    return new;
+    return CHNObject_class_alloc( CHNCompiledBlock );
 }
 
 
@@ -80,8 +78,9 @@ CHN_EXPORT CHNCompiledMethod_ref CHNCompiledBlock_get_method(CHNCompiledBlock_re
 
 CHN_EXPORT CHNCompiledMethod_ref CHNCompiledBlock_set_method(CHNCompiledBlock_ref self, CHNCompiledMethod_ref a_method)
 {
-    CHNCompiledMethod_ref retval = self->method;
+    CHNCompiledMethod_ref retval;
 
+    retval = self->method;
     self->method = a_method;
 
     return retval;

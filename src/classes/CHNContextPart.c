@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include "coreHezelnut/coreHezelnut.h"
+#include "coreHezelnut/chn_api.h"
 #include "coreHezelnut/classes.h"
 #include "coreHezelnut/callbacks.h"
 
@@ -37,14 +37,14 @@ CHN_EXTERN_C_BEGIN
 
 
 struct chn_context_part {
-    CHNClass_ref prototype;
+    CHNClass_ref         prototype;
 
-    CHNContextPart_ref parent;
-    id native_ip;
-    id ip;
-    id sp;
-    id receiver;
-    id method;
+    CHNContextPart_ref   parent;
+    id                   native_ip;
+    id                   ip;
+    id                   sp;
+    id                   receiver;
+    id                   method;
 };
 
 
@@ -92,7 +92,7 @@ CHN_EXPORT id CHNContextPart_class_backtrace(void)
     CHNContextPart_backtraceOn( CHNContextPart_get_parentContext( this_context ),
                                 CHNTranscript_class_get_instance() );
 
-    CHN_release( CHN_ASOBJECT(this_context) );
+    CHNContextPart_release( this_context );
 
     return CHNContextPart;
 }
@@ -105,7 +105,7 @@ CHN_EXPORT id CHNContextPart_class_backtraceOn(CHNStream_ref a_stream)
     CHNContextPart_backtraceOn( CHNContextPart_get_parentContext( this_context ),
                                 a_stream );
 
-    CHN_release( CHN_ASOBJECT(this_context) );
+    CHNContextPart_release( this_context );
 
     return CHNContextPart;
 }
@@ -133,9 +133,9 @@ CHN_EXPORT id CHNContextPart_backtraceOn(CHNContextPart_ref self, CHNStream_ref 
     CHNContextPart_ref other_context = self;
     CHNContextPart_ref temp_context;
 
-    while ( !( CHN_isNil( CHN_ASOBJECT(other_context) ) || CHNContextPart_isEnvironment( other_context ) ) ) {
+    while ( !( CHNObject_isNil( CHN_ASOBJECT(other_context) ) || CHNContextPart_isEnvironment( other_context ) ) ) {
         if ( !CHNContextPart_isDisabled( other_context ) ) {
-            CHN_printOn( other_context, a_stream );
+            CHNContextPart_printOn( other_context, a_stream );
             CHNStream_nl( a_stream );
         }
         temp_context = other_context;
@@ -173,7 +173,7 @@ CHN_EXPORT int CHNContextPart_get_initialIP(CHNContextPart_ref self)
 
 CHN_EXPORT CHNBoolean CHNContextPart_isDisabled(CHNContextPart_ref self)
 {
-    CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+    CHNObject_subclassResponsibility( CHN_ASOBJECT(self) );
 
     return FALSE;
 }
@@ -181,7 +181,7 @@ CHN_EXPORT CHNBoolean CHNContextPart_isDisabled(CHNContextPart_ref self)
 
 CHN_EXPORT CHNBoolean CHNContextPart_isUnwind(CHNContextPart_ref self)
 {
-    CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+    CHNObject_subclassResponsibility( CHN_ASOBJECT(self) );
 
     return FALSE;
 }
@@ -189,7 +189,7 @@ CHN_EXPORT CHNBoolean CHNContextPart_isUnwind(CHNContextPart_ref self)
 
 CHN_EXPORT CHNBoolean CHNContextPart_isEnvironment(CHNContextPart_ref self)
 {
-    CHN_subclassResponsibility( CHN_ASOBJECT(self) );
+    CHNObject_subclassResponsibility( CHN_ASOBJECT(self) );
 
     return FALSE;
 }
@@ -197,7 +197,7 @@ CHN_EXPORT CHNBoolean CHNContextPart_isEnvironment(CHNContextPart_ref self)
 
 CHN_EXPORT CHNBoolean CHNContextPart_isProcess(CHNContextPart_ref self)
 {
-    return CHN_isNil( CHN_ASOBJECT(CHNContextPart_get_parentContext( self )) )
+    return CHNObject_isNil( CHN_ASOBJECT(CHNContextPart_get_parentContext( self )) )
         && !CHNContextPart_isEnvironment( self );
 }
 
@@ -212,8 +212,8 @@ CHN_EXPORT id CHNContextPart_set_parentContext(CHNContextPart_ref self, CHNConte
 {
     id retval = CHN_ASOBJECT(self->parent);
 
-    if ( CHNClass_equals( CHN_get_superclass( CHN_ASOBJECT(CHN_get_class( CHN_ASOBJECT(self) )) ), CHNContextPart )
-         || CHN_isNil( CHN_ASOBJECT(a_context) ) )
+    if ( CHNClass_equals( CHN_get_superclass( CHN_ASOBJECT(CHNObject_get_class( CHN_ASOBJECT(self) )) ), CHNContextPart )
+         || CHNObject_isNil( CHN_ASOBJECT(a_context) ) )
         return CHNWrongClassError_signalOn_mustBe( CHN_ASOBJECT(a_context), CHNContextPart );
 
     self->parent = a_context;

@@ -125,14 +125,16 @@ CHN_EXPORT id CHNStream_nextAvailable(CHNStream_ref self, int an_integer)
 
 CHN_EXPORT int CHNStream_nextAvailable_putAllOn(CHNStream_ref self, int an_integer, CHNStream_ref a_stream)
 {
-    int n = chn_int_min( an_integer, 1024 );
-    id collection;
+    int   n;
+    id    collection;
+
+    n = chn_int_min( an_integer, 1024 );
 
     collection = CHNObject_class_newWithSize( CHNStream_species( self ), an_integer );
-    n = CHNStream_nextAvailable_into_startingAt( n,
-                                                 an_integer,
-                                                 collection,
-                                                 0 );
+    n          = CHNStream_nextAvailable_into_startingAt( n,
+                                                          an_integer,
+                                                          collection,
+                                                          0 );
 
     CHNStream_next_putAll_startingAt( a_stream, n, collection , 0 );
     CHNObject_release( collection );
@@ -186,7 +188,7 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_contents(CHNStream_ref self)
 CHN_EXPORT CHNOrderedCollection_ref CHNStream_upToEnd(CHNStream_ref self)
 {
     CHNOrderedCollection_ref result;
-    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 8 ) );
+    CHNWriteStream_ref write_stream = CHNWriteStream_class_on( CHNObject_class_newWithSize( CHNStream_species( self ), 8 ) );
 
     CHNStream_nextPutAllOn( self, write_stream );
 
@@ -202,7 +204,7 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_nextLine(CHNStream_ref self)
     CHNOrderedCollection_ref result;
 
     id next;
-    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 40 ) );
+    CHNWriteStream_ref write_stream = CHNWriteStream_class_on( CHNObject_class_newWithSize( CHNStream_species( self ), 40 ) );
 
     while ( !( CHNStream_atEnd( self )
                || CHNObject_equals( next = CHNStream_next( self ), CHNCharacter_cr() )
@@ -221,7 +223,9 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_upTo(CHNStream_ref self, id an_obj
 {
     id next;
     CHNOrderedCollection_ref result;
-    CHNWriteStream_ref write_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 8 ) );
+    CHNWriteStream_ref write_stream;
+
+    write_stream = CHNWriteStream_class_on( CHNObject_class_newWithSize( CHNStream_species( self ), 8 ) );
 
     while ( !( CHNStream_atEnd( self ) || CHNObject_equals( ( next = CHNStream_next( self ) ), an_object ) ) ) {
         CHNWriteStream_nextPut( write_stream, next );
@@ -243,11 +247,11 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_upToAll(CHNStream_ref self, CHNCol
     int j;
 
     if ( CHNStream_atEnd( self ) )
-        return CHNObject_class_new( CHNStream_species( self ) );
+        return CHNObject_class_basicNew( CHNStream_species( self ) );
     if ( CHNCollection_isEmpty( a_collection ) )
-        return CHNObject_class_new( CHNStream_species( self ) );
+        return CHNObject_class_basicNew( CHNStream_species( self ) );
 
-    result_stream = CHNWriteStream_on( CHNObject_class_newWithSize( CHNStream_species( self ), 20 ) );
+    result_stream = CHNWriteStream_class_on( CHNObject_class_newWithSize( CHNStream_species( self ), 20 ) );
     /*
       prefix の型は CHNIntegerArray で、プリミティブの int 型の要素で成り立っている…ことにしておく。
      */

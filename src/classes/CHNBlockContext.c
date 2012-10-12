@@ -33,7 +33,7 @@ CHN_EXTERN_C_BEGIN
 
 CHN_EXPORT id CHNBlockContext_class_fromClosure_parent(CHNBlockClosure_ref a_block_closure, CHNContextPart_ref parent_context)
 {
-    CHNContextPart_ref context = CHN_copy( CHN_ASOBJECT(CHNContextPart_get_parentContext( CHN_THIS_CONTEXT )) );
+    CHNContextPart_ref context = CHNContextPart_copy( CHNContextPart_get_parentContext( CHN_THIS_CONTEXT ) );
 
     CHNContextPart_set_parentContext( context, parent_context );
 
