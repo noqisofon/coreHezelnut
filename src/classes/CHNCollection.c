@@ -30,6 +30,9 @@
 #include "coreHezelnut/classes/CHNCollection.h"
 
 
+static id chn_collection_default_remove_an_exception_block(void* pcontext);
+
+
 CHN_EXPORT CHNCollection_ref CHNCollection_class_from(CHNArray_ref an_array)
 {
     return CHNCollection_class_withAll( CHN_ASCOLLECTION(an_array) );
@@ -173,8 +176,8 @@ static id chn_collection_default_remove_an_exception_block(void* pcontext)
  */
 CHN_EXPORT id CHNCollection_remove(CHNCollection_ref self, id old_object)
 {
-    CHNCompiledBlock_ref  a_block;
-    struct default_remove_an_exception_block_context context;
+    CHNCompiledBlock_ref                               a_block;
+    struct default_remove_an_exception_block_context   context;
 
     context.receiver = CHN_ASCOLLECTION(self);
     context.old_object = old_object;
@@ -191,7 +194,7 @@ CHN_EXPORT id CHNCollection_remove_ifAbsent(CHNCollection_ref self, id old_objec
 
 CHN_EXPORT CHNCollection_ref CHNCollection_removeAllSuchThat(CHNCollection_ref self, CHNCompiledBlock_ref a_block)
 {
-    CHNCollection_ref removee;
+    CHNCollection_ref              removee;
 
     removee = CHNCollection_select( self, a_block );
     CHNCollection_removeAll( self, removee );

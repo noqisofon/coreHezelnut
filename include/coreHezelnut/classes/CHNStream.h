@@ -50,7 +50,7 @@ CHN_EXPORT CHNString_ref CHNStream_get_name(CHNStream_ref self);
 
 
 /*!
- * 
+ * ストリーム内の次の要素を返します。
  */
 CHN_EXPORT id CHNStream_next(CHNStream_ref self);
 
