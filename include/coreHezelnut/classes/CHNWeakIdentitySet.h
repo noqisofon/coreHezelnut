@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  CHNWeakIdentitySet.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,39 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+//
+#ifndef coreHezelnut_classes_CHNWeakIdentitySet_h
+#define coreHezelnut_classes_CHNWeakIdentitySet_h
 
 
 CHN_EXTERN_C_BEGIN
 
 
-const CHNClass_ref CHNInteger;
+CHN_EXPORT const CHNClass_ref CHNWeakIdentitySet;
 
 
-typedef struct chn_integer*   CHNInteger_ref;
+typedef struct chn_weak_identity_set* CHNWeakIdentitySet_ref;
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNWeakIdentitySet_class_alloc(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNWeakIdentitySet_ref CHNWeakIdentitySet_class_new(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNWeakIdentitySet_ref CHNWeakIdentitySet_init(id base);
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNInteger_h */
-// Local Variables:
-//   coding: utf-8
-// End:
+#endif  /* coreHezelnut_classes_CHNWeakIdentitySet_h */

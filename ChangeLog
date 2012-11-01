@@ -1,3 +1,151 @@
+commit 4b2170dbe00fbda24bc825a6d4b31d728a49c1e8
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Sun Oct 28 22:09:00 2012 +0900
+
+    add class CHNFileDescriptor, CHNBag
+
+ include/coreHezelnut/classes/CHNBag.h            | 124 +++++++++++++++
+ include/coreHezelnut/classes/CHNFileDescriptor.h | 101 +++++++++++++
+ include/coreHezelnut/classes/CHNStream.h         |   2 +-
+ src/classes/CHNBag.c                             | 185 +++++++++++++++++++++++
+ src/classes/CHNCollection.c                      |   9 +-
+ src/classes/CHNFileDescriptor.c                  | 137 +++++++++++++++++
+ src/classes/CHNStream.c                          |  36 +++--
+ 7 files changed, 574 insertions(+), 20 deletions(-)
+
+commit 79eff108302f0950480b95a5886172347bb2d39e
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Fri Oct 12 20:13:40 2012 +0900
+
+    s/CHN_/CHNObject_/
+
+ include/coreHezelnut/classes/CHNArray.h      |   2 +-
+ include/coreHezelnut/classes/CHNCollection.h |  54 +++++-
+ src/classes/CHNArray.c                       |  51 +++---
+ src/classes/CHNBihavior.c                    | 251 ++++++++++++++++-----------
+ src/classes/CHNBlockContext.c                |   2 +-
+ src/classes/CHNCollection.c                  | 167 ++++++++++++++++--
+ src/classes/CHNCompiledBlock.c               |  13 +-
+ src/classes/CHNContextPart.c                 |  38 ++--
+ src/classes/CHNStream.c                      |  28 +--
+ 9 files changed, 415 insertions(+), 191 deletions(-)
+
+commit d883dbbeecbd9308c6f28a5fba093fddf2f8a1c6
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Thu Oct 11 06:26:10 2012 +0900
+
+    modify Stream, Collection
+
+ src/classes/CHNCollection.c | 22 +++++++--------
+ src/classes/CHNStream.c     | 69 +++++++++++++++++++++++++--------------------
+ 2 files changed, 50 insertions(+), 41 deletions(-)
+
+commit 2669ae326ebc867bb757165a560d98008a0f4dc1
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Thu Oct 11 05:29:01 2012 +0900
+
+    objects.h > classes/CHNObject.c
+
+ .gitignore                               |   3 +
+ Makefile.am                              |   2 +
+ configure.ac                             |   6 +-
+ include/coreHezelnut/Makefile.am         |   1 -
+ include/coreHezelnut/allocation.h        |  12 +-
+ include/coreHezelnut/chn_api.h           |   7 +-
+ include/coreHezelnut/chn_internal.h      |  13 +-
+ include/coreHezelnut/classes.h           |  12 +-
+ include/coreHezelnut/classes/CHNError.h  |   2 -
+ include/coreHezelnut/classes/CHNObject.h | 292 ++++++++++++++++-
+ include/coreHezelnut/error_handling.h    |   8 +-
+ include/coreHezelnut/objects.h           | 325 ------------------
+ include/coreHezelnut/runtime.h           |   1 -
+ src/Makefile.am                          |   1 -
+ src/allocation.c                         | 128 ++++++--
+ src/chn_selector.c                       |   3 +-
+ src/classes.c                            |   2 +-
+ src/classes/CHNContextPart.c             |   6 +-
+ src/classes/CHNObject.c                  | 546 +++++++++++++++++++++++++++++--
+ src/error_handling.c                     |   9 +-
+ src/objects.c                            | 542 ------------------------------
+ src/utils.c                              |   2 +-
+ tests/hello/hello                        | Bin 8968 -> 0 bytes
+ 23 files changed, 957 insertions(+), 966 deletions(-)
+
+commit 251296309d48758870dc7086c849f2f34d699072
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Wed Oct 10 20:56:05 2012 +0900
+
+    add test
+
+ Makefile.am                                  |   3 +
+ configure.ac                                 |  25 +++-
+ include/coreHezelnut/Makefile.am             |  10 +-
+ include/coreHezelnut/chn-api.h               |  81 -----------
+ include/coreHezelnut/chn-internal.h          | 209 --------------------------
+ include/coreHezelnut/chn-list.h              |  37 -----
+ include/coreHezelnut/chn_api.h               |  81 +++++++++++
+ include/coreHezelnut/chn_internal.h          | 210 +++++++++++++++++++++++++++
+ include/coreHezelnut/chn_list.h              |  37 +++++
+ include/coreHezelnut/classes/CHNTranscript.h |  21 +++
+ include/coreHezelnut/coreHezelnut.h          |   6 +-
+ include/coreHezelnut/error-handling.h        |  72 ---------
+ include/coreHezelnut/error_handling.h        |  72 +++++++++
+ include/coreHezelnut/runtime.h               |   2 +-
+ include/coreHezelnut/target-conditionals.h   |  34 -----
+ include/coreHezelnut/target_conditionals.h   |  34 +++++
+ src/Makefile.am                              |   9 +-
+ src/allocation.c                             |   2 +-
+ src/chn-selector.c                           |  34 -----
+ src/chn_selector.c                           |  34 +++++
+ src/classes/CHNObject.c                      |   8 +-
+ src/classes/CHNTranscript.c                  |  50 +++++++
+ src/classes/Makefile.am                      |  19 +--
+ src/error-handling.c                         |  77 ----------
+ src/error_handling.c                         |  77 ++++++++++
+ src/objects.c                                |   8 +-
+ src/utils.c                                  |   2 +-
+ tests/Makefile.am                            |   3 +
+ tests/hello/Makefile.am                      |   5 +
+ tests/hello/hello                            | Bin 0 -> 8968 bytes
+ tests/hello/hello.c                          |  13 ++
+ 31 files changed, 698 insertions(+), 577 deletions(-)
+
+commit 1b836b0fdbad577216bbd7f54432dd5d32e56ec5
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Fri Feb 3 23:15:29 2012 +0900
+
+    add CHNObject.c
+
+ configure.ac                               |  28 +++++--
+ include/Makefile.am                        |   2 +-
+ include/coreHezelnut/Makefile.am           |   7 +-
+ include/coreHezelnut/allocator.h           |  38 ----------
+ include/coreHezelnut/chn-internal.h        |  10 ++-
+ include/coreHezelnut/classes/CHNObject.h   |  15 +++-
+ include/coreHezelnut/classes/Makefile.am   |   6 +-
+ include/coreHezelnut/target-conditionals.h |  34 +++++++++
+ src/allocation.c                           |   7 ++
+ src/chn-selector.c                         |   2 +
+ src/classes.c                              |   2 +
+ src/classes/CHNObject.c                    | 118 +++++++++++++++++++++++++++++
+ src/classes/Makefile.am                    |   1 +
+ src/objects.c                              |   4 +-
+ src/utils.c                                |   2 +
+ tests/Makefile.am                          |   1 +
+ 16 files changed, 221 insertions(+), 56 deletions(-)
+
+commit e814d9e81c30a894ddf57343edf7f01535d2c200
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Fri Feb 3 16:04:36 2012 +0900
+
+    add coreHezelnut.pc.in
+
+ ChangeLog          | 123 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Makefile.am        |   7 ++-
+ configure.ac       |   1 +
+ coreHezelnut.pc.in |  10 +++++
+ 4 files changed, 140 insertions(+), 1 deletion(-)
+
 commit 52badab050fe6c7c2097becd11592a2fff469281
 Author: ned rihine <ned.rihine@gmail.com>
 Date:   Fri Feb 3 13:26:18 2012 +0900
@@ -54,24 +202,24 @@ Date:   Fri Feb 3 13:26:18 2012 +0900
     + src/utils.c:
     ++ chn_error 関数を error-handling.c に移したので削除。
 
- configure.ac                                     |    1 +
- include/coreHezelnut/Makefile.am                 |   13 +++-
- include/coreHezelnut/allocation.h                |   76 ++++++++++++++
- include/coreHezelnut/chn-internal.h              |    1 +
- include/coreHezelnut/classes/CHNBlockClosure.h   |   10 ++-
- include/coreHezelnut/classes/CHNCompiledBlock.h  |   94 ++++++++++++++++++
- include/coreHezelnut/classes/CHNCompiledMethod.h |   30 ++++++
- include/coreHezelnut/classes/CHNInteger.h        |   38 +++++++
- include/coreHezelnut/classes/Makefile.am         |    1 +
- include/coreHezelnut/error-handling.h            |   72 ++++++++++++++
- src/Makefile.am                                  |    8 ++-
- src/allocation.c                                 |  114 ++++++++++++++++++++++
- src/classes/CHNBlockClosure.c                    |   20 +++-
- src/classes/CHNCompiledBlock.c                   |  112 +++++++++++++++++++++
- src/classes/Makefile.am                          |   10 ++-
- src/error-handling.c                             |   77 +++++++++++++++
- src/objects.c                                    |    2 +-
- src/utils.c                                      |    5 -
+ configure.ac                                     |   1 +
+ include/coreHezelnut/Makefile.am                 |  13 ++-
+ include/coreHezelnut/allocation.h                |  76 +++++++++++++++
+ include/coreHezelnut/chn-internal.h              |   1 +
+ include/coreHezelnut/classes/CHNBlockClosure.h   |  10 +-
+ include/coreHezelnut/classes/CHNCompiledBlock.h  |  94 +++++++++++++++++++
+ include/coreHezelnut/classes/CHNCompiledMethod.h |  30 ++++++
+ include/coreHezelnut/classes/CHNInteger.h        |  38 ++++++++
+ include/coreHezelnut/classes/Makefile.am         |   1 +
+ include/coreHezelnut/error-handling.h            |  72 ++++++++++++++
+ src/Makefile.am                                  |   8 +-
+ src/allocation.c                                 | 114 +++++++++++++++++++++++
+ src/classes/CHNBlockClosure.c                    |  20 +++-
+ src/classes/CHNCompiledBlock.c                   | 112 ++++++++++++++++++++++
+ src/classes/Makefile.am                          |  10 +-
+ src/error-handling.c                             |  77 +++++++++++++++
+ src/objects.c                                    |   2 +-
+ src/utils.c                                      |   5 -
  18 files changed, 668 insertions(+), 16 deletions(-)
 
 commit ea31320e7a799a06028e4ae01f3c9a206d141504
@@ -80,9 +228,9 @@ Date:   Thu Feb 2 16:14:55 2012 +0900
 
     add configure.ac
 
- .gitignore   |    1 -
- configure.ac |   35 +++++++++++++++++++++++++++++++++++
- 2 files changed, 35 insertions(+), 1 deletions(-)
+ .gitignore   |  1 -
+ configure.ac | 35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+), 1 deletion(-)
 
 commit f57fddd9e9562295f183883671afef0c9f6cffc8
 Author: ned rihine <ned.rihine@gmail.com>
@@ -90,26 +238,26 @@ Date:   Thu Feb 2 16:06:59 2012 +0900
 
     remove Makefile.in and config.h.in
 
- .gitignore                                     |    4 +-
- Makefile.in                                    |  740 ------------------------
- include/Makefile.am                            |    3 +
- include/config.h.in                            |   80 ---
- include/coreHezelnut/Makefile.am               |    5 +
- include/coreHezelnut/callbacks.h               |    3 +
- include/coreHezelnut/chn-internal.h            |   32 +-
- include/coreHezelnut/classes/CHNBihavior.h     |   40 ++-
- include/coreHezelnut/classes/CHNBlockContext.h |   46 ++
- include/coreHezelnut/classes/CHNCollection.h   |   14 +-
- include/coreHezelnut/classes/CHNContextPart.h  |   59 ++-
- include/coreHezelnut/classes/CHNSet.h          |   56 ++
- include/coreHezelnut/classes/Makefile.am       |   38 ++
- src/Makefile.am                                |    7 +-
- src/Makefile.in                                |  682 ----------------------
- src/classes/CHNBihavior.c                      |  121 ++++-
- src/classes/CHNBlockContext.c                  |   47 ++
- src/classes/CHNContextPart.c                   |   84 +++-
- src/classes/Makefile.am                        |    2 +-
- src/classes/Makefile.in                        |  532 -----------------
+ .gitignore                                     |   4 +-
+ Makefile.in                                    | 740 -------------------------
+ include/Makefile.am                            |   3 +
+ include/config.h.in                            |  80 ---
+ include/coreHezelnut/Makefile.am               |   5 +
+ include/coreHezelnut/callbacks.h               |   3 +
+ include/coreHezelnut/chn-internal.h            |  32 +-
+ include/coreHezelnut/classes/CHNBihavior.h     |  40 +-
+ include/coreHezelnut/classes/CHNBlockContext.h |  46 ++
+ include/coreHezelnut/classes/CHNCollection.h   |  14 +-
+ include/coreHezelnut/classes/CHNContextPart.h  |  59 +-
+ include/coreHezelnut/classes/CHNSet.h          |  56 ++
+ include/coreHezelnut/classes/Makefile.am       |  38 ++
+ src/Makefile.am                                |   7 +-
+ src/Makefile.in                                | 682 -----------------------
+ src/classes/CHNBihavior.c                      | 121 +++-
+ src/classes/CHNBlockContext.c                  |  47 ++
+ src/classes/CHNContextPart.c                   |  84 ++-
+ src/classes/Makefile.am                        |   2 +-
+ src/classes/Makefile.in                        | 532 ------------------
  20 files changed, 508 insertions(+), 2087 deletions(-)
 
 commit 2a970305aceee3cedf01bc159d4e9ce1347f5610
@@ -118,8 +266,8 @@ Date:   Wed Feb 1 23:58:39 2012 +0900
 
     update ChangeLog.
 
- ChangeLog |  140 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 140 insertions(+), 0 deletions(-)
+ ChangeLog | 140 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 140 insertions(+)
 
 commit 845d5b9ee3250a69e0e435b55b3d97a0d0df9477
 Author: ned rihine <ned.rihine@gmail.com>
@@ -127,12 +275,12 @@ Date:   Wed Feb 1 19:18:44 2012 +0900
 
     add chn-list.h
 
- .gitignore                                |    2 +
- include/coreHezelnut/chn-internal.h       |    1 +
- include/coreHezelnut/chn-list.h           |   37 +++++++++++++++++
- include/coreHezelnut/classes/CHNMessage.h |    6 +++
- include/coreHezelnut/objects.h            |    6 +++
- src/objects.c                             |   64 +++++++++++++++++------------
+ .gitignore                                |  2 +
+ include/coreHezelnut/chn-internal.h       |  1 +
+ include/coreHezelnut/chn-list.h           | 37 ++++++++++++++++++
+ include/coreHezelnut/classes/CHNMessage.h |  6 +++
+ include/coreHezelnut/objects.h            |  6 +++
+ src/objects.c                             | 64 ++++++++++++++++++-------------
  6 files changed, 90 insertions(+), 26 deletions(-)
 
 commit ed9091bbc987f7b0e17b014299a833635bd4a9cd
@@ -141,23 +289,23 @@ Date:   Wed Feb 1 10:41:44 2012 +0900
 
     remove files not needed.
 
- COPYING.LESSER                          |  165 ----------
- commit-message.tmp                      |   31 --
- include/core-hezelnut/CHNClass.h        |   31 --
- include/core-hezelnut/CHNGenericTypes.h |   21 --
- include/core-hezelnut/CHNInternal.h     |   28 --
- include/core-hezelnut/CHNObject.h       |   65 ----
- include/core-hezelnut/chn-internal.h    |  197 ------------
- include/core-hezelnut/coreHezelnut.h    |   92 ------
- src/CHNAllocator.c                      |  503 -------------------------------
- src/CHNClass.c                          |   25 --
- src/CHNCollection.c                     |  129 --------
- src/CHNInternal.c                       |   52 ----
- src/CHNObject.c                         |  120 --------
- src/chn-selector.h                      |   31 --
- src/classes/libcoreHezelnut_classes.la  |   41 ---
- src/objacts.c                           |   53 ----
- 16 files changed, 0 insertions(+), 1584 deletions(-)
+ COPYING.LESSER                          | 165 -----------
+ commit-message.tmp                      |  31 --
+ include/core-hezelnut/CHNClass.h        |  31 --
+ include/core-hezelnut/CHNGenericTypes.h |  21 --
+ include/core-hezelnut/CHNInternal.h     |  28 --
+ include/core-hezelnut/CHNObject.h       |  65 -----
+ include/core-hezelnut/chn-internal.h    | 197 -------------
+ include/core-hezelnut/coreHezelnut.h    |  92 ------
+ src/CHNAllocator.c                      | 503 --------------------------------
+ src/CHNClass.c                          |  25 --
+ src/CHNCollection.c                     | 129 --------
+ src/CHNInternal.c                       |  52 ----
+ src/CHNObject.c                         | 120 --------
+ src/chn-selector.h                      |  31 --
+ src/classes/libcoreHezelnut_classes.la  |  41 ---
+ src/objacts.c                           |  53 ----
+ 16 files changed, 1584 deletions(-)
 
 commit 8ceafafea2e9d96658b6910a1c7879ef7a3d9966
 Author: ned rihine <ned.rihine@gmail.com>
@@ -165,8 +313,8 @@ Date:   Wed Feb 1 10:31:58 2012 +0900
 
     change from LGPL to GPL.
 
- COPYING |  674 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 674 insertions(+), 0 deletions(-)
+ COPYING | 674 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 674 insertions(+)
 
 commit 0174e54a838a0a9a2dda681787bfc946b75a49bf
 Author: ned rihine <ned.rihine@gmail.com>
@@ -174,66 +322,66 @@ Date:   Wed Feb 1 10:28:59 2012 +0900
 
     change experiment.
 
- .gitignore                                         |   20 +-
- Makefile.in                                        |   73 ++-
- configure.ac                                       |   29 --
- include/config.h.in                                |    7 +
- include/coreHezelnut/allocator.h                   |   38 ++
- include/coreHezelnut/callbacks.h                   |   38 ++
- include/coreHezelnut/chn-api.h                     |   81 +++
- include/coreHezelnut/chn-internal.h                |   26 +-
- include/coreHezelnut/classes.h                     |    4 +-
- .../classes/CHNArgumentOutOfRangeError.h           |   46 ++
- include/coreHezelnut/classes/CHNArray.h            |   97 ++++
- .../coreHezelnut/classes/CHNArrayedCollection.h    |   65 +++
- include/coreHezelnut/classes/CHNBihavior.h         |  155 ++++++
- include/coreHezelnut/classes/CHNBlockClosure.h     |   64 +++
- include/coreHezelnut/classes/CHNByteArray.h        |   37 ++
- include/coreHezelnut/classes/CHNCharacter.h        |   44 ++
- include/coreHezelnut/classes/CHNClass.h            |   41 ++
- include/coreHezelnut/classes/CHNCollection.h       |  109 ++++
- include/coreHezelnut/classes/CHNCompiledMethod.h   |   44 ++
- include/coreHezelnut/classes/CHNContextPart.h      |   78 +++
- include/coreHezelnut/classes/CHNDictionary.h       |   58 +++
- include/coreHezelnut/classes/CHNFloat.h            |   38 ++
- include/coreHezelnut/classes/CHNIODescriptor.h     |   40 ++
- include/coreHezelnut/classes/CHNIteratable.h       |   40 ++
- include/coreHezelnut/classes/CHNIterator.h         |   58 +++
- include/coreHezelnut/classes/CHNMessage.h          |   38 ++
- .../classes/CHNNotEnoughElementsError.h            |   35 ++
- include/coreHezelnut/classes/CHNNotFoundError.h    |   46 ++
- .../coreHezelnut/classes/CHNNotIndexableError.h    |   46 ++
- include/coreHezelnut/classes/CHNObject.h           |   56 ++
- .../coreHezelnut/classes/CHNOrderedCollection.h    |   39 ++
- .../coreHezelnut/classes/CHNReadOnlyObjectError.h  |   46 ++
- .../classes/CHNSequenceableCollection.h            |   40 ++
- include/coreHezelnut/classes/CHNSmallInteger.h     |   38 ++
- include/coreHezelnut/classes/CHNStream.h           |  136 +++++
- include/coreHezelnut/classes/CHNString.h           |   58 +++
- include/coreHezelnut/classes/CHNSymbol.h           |   55 ++
- include/coreHezelnut/classes/CHNTranscript.h       |   35 ++
- include/coreHezelnut/classes/CHNWriteStream.h      |   38 ++
- .../classes/CHNWrongArgumentCountError.h           |   46 ++
- include/coreHezelnut/classes/CHNWrongClassError.h  |   52 ++
- include/coreHezelnut/coreHezelnut.h                |    1 +
- include/coreHezelnut/messaging.h                   |   57 +++
- include/coreHezelnut/objects.h                     |  188 +++++--
- include/coreHezelnut/runtime.h                     |   59 +++
- src/Makefile.am                                    |    7 +-
- src/Makefile.in                                    |  383 ++++++++++++---
- src/chn-selector.c                                 |    2 +-
- src/classes.c                                      |   15 +-
- src/classes/CHNArray.c                             |  170 +++++++
- src/classes/CHNBihavior.c                          |  514 +++++++++++++++++++
- src/classes/CHNBlockClosure.c                      |   73 +++
- src/classes/CHNCollection.c                        |  100 ++++
- src/classes/CHNContextPart.c                       |  152 ++++++
- src/classes/CHNStream.c                            |  287 +++++++++++
- src/classes/Makefile.am                            |    3 +
- src/classes/Makefile.in                            |  532 ++++++++++++++++++++
- src/classes/libcoreHezelnut_classes.la             |   41 ++
- src/objects.c                                      |  315 +++++++++++-
- src/utils.c                                        |    3 +-
+ .gitignore                                         |  20 +-
+ Makefile.in                                        |  73 ++-
+ configure.ac                                       |  29 --
+ include/config.h.in                                |   7 +
+ include/coreHezelnut/allocator.h                   |  38 ++
+ include/coreHezelnut/callbacks.h                   |  38 ++
+ include/coreHezelnut/chn-api.h                     |  81 ++++
+ include/coreHezelnut/chn-internal.h                |  26 +-
+ include/coreHezelnut/classes.h                     |   4 +-
+ .../classes/CHNArgumentOutOfRangeError.h           |  46 ++
+ include/coreHezelnut/classes/CHNArray.h            |  97 ++++
+ .../coreHezelnut/classes/CHNArrayedCollection.h    |  65 +++
+ include/coreHezelnut/classes/CHNBihavior.h         | 155 ++++++
+ include/coreHezelnut/classes/CHNBlockClosure.h     |  64 +++
+ include/coreHezelnut/classes/CHNByteArray.h        |  37 ++
+ include/coreHezelnut/classes/CHNCharacter.h        |  44 ++
+ include/coreHezelnut/classes/CHNClass.h            |  41 ++
+ include/coreHezelnut/classes/CHNCollection.h       | 109 +++++
+ include/coreHezelnut/classes/CHNCompiledMethod.h   |  44 ++
+ include/coreHezelnut/classes/CHNContextPart.h      |  78 +++
+ include/coreHezelnut/classes/CHNDictionary.h       |  58 +++
+ include/coreHezelnut/classes/CHNFloat.h            |  38 ++
+ include/coreHezelnut/classes/CHNIODescriptor.h     |  40 ++
+ include/coreHezelnut/classes/CHNIteratable.h       |  40 ++
+ include/coreHezelnut/classes/CHNIterator.h         |  58 +++
+ include/coreHezelnut/classes/CHNMessage.h          |  38 ++
+ .../classes/CHNNotEnoughElementsError.h            |  35 ++
+ include/coreHezelnut/classes/CHNNotFoundError.h    |  46 ++
+ .../coreHezelnut/classes/CHNNotIndexableError.h    |  46 ++
+ include/coreHezelnut/classes/CHNObject.h           |  56 +++
+ .../coreHezelnut/classes/CHNOrderedCollection.h    |  39 ++
+ .../coreHezelnut/classes/CHNReadOnlyObjectError.h  |  46 ++
+ .../classes/CHNSequenceableCollection.h            |  40 ++
+ include/coreHezelnut/classes/CHNSmallInteger.h     |  38 ++
+ include/coreHezelnut/classes/CHNStream.h           | 136 ++++++
+ include/coreHezelnut/classes/CHNString.h           |  58 +++
+ include/coreHezelnut/classes/CHNSymbol.h           |  55 +++
+ include/coreHezelnut/classes/CHNTranscript.h       |  35 ++
+ include/coreHezelnut/classes/CHNWriteStream.h      |  38 ++
+ .../classes/CHNWrongArgumentCountError.h           |  46 ++
+ include/coreHezelnut/classes/CHNWrongClassError.h  |  52 ++
+ include/coreHezelnut/coreHezelnut.h                |   1 +
+ include/coreHezelnut/messaging.h                   |  57 +++
+ include/coreHezelnut/objects.h                     | 188 ++++++--
+ include/coreHezelnut/runtime.h                     |  59 +++
+ src/Makefile.am                                    |   7 +-
+ src/Makefile.in                                    | 383 ++++++++++++---
+ src/chn-selector.c                                 |   2 +-
+ src/classes.c                                      |  15 +-
+ src/classes/CHNArray.c                             | 170 +++++++
+ src/classes/CHNBihavior.c                          | 514 ++++++++++++++++++++
+ src/classes/CHNBlockClosure.c                      |  73 +++
+ src/classes/CHNCollection.c                        | 100 ++++
+ src/classes/CHNContextPart.c                       | 152 ++++++
+ src/classes/CHNStream.c                            | 287 +++++++++++
+ src/classes/Makefile.am                            |   3 +
+ src/classes/Makefile.in                            | 532 +++++++++++++++++++++
+ src/classes/libcoreHezelnut_classes.la             |  41 ++
+ src/objects.c                                      | 315 +++++++++++-
+ src/utils.c                                        |   3 +-
  60 files changed, 4823 insertions(+), 213 deletions(-)
 
 commit 8c3ee2de7991f3e6f21aee4cf4b641af80e3b881
@@ -242,23 +390,23 @@ Date:   Sat Jan 28 13:39:14 2012 +0900
 
     add maranon's source tree
 
- ChangeLog                                          |   70 +++++
- Makefile.am                                        |    8 +
- Makefile.in                                        |   36 ++-
- commit-message.tmp                                 |   31 +++
- configure.ac                                       |    2 +-
- include/coreHezelnut/chn-internal.h                |  181 +++++++++++++
- include/coreHezelnut/classes.h                     |   57 +++++
- include/coreHezelnut/classes/CHNError.h            |   28 ++
- .../coreHezelnut/classes/CHNIndexOutOfRangeError.h |   46 ++++
- include/coreHezelnut/coreHezelnut.h                |   29 +++
- include/coreHezelnut/objects.h                     |  237 +++++++++++++++++
- src/Makefile.am                                    |    5 +-
- src/Makefile.in                                    |   34 ++--
- src/chn-selector.c                                 |   32 +++
- src/classes.c                                      |   36 +++
- src/objects.c                                      |  265 ++++++++++++++++++++
- src/utils.c                                        |   45 ++++
+ ChangeLog                                          |  70 ++++++
+ Makefile.am                                        |   8 +
+ Makefile.in                                        |  36 ++-
+ commit-message.tmp                                 |  31 +++
+ configure.ac                                       |   2 +-
+ include/coreHezelnut/chn-internal.h                | 181 ++++++++++++++
+ include/coreHezelnut/classes.h                     |  57 +++++
+ include/coreHezelnut/classes/CHNError.h            |  28 +++
+ .../coreHezelnut/classes/CHNIndexOutOfRangeError.h |  46 ++++
+ include/coreHezelnut/coreHezelnut.h                |  29 +++
+ include/coreHezelnut/objects.h                     | 237 ++++++++++++++++++
+ src/Makefile.am                                    |   5 +-
+ src/Makefile.in                                    |  34 +--
+ src/chn-selector.c                                 |  32 +++
+ src/classes.c                                      |  36 +++
+ src/objects.c                                      | 265 +++++++++++++++++++++
+ src/utils.c                                        |  45 ++++
  17 files changed, 1109 insertions(+), 33 deletions(-)
 
 commit 3457f8b19b6a3e9abcdb2110301ec8eed87c0683
@@ -297,16 +445,16 @@ Date:   Fri Jan 20 17:51:46 2012 +0900
     + src/objacts.c:
     ++ CHNObject 以下派生インスタンスで使用する関数の実装を追加。
 
- include/core-hezelnut/CHNClass.h        |   31 +++++
- include/core-hezelnut/CHNGenericTypes.h |   21 ++++
- include/core-hezelnut/CHNObject.h       |   65 ++++++++++
- include/core-hezelnut/chn-internal.h    |  197 +++++++++++++++++++++++++++++++
- include/core-hezelnut/coreHezelnut.h    |   92 ++++++++++++++
- src/CHNClass.c                          |   53 ++++-----
- src/CHNInternal.c                       |   52 ++++++++
- src/CHNObject.c                         |   86 +++++++++-----
- src/chn-selector.h                      |   31 +++++
- src/objacts.c                           |   53 ++++++++
+ include/core-hezelnut/CHNClass.h        |  31 +++++
+ include/core-hezelnut/CHNGenericTypes.h |  21 ++++
+ include/core-hezelnut/CHNObject.h       |  65 +++++++++++
+ include/core-hezelnut/chn-internal.h    | 197 ++++++++++++++++++++++++++++++++
+ include/core-hezelnut/coreHezelnut.h    |  92 +++++++++++++++
+ src/CHNClass.c                          |  53 ++++-----
+ src/CHNInternal.c                       |  52 +++++++++
+ src/CHNObject.c                         |  86 +++++++++-----
+ src/chn-selector.h                      |  31 +++++
+ src/objacts.c                           |  53 +++++++++
  10 files changed, 620 insertions(+), 61 deletions(-)
 
 commit 5700668f4df9213d090fa595d51c25f607aa3a2e
@@ -315,19 +463,19 @@ Date:   Tue Jan 10 19:04:18 2012 +0900
 
     first commit.
 
- .gitignore                          |   35 ++
- COPYING.LESSER                      |  165 +++++++++
- INSTALL                             |  370 +++++++++++++++++++
- Makefile.am                         |    1 +
- Makefile.in                         |  689 +++++++++++++++++++++++++++++++++++
- README.md                           |   13 +
- configure.ac                        |   29 ++
- include/config.h.in                 |   73 ++++
- include/core-hezelnut/CHNInternal.h |   28 ++
- src/CHNAllocator.c                  |  503 +++++++++++++++++++++++++
- src/CHNClass.c                      |   34 ++
- src/CHNCollection.c                 |  129 +++++++
- src/CHNObject.c                     |   94 +++++
- src/Makefile.am                     |    4 +
- src/Makefile.in                     |  425 +++++++++++++++++++++
- 15 files changed, 2592 insertions(+), 0 deletions(-)
+ .gitignore                          |  35 ++
+ COPYING.LESSER                      | 165 +++++++++
+ INSTALL                             | 370 +++++++++++++++++++
+ Makefile.am                         |   1 +
+ Makefile.in                         | 689 ++++++++++++++++++++++++++++++++++++
+ README.md                           |  13 +
+ configure.ac                        |  29 ++
+ include/config.h.in                 |  73 ++++
+ include/core-hezelnut/CHNInternal.h |  28 ++
+ src/CHNAllocator.c                  | 503 ++++++++++++++++++++++++++
+ src/CHNClass.c                      |  34 ++
+ src/CHNCollection.c                 | 129 +++++++
+ src/CHNObject.c                     |  94 +++++
+ src/Makefile.am                     |   4 +
+ src/Makefile.in                     | 425 ++++++++++++++++++++++
+ 15 files changed, 2592 insertions(+)

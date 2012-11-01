@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  runtime.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,22 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+//
+#include "coreHezelnut/runtime.h"
 
 
-CHN_EXTERN_C_BEGIN
+CHN_EXPORT CHNBoolean __chn_responds_to(id object, SEL selector)
+{
+}
 
 
-const CHNClass_ref CHNInteger;
+CHN_EXPORT int32_t chn_int_max(int32_t n, int32_t m)
+{
+    return n > m ? n : m;
+}
 
 
-typedef struct chn_integer*   CHNInteger_ref;
-
-
-CHN_EXTERN_C_END
-
-
-#endif  /* coreHezelnut_classes_CHNInteger_h */
-// Local Variables:
-//   coding: utf-8
-// End:
+CHN_EXPORT int32_t chn_int_min(int32_t n, int32_t m)
+{
+    return n < m ? n : m;
+}

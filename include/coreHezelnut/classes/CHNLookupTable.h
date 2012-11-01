@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  CHNSet.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,39 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+//
+#ifndef coreHezelnut_classes_CHNLookupTable_h
+#define coreHezelnut_classes_CHNLookupTable_h
 
 
 CHN_EXTERN_C_BEGIN
 
 
-const CHNClass_ref CHNInteger;
+CHN_EXPORT const CHNClass_ref CHNLookupTable;
 
 
-typedef struct chn_integer*   CHNInteger_ref;
+typedef struct chn_lookup_table* CHNLookupTable_ref;
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNLookupTable_alloc(void);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNLookupTable_init(id self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT CHNLookupTable_ref CHNLookupTable_new(void);
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNInteger_h */
-// Local Variables:
-//   coding: utf-8
-// End:
+#endif  /* coreHezelnut_classes_CHNLookupTable_h */

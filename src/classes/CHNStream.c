@@ -19,14 +19,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include "coreHezelnut/coreHezelnut.h"
+#include "config.h"
+
+#include <stdint.h>
+
+#include "coreHezelnut/chn_internal.h"
+#include "coreHezelnut/chn_api.h"
 #include "coreHezelnut/classes.h"
 #include "coreHezelnut/callbacks.h"
 
 #include "coreHezelnut/classes/CHNClass.h"
 #include "coreHezelnut/classes/CHNIterator.h"
 #include "coreHezelnut/classes/CHNCollection.h"
-#include "coreHezelnut/classes/CHNIODescriptor.h"
+#include "coreHezelnut/classes/CHNFileDescriptor.h"
 #include "coreHezelnut/classes/CHNString.h"
 #include "coreHezelnut/classes/CHNWriteStream.h"
 
@@ -38,9 +43,9 @@
 CHN_EXTERN_C_BEGIN
 
 
-CHN_EXPORT CHNIODescriptor_ref CHNStream_get_file(CHNStream_ref self)
+CHN_EXPORT CHNFileDescriptor_ref CHNStream_get_file(CHNStream_ref self)
 {
-    return CHN_ASIO_DESCRIPTOR(nil);
+    return CHN_ASFILE_DESCRIPTOR(nil);
 }
 
 
@@ -208,12 +213,12 @@ CHN_EXPORT CHNOrderedCollection_ref CHNStream_nextLine(CHNStream_ref self)
     id                        next;
     CHNWriteStream_ref        write_stream;
 
-    write_stream =  = CHNWriteStream_class_on( CHNObject_class_newWithSize( CHNStream_species( self ), 40 ) );
+    write_stream = CHNWriteStream_class_on( CHNObject_class_newWithSize( CHNStream_species( self ), 40 ) );
 
     while ( !( CHNStream_atEnd( self )
                || CHNObject_equals( next = CHNStream_next( self ), CHNCharacter_cr() )
                || CHNObject_equals( next = CHNStream_next( self ), CHNCharacter_nl() )
-               || CHN_isNil( next ) ) ) {
+               || CHNObject_isNil( next ) ) ) {
         CHNWriteStream_nextPut( write_stream, next );
     }
     result = CHNStream_contents( write_stream );

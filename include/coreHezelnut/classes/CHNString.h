@@ -31,7 +31,7 @@ CHN_EXPORT const CHNClass_ref CHNString;
 
 #define CHN_ASSTRING(_that_) ((CHNString_ref)_that_)
 
-#define _S(_cstring_) CHNString_initWithCString( CHNString_class_alloc( CHNString ), _cstring_ )
+#define _S(_cstring_) CHNString_newWithCString( _cstring_ )
 
 
 /*!

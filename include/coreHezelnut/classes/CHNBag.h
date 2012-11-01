@@ -28,91 +28,142 @@
 CHN_EXTERN_C_BEGIN
 
 
+CHN_EXPORT const CHNClass_ref CHNBag;
+
+
 typedef struct chn_bag*  CHNBag_ref;
 
 
 /*!
  *
  */
-CHN_EXTERN id CHNBag_class_alloc(void);
+CHN_EXPORT id CHNBag_class_alloc(void);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNBag_ref CHNBag_class_new(void);
+CHN_EXPORT CHNBag_ref CHNBag_class_new(void);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNBag_ref CHNBag_class_new_(size_t size);
+CHN_EXPORT CHNBag_ref CHNBag_class_new_(size_t size);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNBag_ref CHNBag_add(CHNBag_ref self, id new_object);
+CHN_EXPORT CHNBag_ref CHNBag_class_basicNew(void);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNBag_ref CHNBag_add_withOccurrences(CHNBag_ref self, id new_object, int an_integer);
+CHN_EXPORT CHNBag_ref CHNBag_initContents(id base, size_t size);
 
 
 /*!
  *
  */
-CHN_EXTERN id CHNBag_remove_ifAbsent(CHNBag_ref self, id old_object, CHNCompiledBlock_ref an_exception_block);
+CHN_EXPORT CHNClass_ref CHNBag_dictionaryClass(CHNBag_ref self);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNArray_ref CHNBag_sortedByCount(CHNBag_ref self);
+CHN_EXPORT CHNBag_ref CHNBag_add(CHNBag_ref self, id new_object);
 
 
 /*!
  *
  */
-CHN_EXTERN int CHNBag_occurrencesOf(CHNBag_ref self, id an_object);
+CHN_EXPORT CHNBag_ref CHNBag_add_withOccurrences(CHNBag_ref self, id new_object, int an_integer);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNBoolean CHNBag_includes(CHNBag_ref self, id an_object);
+CHN_EXPORT id CHNBag_remove_ifAbsent(CHNBag_ref self, id old_object, CHNCompiledBlock_ref an_exception_block);
 
 
 /*!
  *
  */
-CHN_EXTERN size_t CHNBag_size(CHNBag_ref self);
+CHN_EXPORT CHNArray_ref CHNBag_sortedByCount(CHNBag_ref self);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNHashCode CHNBag_hash(CHNBag_ref self);
+CHN_EXPORT int CHNBag_occurrencesOf(CHNBag_ref self, id an_object);
 
 
 /*!
  *
  */
-CHN_EXTERN int CHNBag_equals(CHNBag_ref self, CHNBag_ref other);
+CHN_EXPORT CHNBoolean CHNBag_includes(CHNBag_ref self, id an_object);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNSet_ref CHNBag_asSet(CHNBag_ref self);
+CHN_EXPORT size_t CHNBag_size(CHNBag_ref self);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNIterator_ref CHNSet_iterator(CHNBag_ref self);
+CHN_EXPORT CHNHashCode CHNBag_hash(CHNBag_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT int CHNBag_equals(CHNBag_ref self, CHNBag_ref other);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNSet_ref CHNBag_asSet(CHNBag_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNIterator_ref CHNSet_iterator(CHNBag_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNClass_ref CHNBag_class(CHNBag_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNBag_ref CHNBag_storeOn(CHNBag_ref self, CHNStream_ref a_stream);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNBag_ref CHNBag_printOn(CHNBag_ref self, CHNStream_ref a_stream);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNMappedCollection_ref CHNBag_keyAndValues(CHNBag_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNMappedCollection_ref CHNBag_contents(CHNBag_ref self);
 
 
 CHN_EXTERN_C_END

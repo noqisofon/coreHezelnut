@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  CHNHashedCollection.c
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,53 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+//
 
 
 CHN_EXTERN_C_BEGIN
 
 
-const CHNClass_ref CHNInteger;
+struct chn_hashed_collection {
+    
+};
 
 
-typedef struct chn_integer*   CHNInteger_ref;
+CHN_EXPORT id CHNHashedCollection_class_alloc(void)
+{
+    return CHNClass_createInstance( CHNHashedCollection );
+}
+
+
+CHN_EXPORT CHNHashedCollection_ref CHNHashedCollection_class_new(void)
+{
+    return CHNHashedCollection_class_newWithSize( 0 );
+}
+
+
+CHN_EXPORT CHNHashedCollection_ref CHNHashedCollection_class_newWithSize(size_t an_integer)
+{
+    return CHNHashedCollection_initWithSize( CHNHashedCollection_class_alloc(), an_integer );
+}
+
+
+CHN_EXPORT CHNHashedCollection_ref CHNHashedCollection_init(id base)
+{
+}
+
+
+CHN_EXPORT id CHNHashedCollection_at(CHNHashedCollection_ref self, id key)
+{
+}
+
+
+CHN_EXPORT void CHNHashedCollection_free(CHNHashedCollection_ref self)
+{
+}
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNInteger_h */
 // Local Variables:
 //   coding: utf-8
 // End:

@@ -21,10 +21,22 @@
 //
 #include "config.h"
 
+#include <stdint.h>
+
+#include "coreHezelnut/runtime.h"
+
+#include "coreHezelnut/classes/CHNCollection.h"
 #include "coreHezelnut/classes/CHNSymbol.h"
+#include "coreHezelnut/classes/CHNCompiledBlock.h"
 #include "coreHezelnut/classes/CHNWeakIdentitySet.h"
+#include "coreHezelnut/classes/CHNFileStream.h"
 
 #include "coreHezelnut/classes/CHNFileDescriptor.h"
+
+
+struct chn_file_descriptor_class {
+    CHNWeakIdentitySet_ref _AllOpenFiles;
+};
 
 
 struct chn_file_descriptor {
@@ -37,41 +49,52 @@ struct chn_file_descriptor {
 };
 
 
+static struct chn_file_descriptor_class class_data;
+
+
 static CHNFileDescriptor_ref super_init(id base);
 static void super_free(id base);
 
 
-CHN_EXTERN void CHNFileDescriptor_class_initialize(void)
+CHN_EXPORT void CHNFileDescriptor_class_initialize(void)
 {
     GarbageCollector_class_addDependent( CHNFileDescriptor );
-    _AllOpenFiles = CHNWeakIdentitySet_class_new();
+    class_data._AllOpenFiles = CHNWeakIdentitySet_class_new();
 }
 
 
-CHN_EXTERN id CHNFileDescriptor_class_alloc(void)
+CHN_EXPORT id CHNFileDescriptor_class_alloc(void)
 {
     return CHNObject_class_alloc( CHNFileDescriptor );
 }
 
 
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_open(const char* filename)
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_open(CHNString_ref filename)
 {
-    return CHNFileDescriptor_class_open( filename, FileStream_class_readWrite() );
+    return CHNFileDescriptor_class_ope_moden( filename, FileStream_class_readWrite() );
 }
 
 
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode(const char* filename, int32_t file_mode)
+static id chn_file_descriptor_open_mode_if_fail()
 {
-    return CHNFileDescriptor_class_open_ifFail( filename, FileStream_class_readWrite(), chn_file_descriptor_open_mode_if_fail );
+    return nil;
 }
 
 
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode_ifFail(const char* filename, int32_t file_mode, fail_func a_block)
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode(CHNString_ref filename, int32_t file_mode)
+{
+    return CHNFileDescriptor_class_open_mode_ifFail( filename,
+                                                     FileStream_class_readWrite(),
+                                                     CHNCompiledBlock_class_block( chn_file_descriptor_open_mode_if_fail ) );
+}
+
+
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode_ifFail(CHNString_ref filename, int32_t file_mode, CHNCompiledBlock_ref a_block)
 {
 }
 
 
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_openTemporaryFile(const char* base_name)
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_openTemporaryFile(CHNString_ref base_name)
 {
     CHNFileDescriptor_ref new;
 
@@ -91,7 +114,7 @@ static void super_free(id base)
 }
 
 
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_init(id base)
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_init(id base)
 {
     CHNFileDescriptor_ref self;
 
@@ -107,7 +130,7 @@ CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_init(id base)
 }
 
 
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_close(CHNFileDescriptor_ref self)
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_close(CHNFileDescriptor_ref self)
 {
     if ( !CHNFileDescriptor_isOpen( self ) )
         return self;
@@ -123,13 +146,13 @@ CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_close(CHNFileDescriptor_ref s
 }
 
 
-CHN_EXTERN void CHNFileDescriptor_free(CHNFileDescriptor_ref self)
+CHN_EXPORT void CHNFileDescriptor_free(CHNFileDescriptor_ref self)
 {
     super_free( CHN_OBJECT(self) );
 }
 
 
-CHN_EXTERN void CHNFileDescriptor_release(CHNFileDescriptor_ref self)
+CHN_EXPORT void CHNFileDescriptor_release(CHNFileDescriptor_ref self)
 {
 }
 // Local Variables:

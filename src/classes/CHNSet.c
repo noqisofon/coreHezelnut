@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  CHNSet.c
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,49 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+//
+#include "config.h"
+
+#include "coreHezelnut/coreHezelnut.h"
+#include "coreHezelnut/classes.h"
+#include "coreHezelnut/callbacks.h"
+
+#include "coreHezelnut/classes/CHNInteger.h"
+#include "coreHezelnut/classes/CHNString.h"
+#include "coreHezelnut/classes/CHNKeyAndValueIterator.h"
+#include "coreHezelnut/classes/CHNSortedCollection.h"
+#include "coreHezelnut/classes/CHNMappedCollection.h"
+#include "coreHezelnut/classes/CHNLookupTable.h"
+
+#include "coreHezelnut/classes/CHNSet.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
-const CHNClass_ref CHNInteger;
+CHN_EXPORT id CHNSet_class_alloc(void)
+{
+    return CHNObject_class_basicNew( CHNSet );
+}
 
 
-typedef struct chn_integer*   CHNInteger_ref;
+CHN_EXPORT CHNSet_ref CHNSet_class_new(void)
+{
+    return CHNSet_init( CHNSet_class_alloc() );
+}
+
+
+CHN_EXPORT id CHNSet_init(id base)
+{
+if () {
+
+}
+}
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNInteger_h */
 // Local Variables:
 //   coding: utf-8
 // End:

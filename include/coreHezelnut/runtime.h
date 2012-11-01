@@ -23,12 +23,16 @@
 #define coreHezelnut_runtime_h
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stddef.h>
 #include <stdarg.h>
 #include <ctype.h>
 #include <assert.h>
 
+#include "coreHezelnut/chn_internal.h"
 #include "coreHezelnut/chn_api.h"
+#include "coreHezelnut/classes.h"
+#include "coreHezelnut/callbacks.h"
 #include "coreHezelnut/threading.h"
 #include "coreHezelnut/hashing.h"
 
@@ -50,6 +54,18 @@ typedef CHNClass_ref (*_chn_class_initialize)(const char*);
  * 
  */
 CHN_EXPORT CHNBoolean __chn_responds_to(id object, SEL selector);
+
+
+/*!
+ *
+ */
+CHN_EXPORT int32_t chn_int_max(int32_t n, int32_t m);
+
+
+/*!
+ *
+ */
+CHN_EXPORT int32_t chn_int_min(int32_t n, int32_t m);
 
 
 CHN_EXTERN_C_END

@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  CHNWrongMessageSent.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,24 +18,12 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+//
+#ifndef coreHezelnut_CHNWrongMessageSent_h
+#define coreHezelnut_CHNWrongMessageSent_h
 
 
-CHN_EXTERN_C_BEGIN
-
-
-const CHNClass_ref CHNInteger;
-
-
-typedef struct chn_integer*   CHNInteger_ref;
-
-
-CHN_EXTERN_C_END
-
-
-#endif  /* coreHezelnut_classes_CHNInteger_h */
+#endif  /* coreHezelnut_CHNWrongMessageSent_h */
 // Local Variables:
 //   coding: utf-8
 // End:

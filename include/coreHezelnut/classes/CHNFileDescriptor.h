@@ -28,67 +28,73 @@
 CHN_EXTERN_C_BEGIN
 
 
+CHN_EXPORT const CHNClass_ref CHNFileDescriptor;
+
+
 typedef struct chn_file_descriptor*  CHNFileDescriptor_ref;
 
 
-/*!
- *
- */
-CHN_EXTERN void CHNFileDescriptor_class_initialize(void);
+#define CHN_ASFILE_DESCRIPTOR(_that_) ((CHNFileDescriptor_ref)_that_)
 
 
 /*!
  *
  */
-CHN_EXTERN id CHNFileDescriptor_class_alloc(void);
+CHN_EXPORT void CHNFileDescriptor_class_initialize(void);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_open(const char* filename);
+CHN_EXPORT id CHNFileDescriptor_class_alloc(void);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode(const char* filename, int32_t file_mode);
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_open(CHNString_ref filename);
 
 
 /*!
  *
  */
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode_ifFail(const char* filename, int32_t file_mode, fail_func a_block);
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode(CHNString_ref filename, int32_t file_mode);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_open_mode_ifFail(CHNString_ref filename, int32_t file_mode, CHNCompiledBlock_ref a_block);
 
 
 /*!
  * base_name から一時ファイルを作成します。
  */
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_class_openTemporaryFile(const char* base_name);
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_class_openTemporaryFile(CHNString_ref base_name);
 
 
 /*!
  *
  */
-CHN_EXTERN id CHNFileDescriptor_init(id base);
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_init(id base);
 
 
 /*!
  * ファイルディスクリプターを閉じます。
  */
-CHN_EXTERN CHNFileDescriptor_ref CHNFileDescriptor_close(CHNFileDescriptor_ref self);
+CHN_EXPORT CHNFileDescriptor_ref CHNFileDescriptor_close(CHNFileDescriptor_ref self);
 
 
 /*!
  *
  */
-CHN_EXTERN void CHNFileDescriptor_free(CHNFileDescriptor_ref self);
+CHN_EXPORT void CHNFileDescriptor_free(CHNFileDescriptor_ref self);
 
 
 /*!
  *
  */
-CHN_EXTERN void CHNFileDescriptor_release(CHNFileDescriptor_ref self);
+CHN_EXPORT void CHNFileDescriptor_release(CHNFileDescriptor_ref self);
 
 
 

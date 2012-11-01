@@ -35,22 +35,25 @@ CHN_EXPORT const CHNClass_ref CHNSet;
 /*!
  * 
  */
-CHN_EXPORT id CHNSet_alloc(void);
+CHN_EXPORT id CHNSet_class_alloc(void);
 
 
 /*!
  * 
  */
-CHN_EXPORT id CHNSet_init(id self);
+CHN_EXPORT CHNSet_ref CHNSet_class_new(void);
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNSet_ref CHNSet_new(void);
+CHN_EXPORT id CHNSet_init(id base);
 
 
 CHN_EXTERN_C_END
 
 
 #endif  /* coreHezelnut_classes_CHNSet_h */
+// Local Variables:
+//   coding: utf-8
+// End:

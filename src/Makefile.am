@@ -12,4 +12,5 @@ libcoreHezelnut_la_SOURCES = \
 	chn_selector.c  \
 	classes.c  \
 	error_handling.c  \
+	runtime.c   \
 	utils.c

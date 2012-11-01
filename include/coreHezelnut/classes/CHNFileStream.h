@@ -1,5 +1,5 @@
 //  
-//  CHNInteger.h
+//  CHNFileStream.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,23 +19,32 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-#ifndef coreHezelnut_classes_CHNInteger_h
-#define coreHezelnut_classes_CHNInteger_h
+#ifndef coreHezelnut_classes_CHNFileStream_h
+#define coreHezelnut_classes_CHNFileStream_h
+
+#include "coreHezelnut/classes/CHNStream.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
-const CHNClass_ref CHNInteger;
+CHN_EXPORT const CHNClass_ref CHNFileStream;
 
 
-typedef struct chn_integer*   CHNInteger_ref;
+typedef struct chn_file_stream*  CHNFileStream_ref;
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNString_ref FileStream_class_readWrite(void);
+
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNInteger_h */
+#endif  /* coreHezelnut_classes_CHNFileStream_h */
 // Local Variables:
 //   coding: utf-8
 // End:

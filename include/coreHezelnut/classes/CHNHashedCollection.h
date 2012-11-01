@@ -1,5 +1,5 @@
 //  
-//  CHNIterator.h
+//  CHNHashedCollection.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -18,53 +18,65 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 
-#ifndef coreHezelnut_classes_CHNIterator_h
-#define coreHezelnut_classes_CHNIterator_h
+//
+#ifndef coreHezelnut_classes_CHNHashedCollection_h
+#define coreHezelnut_classes_CHNHashedCollection_h
 
-#include "coreHezelnut/classes/CHNObject.h"
+#include "coreHezelnut/classes/CHNCollection.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
-typedef struct chn_collection* CHNCollection_ref;
+CHN_EXPORT const CHNClass_ref CHNHashedCollection;
 
 
-CHN_EXPORT const CHNClass_ref CHNIterator;
+typedef struct chn_hashed_collection* CHNHashedCollection_ref;
 
 
-typedef struct chn_iterator* CHNIterator_ref;
+#define CHN_ASHASHED_COLLECTION(_that_)    ((CHNHashedCollection_ref)_that_)
 
 
 /*!
  * 
  */
-CHN_EXPORT CHNIterator_ref CHNIterator_class_new(CHNCollection_ref a_collection);
+CHN_EXPORT id CHNHashedCollection_class_alloc(void);
 
 
 /*!
- *
+ * 
  */
-CHN_EXPORT CHNBoolean CHNIterator_finished(CHNIterator_ref id);
+CHN_EXPORT CHNHashedCollection_ref CHNHashedCollection_class_new(void);
 
 
 /*!
- *
+ * 
  */
-CHN_EXPORT id CHNIterator_next(CHNIterator_ref id);
+CHN_EXPORT CHNHashedCollection_ref CHNHashedCollection_class_newWithSize(size_t an_integer);
 
 
 /*!
- *
+ * 
  */
-CHN_EXPORT id CHNIterator_current(CHNIterator_ref id);
+CHN_EXPORT CHNHashedCollection_ref CHNHashedCollection_init(id base);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNHashedCollection_at(CHNHashedCollection_ref self, id key);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT void CHNHashedCollection_free(CHNHashedCollection_ref self);
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_classes_CHNIterator_h */
+#endif  /* coreHezelnut_classes_CHNHashedCollection_h */
 // Local Variables:
 //   coding: utf-8
 // End:

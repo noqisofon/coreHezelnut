@@ -23,7 +23,6 @@
 #include "coreHezelnut/classes.h"
 #include "coreHezelnut/callbacks.h"
 
-#include "coreHezelnut/classes/CHNIteratable.h"
 #include "coreHezelnut/classes/CHNIterator.h"
 #include "coreHezelnut/classes/CHNCompiledBlock.h"
 #include "coreHezelnut/classes/CHNOrderedCollection.h"

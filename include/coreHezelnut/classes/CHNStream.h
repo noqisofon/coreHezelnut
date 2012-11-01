@@ -31,6 +31,7 @@ CHN_EXTERN_C_BEGIN
 CHN_EXPORT const CHNClass_ref CHNStream;
 
 
+typedef struct chn_file_descriptor* CHNFileDescriptor_ref;
 typedef struct chn_stream* CHNStream_ref;
 
 
@@ -40,7 +41,7 @@ typedef struct chn_stream* CHNStream_ref;
 /*!
  * 
  */
-CHN_EXPORT CHNIODescriptor_ref CHNStream_get_file(CHNStream_ref self);
+CHN_EXPORT CHNFileDescriptor_ref CHNStream_get_file(CHNStream_ref self);
 
 
 /*!
