@@ -23,4 +23,40 @@
 #define coreHezelnut_CHNError_h
 
 
+/*!
+ *
+ */
+CHN_EXPORT id CHNError_class_alloc(void);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNError_ref CHNError_class_new(void);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNError_ref CHNError_class_signalOn();
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNError_ref CHNError_init(id base);
+
+
+/*!
+ *
+ */
+CHN_EXPORT void CHNError_free(CHNError_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT void CHNError_release(CHNError_ref self);
+
+
 #endif  /* coreHezelnut_CHNError_h */
