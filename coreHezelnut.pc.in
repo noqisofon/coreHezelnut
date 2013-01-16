@@ -4,7 +4,7 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: @PACKAGE@
-Description: Smalltalk like OOP library
+Description: @COREHEZELNUT_DESCRIPTION@
 Version: @PACKAGE_VERSION@
 Libs: -L${libdir} -lcoreHezelnut
 Cflags: -I${includedir}

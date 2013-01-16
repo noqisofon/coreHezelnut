@@ -23,6 +23,12 @@
 #define coreHezelnut_CHNError_h
 
 
+typedef struct chn_error* CHNError_ref;
+
+
+#define CHN_ASERROR(_that_) ((CHNError_ref)_that_)
+
+
 /*!
  *
  */

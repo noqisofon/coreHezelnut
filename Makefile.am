@@ -3,8 +3,12 @@ if TESTS
   SUBDIRS += tests
 endif
 
-pkgconfigdir = $(libdir)/pkgconfig
+pkgconfigdir = $(libdir)/pkg-config
+pkgincludedir = $(includedir)
+pkginclude_HEADERS = coreHezelnut.h
 pkgconfig_DATA = coreHezelnut.pc
+
+CLEANFILES = coreHezelnut.pc
 
 EXTRA_DIST = coreHezelnut.pc.in
 

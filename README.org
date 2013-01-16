@@ -14,10 +14,10 @@ coreHezelnut は、Hezelnut を忠実に C 言語に移植したいバージョ�
 
 ** インストール
 
-
+#+BEGIN_SRC text
     % ./configure
     % make
     % sudo make install
-
+#+END_SRC
 
 ** 使い方

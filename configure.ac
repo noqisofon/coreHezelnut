@@ -3,11 +3,37 @@
 
 AC_PREREQ([2.68])
 AC_INIT(coreHezelnut, 0.1, ned.rihine@gmail.com)
+COREHEZELNUT_DESCRIPTION='Smalltalk like OOP library'
+AC_SUBST(COREHEZELNUT_DESCRIPTION)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/allocation.c])
-AM_CONFIG_HEADER([include/config.h])
+AC_CONFIG_HEADERS([include/config.h])
 AC_CONFIG_MACRO_DIR([builds/m4])
 AC_CONFIG_FILES([coreHezelnut.pc:coreHezelnut.pc.in])
+
+# 
+# --enable-gc
+# 
+AC_ARG_ENABLE(gc,
+    AC_HELP_STRING([--enable-gc],
+        [Enable GC suppert [default=yes]]),
+    ,enable_gc=yes)
+
+# 
+# --enable-tests
+# 
+AC_ARG_ENABLE(tests,
+    AC_HELP_STRING([--enable-tests],
+    [enable test suites [default=no]]),
+    ,enable_tests=no)
+
+# 
+# --enable-debug
+# 
+AC_ARG_ENABLE(debug,
+    AC_HELP_STRING([--enable-debug],
+        [use 'DEBUG' configuration [default=no]]),
+        , enable_debug=no)
 
 
 # Checks for programs.
@@ -17,19 +43,9 @@ AC_PROG_INSTALL
 AC_PROG_CC
 AC_HEADER_STDC
 
-AC_ARG_ENABLE(gc,
-    [   --enable-gc Enable GC suppert [default=yes]],
-    , enable_gc=yes)
-
-AC_ARG_ENABLE(tests,
-    AC_HELP_STRING([--enable-tests],
-    [enable test suites [default=no]]),
-    ,enable_tests=no)
-AC_ARG_ENABLE(debug,
-              AC_HELP_STRING([--enable-debug],
-                            [use 'DEBUG' configuration [default=no]]),
-                            , enable_debug=no)
-
+# 
+# CFLAGS 
+# 
 if test x$enable_debug = xyes; then
   CFLAGS="$CFLAGS -g -W -Wall"
 else
