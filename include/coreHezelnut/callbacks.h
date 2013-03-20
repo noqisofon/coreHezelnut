@@ -22,16 +22,31 @@
 #ifndef coreHezelnut_callbacks_h
 #define coreHezelnut_callbacks_h
 
+#include "coreHezelnut/runtime.h"
 
+
+/*!
+ * \typedef chn_if_abesent_callback
+ * ifAbsent: に渡すための関数ポインタの型です。
+ */
 typedef id (*chn_if_absent_callback)(void* pcontext);
 
 
+/*!
+ * \typedef chn_doing_callback
+ */
 typedef id (*chn_doing_callback)(void* pcontext, id element);
 
 
+/*!
+ * \typedef chn_predicate1_callback
+ */
 typedef CHNBoolean (*chn_predicate1_callback)(void* pcontext, id element);
 
 
+/*!
+ * \typedef chn_if_error_callback
+ */
 typedef id (*chn_if_error_callback)(void* pcontext);
 
 

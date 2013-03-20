@@ -23,36 +23,16 @@
 #define coreHezelnut_chn_api_h
 
 #include "coreHezelnut/chn_internal.h"
+#include "coreHezelnut/selector.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
-typedef struct chn_selector {
-    void*               actual_id;       /*!< 関数ポインタ。 */
-    const char*         func_type;       /*!< その関数の型。 */
-} *SEL;
-
-
-#ifdef CHN_INLINE
-CHN_INLINE CHNBoolean sel_eq(SEL left, SEL right)
-{
-    if ( left == NULL || right == NULL )
-        return left == right;
-    else
-        return left->actual_id == right->actual_id;
-}
-#else
-#   define sel_eq(_left_, _right_)  __sel_eq(_left_, _right_)
-#endif  /* def CHN_INLINE */
-
-
-CHN_EXPORT CHNBoolean __sel_eq(SEL left, SEL right);
-
-
-typedef id (*IMP)(id, SEL, ...);
-
-
+/*!
+ * @struct chn_varible
+ *
+ */
 typedef struct chn_varible {
     const char*                         var_name;
     const char*                         var_type;
@@ -60,16 +40,15 @@ typedef struct chn_varible {
 } *CHNVariable_ref;
 
 
+/*!
+ * @struct chn_varible_list
+ *
+ */
 typedef struct chn_varible_list {
     struct chn_varible*                 head;
     struct chn_varible_list*            tail;
 } *CHNVariableList_ref;
 
-
-CHN_EXPORT void chn_error(id context, int error_code, const char* format, ...);
-
-
-typedef id (*chn_if_abesent_callback)(void* context);
 
 
 CHN_EXTERN_C_END

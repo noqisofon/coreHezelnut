@@ -26,14 +26,29 @@
 CHN_EXTERN_C_BEGIN
 
 
+#ifdef CHN_DEBUG_RUNTIME
+#   define CHN_DEBUG_PRINTF(format, args, ...)    printf( format, ## args )
+#else
+#   define CHN_DEBUG_PRINTF(format, args, ...)
+#endif  /* def CHN_DEBUG_RUNTIME */
+
+
+
 /*!
- *
+ * 
+ * @param context
+ * @patam error_code
+ * @param format
  */
-CHN_EXPORT void CHN_error(id object, int code, const char* format, ...);
+CHN_EXPORT void chn_error(id context, int error_code, const char* format, ...);
 
 
 /*!
- *
+ * 
+ * @param context
+ * @patam error_code
+ * @param format
+ * @param argument
  */
 CHN_EXPORT void CHN_verror(id object, int code, const char* format, va_list argument);
 
@@ -42,13 +57,19 @@ typedef CHNBoolean (*chn_error_handler)(id, int, const char* format, va_list);
 
 
 /*!
+ * 設定されたエラーハンドルを返します。
  *
+ * @return 
  */
 CHN_EXPORT chn_error_handler CHN_get_error_handler(void);
 
 
 /*!
- *
+ * エラーハンドルを設定します。
+ * 
+ * @param handler
+ * 
+ * @return 
  */
 CHN_EXPORT chn_error_handler CHN_set_error_handler(chn_error_handler handler);
 

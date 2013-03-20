@@ -1,3 +1,75 @@
+commit e3d8a21b0e2880834f7d4d344cb392089dfecd8d
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Thu Jan 17 05:39:31 2013 +0900
+
+    modify configure.ac
+
+ .gitignore                              |  1 +
+ Makefile.am                             |  6 ++++-
+ README.org                              |  4 +--
+ configure.ac                            | 44 ++++++++++++++++++++++-----------
+ coreHezelnut.pc.in                      |  2 +-
+ include/coreHezelnut/classes/CHNError.h |  6 +++++
+ 6 files changed, 45 insertions(+), 18 deletions(-)
+
+commit ad08db30072193dc6e9225c8ed510af9c1f77728
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Thu Jan 10 05:47:07 2013 +0900
+
+    s/README.md/README.org/
+
+ README     | 39 +++++++++++++++++++++++++++++++++++++++
+ README.md  | 13 -------------
+ README.org | 23 +++++++++++++++++++++++
+ 3 files changed, 62 insertions(+), 13 deletions(-)
+
+commit d01cf1498c93bde6efb4b006c7d3e29628f52700
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Mon Nov 12 21:49:01 2012 +0900
+
+    modify CHNError
+
+ include/coreHezelnut/classes/CHNError.h | 36 +++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
+commit 0086d0b27066c5574a35726d42d3f6082ec7e6f4
+Author: ned rihine <ned.rihine@gmail.com>
+Date:   Fri Nov 2 05:02:30 2012 +0900
+
+    dependant fix
+
+ ChangeLog                                          | 490 ++++++++++++++-------
+ include/coreHezelnut/classes/CHNBag.h              |  79 +++-
+ include/coreHezelnut/classes/CHNFileDescriptor.h   |  26 +-
+ include/coreHezelnut/classes/CHNFileStream.h       |  50 +++
+ include/coreHezelnut/classes/CHNHashedCollection.h |  82 ++++
+ include/coreHezelnut/classes/CHNInteger.h          |   3 +
+ include/coreHezelnut/classes/CHNIterator.h         |  12 +
+ .../coreHezelnut/classes/CHNKeyAndValueIterator.h  |  56 +++
+ include/coreHezelnut/classes/CHNLookupTable.h      |  56 +++
+ include/coreHezelnut/classes/CHNMappedCollection.h |  90 ++++
+ include/coreHezelnut/classes/CHNSet.h              |   9 +-
+ include/coreHezelnut/classes/CHNSortedCollection.h |  56 +++
+ include/coreHezelnut/classes/CHNStream.h           |   3 +-
+ include/coreHezelnut/classes/CHNString.h           |   2 +-
+ include/coreHezelnut/classes/CHNWeakIdentitySet.h  |  56 +++
+ .../classes/CHNWrongMessageSentError.h             |  29 ++
+ include/coreHezelnut/classes/Makefile.am           |  79 ++--
+ include/coreHezelnut/hashing.h                     |  32 ++
+ include/coreHezelnut/runtime.h                     |  16 +
+ include/coreHezelnut/threading.h                   |  32 ++
+ src/Makefile.am                                    |   1 +
+ src/classes/CHNArray.c                             |   1 -
+ src/classes/CHNBag.c                               | 179 ++++++--
+ src/classes/CHNFileDescriptor.c                    |  49 ++-
+ src/classes/CHNHashedCollection.c                  |  70 +++
+ src/classes/CHNMappedCollection.c                  | 121 +++++
+ src/classes/CHNSet.c                               |  66 +++
+ src/classes/CHNStream.c                            |  17 +-
+ src/classes/Makefile.am                            |   3 +
+ src/runtime.c                                      |  39 ++
+ 30 files changed, 1523 insertions(+), 281 deletions(-)
+
 commit 4b2170dbe00fbda24bc825a6d4b31d728a49c1e8
 Author: ned rihine <ned.rihine@gmail.com>
 Date:   Sun Oct 28 22:09:00 2012 +0900
@@ -464,10 +536,14 @@ Date:   Tue Jan 10 19:04:18 2012 +0900
     first commit.
 
  .gitignore                          |  35 ++
+ AUTHORS                             |   0
  COPYING.LESSER                      | 165 +++++++++
+ ChangeLog                           |   0
  INSTALL                             | 370 +++++++++++++++++++
  Makefile.am                         |   1 +
  Makefile.in                         | 689 ++++++++++++++++++++++++++++++++++++
+ NEWS                                |   0
+ README                              |   0
  README.md                           |  13 +
  configure.ac                        |  29 ++
  include/config.h.in                 |  73 ++++
@@ -478,4 +554,4 @@ Date:   Tue Jan 10 19:04:18 2012 +0900
  src/CHNObject.c                     |  94 +++++
  src/Makefile.am                     |   4 +
  src/Makefile.in                     | 425 ++++++++++++++++++++++
- 15 files changed, 2592 insertions(+)
+ 19 files changed, 2592 insertions(+)

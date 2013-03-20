@@ -74,7 +74,12 @@ CHN_EXTERN_C_BEGIN
 #   endif  /* defined(__GNUG__) */
 #endif  /* !defined(NULL) */
 
+/*!
+ * @typedef CHNBoolean
+ * 真偽値の型として利用します。
+ */
 typedef unsigned char CHNBoolean;
+
 
 #ifndef TRUE
 #   define TRUE 1

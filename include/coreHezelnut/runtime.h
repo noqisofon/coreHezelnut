@@ -1,5 +1,5 @@
 //  
-//  runtime.h
+//  chn_runtime.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#ifndef coreHezelnut_runtime_h
-#define coreHezelnut_runtime_h
+#ifndef coreHezelnut_chn_runtime_h
+#define coreHezelnut_chn_runtime_h
 
 #include <stdio.h>
 #include <stdint.h>
@@ -31,39 +31,32 @@
 
 #include "coreHezelnut/chn_internal.h"
 #include "coreHezelnut/chn_api.h"
-#include "coreHezelnut/classes.h"
-#include "coreHezelnut/callbacks.h"
-#include "coreHezelnut/threading.h"
-#include "coreHezelnut/hashing.h"
+#include "coreHezelnut/chn_class.h"
+#include "coreHezelnut/chn_selector.h"
+#include "coreHezelnut/chn_messaging.h"
+#include "coreHezelnut/chn_error_handling.h"
+#include "coreHezelnut/chn_callbacks.h"
+#include "coreHezelnut/chn_threading.h"
+#include "coreHezelnut/chn_hashing.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
-typedef CHNClass_ref (*_chn_class_initialize)(const char*);
-
-
-#ifdef CHN_DEBUG_RUNTIME
-#   define CHN_DEBUG_PRINTF(format, args, ...)    printf( format, ## args )
-#else
-#   define CHN_DEBUG_PRINTF(format, args, ...)
-#endif  /* def CHN_DEBUG_RUNTIME */
-
-
 /*!
- * 
+ * object に selector がある場合に真を返します。
  */
 CHN_EXPORT CHNBoolean __chn_responds_to(id object, SEL selector);
 
 
 /*!
- *
+ * プリミティブ整数用の max 関数です。 n か m のうち、大きい方を返します。
  */
 CHN_EXPORT int32_t chn_int_max(int32_t n, int32_t m);
 
 
 /*!
- *
+ * プリミティブ整数用の max 関数です。 n か m のうち、小さい方を返します。
  */
 CHN_EXPORT int32_t chn_int_min(int32_t n, int32_t m);
 
@@ -71,4 +64,4 @@ CHN_EXPORT int32_t chn_int_min(int32_t n, int32_t m);
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_runtime_h */
+#endif  /* coreHezelnut_chn_runtime_h */

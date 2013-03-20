@@ -1,5 +1,5 @@
 //  
-//  messaging.h
+//  selector.h
 //  
 //  Auther:
 //       ned rihine <ned.rihine@gmail.com>
@@ -19,53 +19,41 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#ifndef coreHezelnut_messaging_h
-#define coreHezelnut_messaging_h
+#ifndef coreHezelnut_selector_h
+#define coreHezelnut_selector_h
 
 #include "coreHezelnut/runtime.h"
-#include "coreHezelnut/selector.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
-typedef id (*IMP)(id, SEL, ...);
+typedef struct chn_selector {
+    void*               actual_id;       /*!< 関数ポインタ。 */
+    const char*         func_type;       /*!< その関数の型。 */
+} *SEL;
 
 
-CHN_EXPORT IMP (*__CHN_message_forward)(SEL);
-CHN_EXPORT IMP (*__CHN_message_forward2)(id, SEL);
-
-
-/*!
- * 
- * @param receiver
- * @param op
- *
- * @return 
- */
-CHN_EXPORT IMP chn_message_lookup(id receiver, SEL op);
-
-
-CHN_INLINE IMP chn_method_get_imp(Method_ref method)
+#ifdef CHN_INLINE
+CHN_INLINE CHNBoolean sel_eq(SEL left, SEL right)
 {
-    return (method != METHOD_NULL) ? method->method_imp : NULL;
+    if ( left == NULL || right == NULL )
+        return left == right;
+    else
+        return left->actual_id == right->actual_id;
 }
+#else
+#   define sel_eq(_left_, _right_)  __sel_eq(_left_, _right_)
+#endif  /* def CHN_INLINE */
 
 
-/*!
- * 
- * @patam klass
- * @patam selector
- *
- * @return
- */
-CHN_EXPORT IMP chn_get_imp(CHNClass_ref klass, SEL selector);
+CHN_EXPORT CHNBoolean __sel_eq(SEL left, SEL right);
 
 
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_messaging_h */
+#endif  /* coreHezelnut_selector_h */
 // Local Variables:
 //   coding: utf-8
 // End:

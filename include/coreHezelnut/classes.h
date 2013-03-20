@@ -26,6 +26,9 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef CHNClass_ref (*_chn_class_initialize)(const char*);
+
+
 #define Nil ((CHNClass_ref)0)
 
 //typedef char* CString_ref;

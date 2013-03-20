@@ -52,30 +52,40 @@ else
   CFLAGS="$CFLAGS -O2 -W -Wall"
 fi
 
+## Makefile.am variables
 AM_CONDITIONAL(TESTS, test x$enable_tests = xyes)
 
 # Checks for libraries.
+## pthread
 AC_CHECK_LIB(pthread, pthread_create, [LIBS="$LIBS -pthread"])
+## gc
 if test x$enable_gc = xyes; then
   AC_CHECK_LIB(gc, [GC_malloc], [LIBS="$LIBS -lgc"])
 fi
 
 # Checks for header files.
 AC_CHECK_HEADERS([limits.h stddef.h stdio.h stdarg.h stdlib.h string.h])
+## pthread
 AC_CHECK_HEADERS(pthread.h,, [AC_MSG_ERROR([pthread.h required])])
-
+## gc
 if test x$enable_gc = xyes; then
   AC_CHECK_HEADERS(gc.h)
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.
+## Keywords
 AC_C_INLINE
+AC_C_VOLATILE
+AC_C_STRINGIZE
 AC_C_CONST
+AC_C_RESTRICT
+## Types
+AC_CHECK_SIZEOF(void *)
 AC_TYPE_SIZE_T
+## Functions
 AC_FUNC_MALLOC
 
-CFLAGS="$CFLAGS -W -Wall"
-
+## Preprocessor symbol
 AC_DEFINE([CORE_HEZELNUT_BUILD], [], [build flag])
 
 # Checks for library functions.
