@@ -22,7 +22,7 @@
 #include "config.h"
 
 #include "coreHezelnut/chn_api.h"
-#include "coreHezelnut/classes.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
 #include "coreHezelnut/chn_list.h"
 

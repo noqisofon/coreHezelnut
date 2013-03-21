@@ -19,8 +19,10 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include "coreHezelnut/chn_api.h"
-#include "coreHezelnut/classes.h"
+#include "config.h"
+
+#include "coreHezelnut/runtime.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
 
 #include "coreHezelnut/classes/CHNClass.h"

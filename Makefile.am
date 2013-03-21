@@ -5,7 +5,7 @@ endif
 
 pkgconfigdir = $(libdir)/pkg-config
 pkgincludedir = $(includedir)
-pkginclude_HEADERS = coreHezelnut.h
+pkginclude_HEADERS = ./include/coreHezelnut/coreHezelnut.h
 pkgconfig_DATA = coreHezelnut.pc
 
 CLEANFILES = coreHezelnut.pc

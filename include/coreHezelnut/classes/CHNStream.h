@@ -31,6 +31,9 @@ CHN_EXTERN_C_BEGIN
 typedef struct chn_collection* CHNCollection_ref;
 typedef struct chn_ordered_collection* CHNOrderedCollection_ref;
 typedef struct chn_file_descriptor* CHNFileDescriptor_ref;
+typedef struct chn_integer_array* CHNIntegerArray_ref;
+typedef struct chn_read_stream* CHNReadStream_ref;
+typedef struct chn_write_stream* CHNWriteStream_ref;
 
 typedef struct chn_stream* CHNStream_ref;
 CHN_EXPORT const CHNClass_ref CHNStream;

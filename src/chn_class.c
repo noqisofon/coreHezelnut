@@ -23,5 +23,8 @@
 
 #include "coreHezelnut/chn_api.h"
 
-#include "coreHezelnut/classes.h"
+#include "coreHezelnut/chn_class.h"
 
+// Local Variables:
+//   coding: utf-8
+// End:

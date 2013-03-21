@@ -28,6 +28,8 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_stream* CHNStream_ref;
+
 typedef struct chn_arrayed_collecton* CHNArrayedCollection_ref;
 
 

@@ -23,6 +23,8 @@
 #define coreHezelnut_messaging_h
 
 #include "coreHezelnut/runtime.h"
+#include "coreHezelnut/chn_class.h"
+#include "coreHezelnut/selector.h"
 
 
 CHN_EXTERN_C_BEGIN

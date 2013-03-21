@@ -28,6 +28,8 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_block_context* CHNBlockContext_ref;
+
 const CHNClass_ref CHNBlockContext;
 
 

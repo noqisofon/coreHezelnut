@@ -23,8 +23,8 @@
 
 #include <stdio.h>
 
-#include "coreHezelnut/coreHezelnut.h"
-#include "coreHezelnut/classes.h"
+#include "coreHezelnut/runtime.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
 
 #include "coreHezelnut/classes/CHNTranscript.h"

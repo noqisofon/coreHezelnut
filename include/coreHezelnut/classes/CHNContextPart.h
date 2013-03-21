@@ -26,6 +26,11 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_stream* CHNStream_ref;
+typedef struct chn_block_closure* CHNBlockClosure_ref;
+
+typedef struct chn_context_part* CHNContextPart_ref;
+
 const CHNClass_ref CHNContextPart;
 
 

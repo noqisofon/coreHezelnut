@@ -21,8 +21,8 @@
 //
 #include "config.h"
 
-#include "coreHezelnut/chn_api.h"
-#include "coreHezelnut/classes.h"
+#include "coreHezelnut/runtime.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
 
 #include "coreHezelnut/classes/CHNCompiledMethod.h"

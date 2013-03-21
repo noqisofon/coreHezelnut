@@ -74,7 +74,7 @@ CHN_EXPORT id CHNBihavior_removeSelector(CHNBihavior_ref self, CHNSymbol_ref sel
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_removeSelector_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_abesent_callback a_block);
+CHN_EXPORT id CHNBihavior_removeSelector_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_absent_callback a_block);
 
 
 /*!
@@ -86,7 +86,7 @@ CHN_EXPORT id CHNBihavior_formattedSourceStringAt(CHNBihavior_ref self, CHNSymbo
 /*!
  * 
  */
-CHN_EXPORT id CHNBihavior_formattedSourceStringAt_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_abesent_callback a_block);
+CHN_EXPORT id CHNBihavior_formattedSourceStringAt_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_absent_callback a_block);
 
 
 /*!

@@ -29,9 +29,11 @@ CHN_EXTERN_C_BEGIN
 
 
 typedef struct chn_byte_array* CHNByteArray_ref;
+
 typedef struct chn_array* CHNArray_ref;
 
 CHN_EXPORT const CHNClass_ref CHNArray;
+
 
 #define CHN_ASARRAY(_that_) ((CHNArray_ref)_that_)
 

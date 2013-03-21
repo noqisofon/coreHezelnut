@@ -21,11 +21,11 @@
 //
 #include "config.h"
 
-#include <stdint.h>
+#include <stddef.h>
 
 #include "coreHezelnut/chn_internal.h"
 #include "coreHezelnut/chn_api.h"
-#include "coreHezelnut/classes.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
 
 #include "coreHezelnut/classes/CHNClass.h"

@@ -19,8 +19,12 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include "coreHezelnut/coreHezelnut.h"
-#include "coreHezelnut/classes.h"
+#include "config.h"
+
+#include <stddef.h>
+
+#include "coreHezelnut/runtime.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
 
 #include "coreHezelnut/classes/CHNIterator.h"
@@ -378,7 +382,7 @@ static id __remove_selector_ifAbsent0(void* pcontext)
 }
 
 
-CHN_EXPORT id CHNBihavior_removeSelector_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_abesent_callback a_block)
+CHN_EXPORT id CHNBihavior_removeSelector_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_absent_callback a_block)
 {
     struct tmp_remove_selector_context0 context;
 
@@ -414,7 +418,7 @@ CHN_EXPORT id CHNBihavior_formattedSourceStringAt(CHNBihavior_ref self, CHNSymbo
 }
 
 
-CHN_EXPORT id CHNBihavior_formattedSourceStringAt_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_abesent_callback a_block)
+CHN_EXPORT id CHNBihavior_formattedSourceStringAt_ifAbsent(CHNBihavior_ref self, CHNSymbol_ref selector, chn_if_absent_callback a_block)
 {
     return CHN_notYetImplemented( CHN_ASOBJECT(self) );
 }

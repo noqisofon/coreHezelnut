@@ -26,6 +26,8 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_character* CHNCharacter_ref;
+
 const CHNClass_ref CHNCharacter;
 
 

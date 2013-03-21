@@ -25,6 +25,7 @@
 
 CHN_EXTERN_C_BEGIN
 
+typedef struct chn_symbol* CHNSymbol_ref;
 
 CHN_EXPORT const CHNClass_ref CHNSymbol;
 

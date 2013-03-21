@@ -22,9 +22,13 @@
 #ifndef coreHezelnut_classes_CHNClass_h
 #define coreHezelnut_classes_CHNClass_h
 
+#include "coreHezelnut/chn_class.h"
+
 
 CHN_EXTERN_C_BEGIN
 
+
+typedef struct chn_symbol* CHNSymbol_ref;
 
 const CHNClass_ref CHNClass;
 

@@ -30,6 +30,8 @@ CHN_EXTERN_C_BEGIN
 
 typedef struct chn_stream* CHNStream_ref;
 typedef struct chn_iterator* CHNIterator_ref;
+typedef struct chn_compiled_block* CHNCompiledBlock_ref;
+typedef struct chn_set* CHNSet_ref;
 
 typedef struct chn_bag*  CHNBag_ref;
 
