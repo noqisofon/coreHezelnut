@@ -19,9 +19,12 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include "coreHezelnut/coreHezelnut.h"
-#include "coreHezelnut/classes.h"
+#include <stddef.h>
+
+#include "coreHezelnut/chn_api.h"
+#include "coreHezelnut/chn_class.h"
 #include "coreHezelnut/callbacks.h"
+#include "coreHezelnut/error_handling.h"
 
 #include "coreHezelnut/classes/CHNIterator.h"
 #include "coreHezelnut/classes/CHNCompiledBlock.h"
@@ -36,9 +39,88 @@
 CHN_EXTERN_C_BEGIN
 
 
+struct chn_array {
+    CHNClass_ref prototype;
+
+    size_t _capacity;
+    size_t _size;
+
+    CHNObject_ref* _contents;
+};
+
+
+CHN_EXPORT id CHNArray_class_alloc(void)
+{
+    return CHNObject_class_alloc( CHNArray );
+}
+
+
+CHN_EXPORT CHNArray_ref CHNArray_class_new(void)
+{
+    return CHNArray_initWithSize( CHNArray_class_alloc(), 32 );
+}
+
+
 CHN_EXPORT CHNArray_ref CHNArray_class_from(CHNArray_ref an_array)
 {
     return an_array;
+}
+
+
+static CHNArray_ref super_init(id base)
+{
+    return (CHNArray_ref)CHNArrayedCollection_init( CHN_ASARRAYED_COLLECTION(base) );
+}
+
+
+static CHNArray_ref super_free(id base)
+{
+    CHNArrayedCollection_free( CHN_ASARRAYED_COLLECTION(base) );
+}
+
+
+CHN_EXPORT CHNArray_ref CHNArray_initWithSize(id base, size_t size)
+{
+    CHNArray_ref self;
+
+    if ( self = super_init( base ) ) {
+        if ( size == 0 )
+            self->_capacity = size + 1;
+        else
+            self->_capacity = size;
+        self->_size = 0;
+        self->_contents = CHN_malloc( sizeof(CHNObject_ref*) * self->_capacity );
+    }
+    return self;
+}
+
+
+CHN_EXPORT id CHNArray_free(CHNArray_ref self)
+{
+    int i;
+    int stop = (int)self->_capacity;
+    id that;
+
+    for ( i = 0; i < stop; ++ i ) {
+        that = self->_contents[i];
+        if ( that )
+            CHNObject_relase( that );
+    }
+    CHN_free( self->_contents );
+    super_free( self );
+}
+
+
+CHN_EXPORT id CHNArray_release(CHNArray_ref self)
+{
+    super_release(  );
+    CHNArray_free( self );
+}
+
+
+CHN_EXPORT id CHNArray_at(CHNArray_ref self, int an_index)
+{
+    return self->_contents[an_index];
 }
 
 

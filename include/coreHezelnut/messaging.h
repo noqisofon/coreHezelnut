@@ -23,13 +23,23 @@
 #define coreHezelnut_messaging_h
 
 #include "coreHezelnut/runtime.h"
-#include "coreHezelnut/selector.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
 typedef id (*IMP)(id, SEL, ...);
+
+
+struct chn_method {
+    SEL implementation;
+};
+
+
+typedef struct chn_method* CHNMethod_ref;
+
+
+#define METHOD_NULL ((CHNMethod_ref)0)
 
 
 CHN_EXPORT IMP (*__CHN_message_forward)(SEL);
@@ -46,9 +56,9 @@ CHN_EXPORT IMP (*__CHN_message_forward2)(id, SEL);
 CHN_EXPORT IMP chn_message_lookup(id receiver, SEL op);
 
 
-CHN_INLINE IMP chn_method_get_imp(Method_ref method)
+CHN_INLINE IMP chn_method_get_imp(CHNMethod_ref method)
 {
-    return (method != METHOD_NULL) ? method->method_imp : NULL;
+    return (method != METHOD_NULL) ? method->implementation : NULL;
 }
 
 

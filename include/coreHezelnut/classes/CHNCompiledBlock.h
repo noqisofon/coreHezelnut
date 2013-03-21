@@ -28,6 +28,9 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_compiled_method* CHNCompiledMethod_ref;
+
+typedef struct chn_compiled_block* CHNCompiledBlock_ref;
 CHN_EXPORT const CHNClass_ref CHNCompiledBlock;
 
 

@@ -22,12 +22,17 @@
 #ifndef coreHezelnut_classes_CHNObject_h
 #define coreHezelnut_classes_CHNObject_h
 
-#include "coreHezelnut/classes.h"
+#include "coreHezelnut/chn_class.h"
 
 
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_array* CHNArray_ref;
+typedef struct chn_symbol* CHNSymbol_ref;
+typedef struct chn_message* CHNMessage_ref;
+
+typedef struct chn_object* CHNObject_ref;
 CHN_EXPORT const CHNClass_ref CHNObject;
 
 

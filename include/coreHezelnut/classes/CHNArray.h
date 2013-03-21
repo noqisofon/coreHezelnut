@@ -28,8 +28,8 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_byte_array* CHNByteArray_ref;
 typedef struct chn_array* CHNArray_ref;
-
 
 CHN_EXPORT const CHNClass_ref CHNArray;
 
@@ -41,15 +41,51 @@ CHN_EXPORT const CHNClass_ref CHNArray;
 
 
 /*!
+ *
+ */
+CHN_EXPORT id CHNArray_class_alloc(void);
+
+
+/*!
+ *
+ */
+CHN_EXPORT CHNArray_ref CHNArray_class_new(void);
+
+
+/*!
  * 
  */
 CHN_EXPORT CHNArray_ref CHNArray_class_from(CHNArray_ref an_array);
 
 
 /*!
+ *
+ */
+CHN_EXPORT CHNArray_ref CHNArray_initWithSize(id self, size_t size);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNArray_free(CHNArray_ref self);
+
+
+/*!
+ *
+ */
+CHN_EXPORT id CHNArray_release(CHNArray_ref self);
+
+
+/*!
  * 
  */
 CHN_EXPORT CHNArray_ref CHNArray_copy(CHNArray_ref self);
+
+
+/*!
+ * 
+ */
+CHN_EXPORT id CHNArray_at(CHNArray_ref self, int an_index);
 
 
 /*!

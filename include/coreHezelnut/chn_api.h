@@ -23,7 +23,8 @@
 #define coreHezelnut_chn_api_h
 
 #include "coreHezelnut/chn_internal.h"
-#include "coreHezelnut/selector.h"
+#include "coreHezelnut/allocation.h"
+#include "coreHezelnut/messaging.h"
 
 
 CHN_EXTERN_C_BEGIN

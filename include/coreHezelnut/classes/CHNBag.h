@@ -28,10 +28,12 @@
 CHN_EXTERN_C_BEGIN
 
 
-CHN_EXPORT const CHNClass_ref CHNBag;
-
+typedef struct chn_stream* CHNStream_ref;
+typedef struct chn_iterator* CHNIterator_ref;
 
 typedef struct chn_bag*  CHNBag_ref;
+
+CHN_EXPORT const CHNClass_ref CHNBag;
 
 
 /*!

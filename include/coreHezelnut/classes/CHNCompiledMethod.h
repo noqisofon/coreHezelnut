@@ -26,6 +26,10 @@
 CHN_EXTERN_C_BEGIN
 
 
+typedef struct chn_bihavior* CHNBihavior_ref;
+typedef struct chn_symbol* CHNSymbol_ref;
+
+typedef struct chn_compiled_method* CHNCompiledMethod_ref;
 CHN_EXPORT const CHNClass_ref CHNCompiledMethod;
 
 

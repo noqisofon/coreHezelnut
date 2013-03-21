@@ -28,11 +28,12 @@
 CHN_EXTERN_C_BEGIN
 
 
-CHN_EXPORT const CHNClass_ref CHNStream;
-
-
+typedef struct chn_collection* CHNCollection_ref;
+typedef struct chn_ordered_collection* CHNOrderedCollection_ref;
 typedef struct chn_file_descriptor* CHNFileDescriptor_ref;
+
 typedef struct chn_stream* CHNStream_ref;
+CHN_EXPORT const CHNClass_ref CHNStream;
 
 
 #define CHN_ASSTREAM(_that_) ((CHNStream_ref)_that_)

@@ -19,8 +19,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#ifndef coreHezelnut_chn_runtime_h
-#define coreHezelnut_chn_runtime_h
+#ifndef coreHezelnut_runtime_h
+#define coreHezelnut_runtime_h
 
 #include <stdio.h>
 #include <stdint.h>
@@ -32,12 +32,13 @@
 #include "coreHezelnut/chn_internal.h"
 #include "coreHezelnut/chn_api.h"
 #include "coreHezelnut/chn_class.h"
-#include "coreHezelnut/chn_selector.h"
-#include "coreHezelnut/chn_messaging.h"
-#include "coreHezelnut/chn_error_handling.h"
-#include "coreHezelnut/chn_callbacks.h"
-#include "coreHezelnut/chn_threading.h"
-#include "coreHezelnut/chn_hashing.h"
+
+#include "coreHezelnut/selector.h"
+#include "coreHezelnut/messaging.h"
+#include "coreHezelnut/error_handling.h"
+#include "coreHezelnut/callbacks.h"
+#include "coreHezelnut/threading.h"
+#include "coreHezelnut/hashing.h"
 
 
 CHN_EXTERN_C_BEGIN
@@ -64,4 +65,4 @@ CHN_EXPORT int32_t chn_int_min(int32_t n, int32_t m);
 CHN_EXTERN_C_END
 
 
-#endif  /* coreHezelnut_chn_runtime_h */
+#endif  /* coreHezelnut_runtime_h */

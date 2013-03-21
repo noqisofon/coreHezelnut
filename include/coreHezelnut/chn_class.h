@@ -26,9 +26,6 @@
 CHN_EXTERN_C_BEGIN
 
 
-typedef CHNClass_ref (*_chn_class_initialize)(const char*);
-
-
 #define Nil ((CHNClass_ref)0)
 
 //typedef char* CString_ref;
@@ -56,7 +53,13 @@ typedef struct chn_class* CHNMetaClass_ref;
 typedef struct chn_class* CHNClass_ref;
 
 
+typedef CHNClass_ref (*_chn_class_initialize)(const char* class_name);
+
+
 CHN_EXTERN_C_END
 
 
 #endif  /* coreHezelnut_classes_h */
+// Local Variables:
+//   coding: utf-8
+// End:
