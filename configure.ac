@@ -1,47 +1,61 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.68])
-AC_INIT(coreHezelnut, 0.1, ned.rihine@gmail.com)
+AC_PREREQ([2.72])
+AC_INIT([coreHezelnut],[0.1],[ned.rihine@gmail.com])
 COREHEZELNUT_DESCRIPTION='Smalltalk like OOP library'
 AC_SUBST(COREHEZELNUT_DESCRIPTION)
-AM_INIT_AUTOMAKE
+AC_CONFIG_AUX_DIR([build])
+AC_CONFIG_MACRO_DIR([build/macros])
 AC_CONFIG_SRCDIR([src/allocation.c])
 AC_CONFIG_HEADERS([include/config.h])
-AC_CONFIG_MACRO_DIR([builds/m4])
 AC_CONFIG_FILES([coreHezelnut.pc:coreHezelnut.pc.in])
+
+AM_INIT_AUTOMAKE
+LT_INIT
 
 # 
 # --enable-gc
 # 
 AC_ARG_ENABLE(gc,
-    AC_HELP_STRING([--enable-gc],
-        [Enable GC suppert [default=yes]]),
+    AS_HELP_STRING([--enable-gc],[Enable GC suppert [default=yes]]),
     ,enable_gc=yes)
 
 # 
 # --enable-tests
 # 
 AC_ARG_ENABLE(tests,
-    AC_HELP_STRING([--enable-tests],
-    [enable test suites [default=no]]),
+    AS_HELP_STRING([--enable-tests],[enable test suites [default=no]]),
     ,enable_tests=no)
 
 # 
 # --enable-debug
 # 
 AC_ARG_ENABLE(debug,
-    AC_HELP_STRING([--enable-debug],
-        [use 'DEBUG' configuration [default=no]]),
+    AS_HELP_STRING([--enable-debug],[use 'DEBUG' configuration [default=no]]),
         , enable_debug=no)
 
 
 # Checks for programs.
-AC_PROG_LIBTOOL
-AC_LIBTOOL_WIN32_DLL
+LT_INIT
+AC_REQUIRE(AC_CANONICAL_HOST)_LT_SET_OPTION([LT_INIT],[win32-dll])
+m4_warn([obsolete],[AC_REQUIRE(AC_CANONICAL_HOST)_LT_SET_OPTION([LT_INIT],[win32-dll])
+m4_warn([obsolete],[AC_LIBTOOL_WIN32_DLL: Remove this warning and the call to _LT_SET_OPTION when you
+put the 'win32-dll' option into LT_INIT's first parameter.])
+: Remove this warning and the call to _LT_SET_OPTION when you
+put the 'win32-dll' option into LT_INIT's first parameter.])
+
 AC_PROG_INSTALL
 AC_PROG_CC
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro 'STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  C89 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 
 # 
 # CFLAGS 
